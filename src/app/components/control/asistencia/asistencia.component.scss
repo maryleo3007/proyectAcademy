@@ -1,0 +1,97 @@
+@import "src/@fuse/scss/fuse";
+.header {
+    .logo {
+        .logo-icon {
+            margin: 16px;
+        }
+        .logo-text {
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+    .account {
+        width: 10%;
+    }
+}
+
+.contenedor {
+    width: 10%;
+    float: left;
+}
+
+.tablaasistencia {
+    width: 90%;
+    float: right;
+    z-index: 2;
+    margin-top: -40px;
+    background: white;
+    border-radius: 20px;
+    // border: solid 2px white;
+    table {
+        text-align: center!important;
+        font-size: 14px;
+        width: 100%;
+    }
+    tr,
+    td,
+    th {
+        // border: solid 1px black;
+        text-align: center!important;
+    }
+    th {
+        background: rgb(247, 247, 189);
+    }
+    .noboder {
+        border: none;
+        background: none;
+    }
+}
+
+th {
+    h3 {
+        font-size: 15px;
+        font-weight: bold;
+        margin: 0;
+        mat-icon {
+            font-size: 17px;
+        }
+        p {
+            margin-top: -20px;
+            margin-block-end: 0!important;
+            margin-block-start: 0!important;
+        }
+    }
+     :hover {
+        cursor: pointer;
+    }
+}
+
+.search-wrapper {
+    margin-left: auto;
+    width: 30%;
+    // max-width: 480px;
+    border-radius: 28px;
+    overflow: hidden;
+    @include mat-elevation(1);
+    @include media-breakpoint('xs') {
+        width: 100%;
+    }
+    .search {
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        padding: 0 18px;
+        input {
+            color: blue!important;
+            font-weight: bold;
+            background-color: #eee;
+            width: 100%;
+            height: 48px;
+            min-height: 48px;
+            max-height: 48px;
+            padding: 0 16px;
+            border: none;
+            outline: none;
+        }
+    }
+}

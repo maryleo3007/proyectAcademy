@@ -1,0 +1,33 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- CENTER -->
+        <div>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <contacts-contact-list [tipo]="tipo" (actualizaValor)="progreso1=$event"></contacts-contact-list>
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </div>
+    <!-- / CONTENT-->
+
+    <br>
+    <br>
+    <div class="iconos">
+        <!-- ADD CONTACT BUTTON -->
+        <button mat-fab class="accent" id="add-contact-button" (click)="newContact()" aria-label="Agregar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+        <mat-icon matSuffix>person_add</mat-icon>
+    </button>
+        <button mat-fab color="warn" id="delete-contact-button" (click)="eliminar()" aria-label="Eliminar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+            <mat-icon matSuffix>delete_forever</mat-icon>
+        </button>
+
+    </div>
+</div>
+<!-- / ADD CONTACT BUTTON -->

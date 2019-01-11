@@ -1,0 +1,154 @@
+<!-- SIDEBAR HEADER -->
+<div fxLayout="column" fxLayoutAlign="space-between start" class="header accent p-24 pb-4">
+    <div class="logo" fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            check_box
+        </mat-icon>
+        <span class="logo-text" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">ASISTENCIA</span>
+    </div>
+    <div class="search-wrapper mt-16 m-10 mt-sm-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>search</mat-icon>
+            <input type="text" [(ngModel)]="term">
+        </div>
+
+    </div>
+    <div class="account" fxLayout="column" [@animate]="{value:'*',params:{delay:'300ms'}}">
+        <mat-form-field floatLabel="never">
+            <mat-select class="account-selection" placeholder="Todo Mes">
+                <!-- <mat-option disabled="disabled">---</mat-option> -->
+                <mat-option *ngFor="let account of accounts" (click)="selectClick(account)" [value]="accounts.id">
+                    {{account.monthName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+</div>
+<!-- / SIDEBAR HEADER -->
+<div class="asistencia">
+
+    <!-- SIDEBAR CONTENT -->
+    <div class="contenedor">
+
+
+        <div>
+            <table *ngIf="verCalendario">
+                <thead>
+                    <tr>
+                        <th>
+                            <h2>Calendario</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let semana of semanas">
+                        <th (click)="SemanaSeleccionada(semana)">
+                            <h3>
+                                <mat-icon>insert_invitation</mat-icon>
+                                {{semana.weekName}}
+                            </h3>
+                            <p>{{semana.startDate | date: 'dd/MM'}} - {{semana.endDate | date: 'dd/MM'}} </p>
+                        </th>
+                    </tr>
+                    <!-- <tr *ngFor="let semana of semanas">
+                        <td>{{semana.startDate}}</td>
+                    </tr> -->
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    <!-- / SIDEBAR CONTENT -->
+    <div class="tablaasistencia">
+
+
+
+
+        <table>
+            <thead>
+                <tr class="noboder">
+                    <th class="noboder" rowspan="4"> APELIIDOS Y NOMBRE</th>
+                </tr>
+                <tr>
+                    <th class="noboder" colspan="14">DIA DE LA SEMANA</th>
+                </tr>
+                <tr>
+                    <th colspan="2">LUNES</th>
+                    <th colspan="2">MARTES</th>
+                    <th colspan="2">MIERCOLES</th>
+                    <th colspan="2">JUEVES</th>
+                    <th colspan="2">VIERNES</th>
+                    <th colspan="2">SABADO</th>
+                    <th colspan="2">DOMINGO</th>
+                </tr>
+                <tr>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let alumno of  Alumnos | filter:term | paginate: { itemsPerPage: 20, currentPage: p }">
+                    <!-- <tr *ngFor="let alumno of  alumnos | paginate: { itemsPerPage: 20, currentPage: p }"> -->
+                    <th>{{alumno.name}} {{alumno.lastName}} {{alumno.secondLastName}}</th>
+                    <td>
+                        <p *ngIf="alumno.record.monday ">{{alumno.record.monday.morning.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.monday ">{{alumno.record.monday.afternoon.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.tuesday ">{{alumno.record.tuesday.morning.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.tuesday ">{{alumno.record.tuesday.afternoon.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.wednesday ">{{alumno.record.wednesday.morning.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.wednesday ">{{alumno.record.wednesday.afternoon.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.thursday">{{alumno.record.thursday.morning.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.thursday ">{{alumno.record.thursday.afternoon.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.friday ">{{alumno.record.friday.morning.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.friday ">{{alumno.record.friday.afternoon.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.saturday ">{{alumno.record.saturday.morning.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.saturday ">{{alumno.record.saturday.afternoon.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.sunday ">{{alumno.record.sunday.morning.registration || ['.']}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="alumno.record.sunday ">{{alumno.record.sunday.afternoon.registration || ['.']}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>

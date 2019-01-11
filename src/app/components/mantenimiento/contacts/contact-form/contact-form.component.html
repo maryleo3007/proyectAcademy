@@ -1,0 +1,110 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="onNoClick()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row class="toolbar-bottom py-16" fxLayout="column" fxLayoutAlign="center center">
+            <!-- <img [src]="contact.avatar" class="avatar contact-avatar huge m-0" [alt]="contact.name" /> -->
+            <!-- <div class="contact-name mt-8">{{contact.name}} {{contact.lastName}}</div> -->
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label for="name">Nombre</mat-label>
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <input id="name" [(ngModel)]="data.name" name="name" matInput required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Apellidos</mat-label>
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <input [(ngModel)]="data.lastName" name="lastName" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Apellido2</mat-label>
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <input [(ngModel)]="data.secondLastName" name="secondLastName" matInput required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-label>Sexo</mat-label><br>
+                <mat-radio-group class="example-radio-group" [(ngModelOptions)]="favoriteSeason">
+                    <mat-radio-button (click)="radioclick(season)" class="example-radio-button" *ngFor="let season of seasons" [checked]="season === itemselect" [value]="season">
+                        {{season}}
+                    </mat-radio-button>
+                </mat-radio-group>
+                <br>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Telefono</mat-label>
+                    <mat-icon matSuffix class="secondary-text">phone</mat-icon>
+                    <input [(ngModel)]="data.cellphone" name="cellphone" type="text" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>DNI</mat-label>
+                    <mat-icon matSuffix class="secondary-text">email</mat-icon>
+                    <input [(ngModel)]="data.documentNumber" type="number" name="documentNumber" matInput required>
+                </mat-form-field>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Aula</mat-label>
+                    <mat-icon matSuffix class="secondary-text">domain</mat-icon>
+                    <input [(ngModel)]="data.classRoom" name="classRoom" matInput>
+                </mat-form-field>
+            </div> -->
+
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Nacimiento</mat-label>
+                    <input [(ngModel)]="data.birthday" name="birthday" matInput [matDatepicker]="birthdayDatePicker" name="birthday">
+                    <mat-datepicker-toggle matSuffix [for]="birthdayDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #birthdayDatePicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Email</mat-label>
+                    <mat-icon matSuffix class="secondary-text">email</mat-icon>
+                    <input [(ngModel)]="data.email" name="email" matInput type="email">
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Dirección</mat-label>
+                    <mat-icon matSuffix class="secondary-text">home</mat-icon>
+                    <input [(ngModel)]="data.address" name="address" matInput>
+                </mat-form-field>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button (click)="onNoClick()" class="warning-button" color="warn" aria-label="warning">
+            Cancelar
+        </button>
+
+        <button mat-raised-button class="save-button" color="accent" cdkFocusInitial [mat-dialog-close]="data" aria-label="SAVE">
+            Guardar
+        </button>
+    </div>
+</div>
