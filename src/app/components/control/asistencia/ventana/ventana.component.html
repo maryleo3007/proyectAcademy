@@ -1,0 +1,68 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">DETALLE DE ASISTENCIA</span>
+            <button mat-icon-button (click)="onNoClick()" aria-label="Close dialog">
+                    <mat-icon>close</mat-icon>
+                </button>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row class="toolbar-bottom py-16" fxLayout="column" fxLayoutAlign="center center">
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <div class="fuse-card">
+
+            <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="h1 font-weight-300">{{data.name}}</div>
+            </div>
+
+            <table class="simple clickable">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>{{data.date}}</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Día</td>
+                        <td>{{data.dayName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Hora Entrada Mañana</td>
+                        <td>{{data.registrationStartDate | slice:11:19}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Hora Salida Mañana</td>
+                        <td>{{data.registrationStartDate | slice:11:19}}</td>
+                    </tr>
+                    <tr>
+                        <td>Hora Entrada Tarde</td>
+                        <td>{{data.registrationStartDate | slice:11:19}}</td>
+                    </tr>
+                    <tr>
+                        <td>Hora Salida Tarde</td>
+                        <td>{{data.registrationStartDate | slice:11:19}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button (click)="onNoClick()" class="warning-button" color="warn" aria-label="warning">
+                Ok
+        </button>
+
+
+    </div>
+</div>

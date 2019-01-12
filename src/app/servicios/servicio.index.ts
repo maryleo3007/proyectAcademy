@@ -1,4 +1,9 @@
-export { AsistenciaRegistroService, AsistenciaListaService, CalendarioService } from './asistencia/asistencia.service';
+export { 
+    AsistenciaRegistroService,
+    AsistenciaListaService,
+    CalendarioService,
+    SucursalService 
+    } from './asistencia/asistencia.service';
 
 export { ProfesorService } from './profesor/profesor.service';
 export { AlumnoService } from './alumno/alumno.service';

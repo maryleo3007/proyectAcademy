@@ -5,6 +5,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/auth.service';
+import { loginModel } from 'app/models/login.model';
 declare var swal: any;
 
 @Component({
@@ -16,10 +17,9 @@ declare var swal: any;
 })
 export class LoginComponent implements OnInit 
 {
-    email: string ='feliz@gmail.com';
-    password: any ='123456';
+    
   loginForm: FormGroup;
-
+    loggin: loginModel;
   /**
    * Constructor
    *
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit
       private auntSrv: AuthService
   )
   {
+      this.loggin =new loginModel();
       // Configure the layout
       this._fuseConfigService.config = {
           layout: {
@@ -53,19 +54,22 @@ export class LoginComponent implements OnInit
   }
  
   ngOnInit(): void
-  {      
+  {  //quitar esto para producción
+    this.loggin.user ='jquijana';
+    this.loggin.password ='123456';    
   }
-  login (username,password) {
-    this.auntSrv.attemptAuth(username,password).subscribe(res => {
+  login () {
+    this.auntSrv.attemptAuth(this.loggin).subscribe(res => {
         const accessToken = 'KJAJSKDDSAKJDAJ32424324ASDA';
         localStorage.setItem('usertoken', accessToken);
         localStorage.setItem('usuario', JSON.stringify(res));
-        console.log(res);        
-        this.router.navigate(['Academia/Bienvenido']);
-    },
-    error => {        
-        swal('Importante', 'Credenciales incorrectos!', 'warning');     
-      }  
+        localStorage.setItem('menu', JSON.stringify(res.data.lstMenus));
+        if(res.data === null) {
+            swal('Importante', 'Credenciales incorrectos!', 'warning');    
+        }  else {
+            this.router.navigate(['Academia/Bienvenido']);
+        }       
+    }    
 
     )
   }

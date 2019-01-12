@@ -1,3 +1,9 @@
+// .cabeza {
+//     height: 100%;
+//     width: 100%;
+//     border: solid 2px #3498DB;
+// }
+// .cuerpo {}
 @import "src/@fuse/scss/fuse";
 .contact-form-dialog {
     @include media-breakpoint('xs') {
@@ -22,9 +28,7 @@
         flex-direction: column;
     }
 }
-.form-office{
-    width: 100%;
-}
+
 .example-radio-button {
     margin: 5px;
 }

@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
-import { CalendarioService, AsistenciaListaService } from 'app/servicios/servicio.index';
+import { CalendarioService, AsistenciaListaService, SucursalService } from 'app/servicios/servicio.index';
+import { MatDialog } from '@angular/material';
+import { VentanaComponent } from './ventana/ventana.component';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-asistencia',
@@ -19,12 +22,20 @@ export class AsistenciaComponent implements OnInit {
   p = 1;
   public term: any;
   public binding: any;
-  
+  dialogRef: any;
+  cambiarColor: any;
+  sucursales: any;
+  sucursal: any;
+
   constructor(
+    @Inject(DOCUMENT) private _document,
     private _CalendarioSrv: CalendarioService,
     private _listaAsistenciaSrv: AsistenciaListaService,
+    private _matDialog: MatDialog,
+    private _sucursalSrv: SucursalService,
   ) {    
     this.term = '';
+    this.cambiarColor= 'Esteesunddedeprueba';
   
    }
 
@@ -34,8 +45,13 @@ export class AsistenciaComponent implements OnInit {
     this.imprimirCalendario();
   }
   imprimirCalendario(){
-    this._CalendarioSrv.getCalenadrio().subscribe((res: any)=> {      
+    this._CalendarioSrv.getCalenadrio().subscribe((res: any)=> {  
+      // console.log(res);    
       this.accounts = res.data;
+    });
+    this._sucursalSrv.getSucursales().subscribe((res:any)=> {
+      console.log(res);
+      this.sucursales = res.data; 
     });
   }
   
@@ -44,14 +60,21 @@ export class AsistenciaComponent implements OnInit {
     this.semanas = mes.weeks;  
 
   }
-  SemanaSeleccionada(semana) {  
-  this.fechainicio = 'startDate=' +  this.cambiarfecha( semana.startDate);
-  this.fechafin = 'endDate='+ this.cambiarfecha( semana.endDate);
-   this._listaAsistenciaSrv.getAsistenciaAlumno(this.fechainicio,this.fechafin).subscribe((res: any) => {
-    console.log(res.data); 
-    this.Alumnos = res.data;
-       
-   });    
+  selectSucursal(sucursal) {
+    this.sucursal = sucursal.id;
+   
+    
+  }
+  SemanaSeleccionada(semana, link:any) {    
+    let selectores:any = this._document.getElementsByClassName('selector');
+    for(let ref of selectores) {
+      ref.classList.remove('colorAzul')    }
+    link.classList.add('colorAzul');     
+    this.fechainicio = 'startDate=' +  this.cambiarfecha( semana.startDate);
+    this.fechafin = 'endDate='+ this.cambiarfecha( semana.endDate);
+    this._listaAsistenciaSrv.getAsistenciaAlumno(this.fechainicio,this.fechafin, this.sucursal).subscribe((res: any) => {      
+      this.Alumnos = res.data;      
+    });
   }
   cambiarfecha(fecha) {  
     var aperturaanio = String(fecha); 
@@ -60,6 +83,41 @@ export class AsistenciaComponent implements OnInit {
     var apertura_anio = aperturaanio.substr(6, 4);    
 return apertura_anio+'-'+apertura_mes+'-'+apertura_dia;
   }
+  lookAsistens(asitencia: any, tiempo:any): void
+    {
+      var name = asitencia.name +' '+  asitencia.lastName +' '+  asitencia.secondLastName;
+      var date = tiempo.date;
+      var dayName = tiempo.dayName;
+      var registrationStartDate = tiempo.morning.registrationStartDate;
+      var registrationEndDate = tiempo.morning.registrationEndDate;
+      // var dayName = asitencia.record.monday.dayName;
+      // var dayName = asitencia.record.monday.dayName;
+      // var dayName = asitencia.record.monday.dayName;
+
+
+      console.log(asitencia,tiempo);
+      
+        this.dialogRef = this._matDialog.open(VentanaComponent, {            
+            width: '25%',
+            data      : {
+              name: name,
+              date: date,
+              dayName: dayName,
+              registrationStartDate: registrationStartDate, 
+              registrationEndDate: registrationEndDate,         
+            }
+        });
+
+        this.dialogRef.afterClosed().subscribe((res: any) => {
+                if ( !res )
+                {
+                    return;
+                }
+                
+                
+            });
+    }
+
  
 
 }

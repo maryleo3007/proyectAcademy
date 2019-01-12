@@ -127,7 +127,8 @@ export class ContactsComponent implements OnInit
                 this.persona.address = res.address;
                 this.persona.birthday = res.birthday;
                 this.persona.gender = res.gender;
-                this.persona.documentNumber = res.documentNumber;                
+                this.persona.documentNumber = res.documentNumber;  
+                this.persona.branchOffice = res.branchOffice;              
                           this.saveOrUpdatePersona(); 
                 
             });
@@ -136,6 +137,7 @@ export class ContactsComponent implements OnInit
     
     
     saveOrUpdatePersona(): void {
+        
         if (this.tipo === 'Alumno') {
             this.persona.documentType = 'DNI';            
             if (this.isValid) {

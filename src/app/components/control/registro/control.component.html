@@ -1,13 +1,13 @@
 
 <div class="search-wrapper mx-auto">
-    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <div class="search bg-white" fxFlex fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>search</mat-icon>
-        <input (keyup.enter)="controlbarra()" [(ngModel)]="documentNumber" name="documentNumber" paceholder="Search for a contact">
+        <input (keyup.enter)="controlbarra()" [(ngModel)]="documentNumber" name="documentNumber" class="bg-white" placeholder="Ingrese DNI">
     </div>
 </div>
 <div *ngIf="verMensaje" class="control">
     <div *ngIf="!verRojo">
-        <p>{{mensaje}}</p>
+        <p class="text-center">{{mensaje}}</p>
     </div>
 
     <div class="content-card">

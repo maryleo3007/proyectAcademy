@@ -1,7 +1,7 @@
 import { Component, Inject, ViewEncapsulation, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Contact } from '../contact.model';
-
+import { OfficeService } from '../../../../servicios/office/office.service';
 @Component({
     selector: 'contacts-contact-form-dialog',
     templateUrl: './contact-form.component.html',
@@ -13,18 +13,18 @@ export class ContactsContactFormDialogComponent implements OnInit {
     
     favoriteSeason: string;
     seasons: string[] = ['Masculino', 'Femenino'];
-    
-    
+    officeList:any = [];
     action: string;
     contact: Contact;
     dialogTitle: string;
     tipo: any;
     itemselect: any;
     ;
-    constructor(        
+    constructor(   
+        private _officeService: OfficeService,     
         public dialogRef: MatDialogRef<ContactsContactFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
-    ) {        
+    ) {       
         this.action = data.action;
         this.tipo = data.tipo;  
         if(data.gender){
@@ -41,8 +41,17 @@ export class ContactsContactFormDialogComponent implements OnInit {
             this.dialogTitle = 'Nuevo ' +this.tipo;            
         }
     }
-    ngOnInit() {        
+    ngOnInit() {      
+        this.getOffices()  
     }   
+
+      // office list  
+  getOffices() {
+    this.officeList = [];
+    this._officeService.getOffice().subscribe((data) => {
+      this.officeList = data.data; 
+    });
+  }
 
     radioclick(radio) {
         if(radio === "Femenino"){

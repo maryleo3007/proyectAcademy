@@ -1,7 +1,7 @@
 import { FuseNavigation } from '@fuse/types';
-
-export const navigation: FuseNavigation[] = [
-    {
+   export const navigation: FuseNavigation[] = 
+    [
+        {
         id       : 'applications',
         title    : 'Applications',
         translate: 'NAV.APPLICATIONS',
@@ -10,19 +10,19 @@ export const navigation: FuseNavigation[] = [
         children : [
             {
                 id       : 'mantenimiento',
-                title    : 'Mantenimiento',                
+                title    : 'MANTENIMIENTO',                
                 type     : 'collapsable',
                 icon     : 'album',
                 children : [
                     {
                         id   : 'alumno',
-                        title: 'Alumno',
+                        title: 'Mantenimiento de alumnos',
                         type : 'item',
                         url      : '/Academia/Alumno',
                     },
                     {
                         id   : 'profesor',
-                        title: 'Profesor',
+                        title: 'Mantenimiento de docentes',
                         type : 'item',
                         url      : '/Academia/Profesor'
                     }
@@ -35,25 +35,31 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id       : 'control',
-                title    : 'Control',                
+                title    : 'CONTROL DE ASISTENCIA',                
                 type     : 'collapsable',
                 icon     : 'change_history',
                 children : [
                     {
                         id   : 'Registro',
-                        title: 'Registro',
+                        title: 'Registro de asistencia',
                         type : 'item',
                         url      : '/Academia/Registro'
                     },
                     {
                         id   : 'Asistencia',
-                        title: 'Asistencia',
+                        title: 'Consulta de asistencia',
                         type : 'item',
                         url      : '/Academia/Asistencia'
                     }
                 ],
+                badge    : {
+                    title    : '2',                   
+                    bg       : '#EC0C8E',
+                    fg       : '#FFFFFF'
+                } 
                                
             }
         ]
     }
 ];
+

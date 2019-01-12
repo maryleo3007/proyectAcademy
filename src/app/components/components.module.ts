@@ -34,6 +34,7 @@ import { ControlComponent } from './control/registro/control.component';
 import { AsistenciaComponent } from './control/asistencia/asistencia.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { VentanaComponent } from './control/asistencia/ventana/ventana.component';
 @NgModule({
   imports: [
     Ng2SearchPipeModule,
@@ -65,7 +66,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     Ng2SearchPipeModule,
     NgxPaginationModule,   
     // PruebasComponent,
-    ContactsContactFormDialogComponent
+    ContactsContactFormDialogComponent,
+    VentanaComponent
   ],
   declarations: [
     ComponentsComponent,
@@ -78,10 +80,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ContactsMainSidebarComponent,
     ContactsContactFormDialogComponent,
     ControlComponent,
-    AsistenciaComponent
+    AsistenciaComponent,
+    VentanaComponent
     
   ],
-  entryComponents:[ContactsContactFormDialogComponent],
+  entryComponents:[ContactsContactFormDialogComponent,VentanaComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class ComponentsModule { }

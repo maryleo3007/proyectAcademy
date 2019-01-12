@@ -40,6 +40,7 @@ export class ContactsContactListComponent implements OnInit {
   classRoom = '';
   documentType = '';
   documentNumber = '';
+  branchOffice = 0;
   @Input() tipo;
   @Input() listapersona;
 
@@ -99,18 +100,19 @@ export class ContactsContactListComponent implements OnInit {
   }
 
   filterbyOffice(){
-    this._alumnoSrv.getStudents().subscribe((data) => {
-      this.studentList = data.data; 
-    });
-    setTimeout(() => {
-      if (this.currentOffice == 0) {
-        this.dataSource.data = this.studentList;
-      }else{
-        this.dataSource.data = this.studentList;
-      this.dataSource.data = this.studentList.filter(data => data.branchOffice == this.currentOffice)  
-      }
-    }, 500);
-    
+      if (this.tipo === 'Alumno') {
+      this._alumnoSrv.getStudents().subscribe((data) => {
+        this.studentList = data.data; 
+      });
+      setTimeout(() => {
+        if (this.currentOffice == 0) {
+          this.dataSource.data = this.studentList;
+        }else{
+          this.dataSource.data = this.studentList;
+        this.dataSource.data = this.studentList.filter(data => data.branchOffice == this.currentOffice)  
+        }
+      }, 1000);
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -135,7 +137,8 @@ export class ContactsContactListComponent implements OnInit {
         address: contact.address,
         birthday: contact.birthday,
         gender: contact.gender,
-        documentNumber: contact.documentNumber
+        documentNumber: contact.documentNumber,
+        branchOffice: contact.branchOffice
       }
     });
     this.dialogRef.afterClosed().subscribe((res: any) => {
@@ -152,6 +155,7 @@ export class ContactsContactListComponent implements OnInit {
       this.persona.birthday = res.birthday;
       this.persona.gender = res.gender;
       this.persona.documentNumber = res.documentNumber; 
+      this.persona.branchOffice = res.branchOffice;
       this.saveOrUpdatePersona();
     });
   }
@@ -192,6 +196,7 @@ export class ContactsContactListComponent implements OnInit {
           console.log(row);          
           this.selection.select(row)});
   }
+
   eventCheckbox(event, contactId) {
     if (event.checked) {
       let localId = new IdModel();

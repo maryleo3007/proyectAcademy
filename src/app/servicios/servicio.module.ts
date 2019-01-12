@@ -8,7 +8,8 @@ import {
   AsistenciaRegistroService,
   AsistenciaListaService,
   CalendarioService,
-  OfficeService
+  OfficeService,
+  SucursalService	
 } from './servicio.index';
 
 
@@ -24,7 +25,8 @@ import {
       AsistenciaRegistroService,
       AsistenciaListaService, 
       CalendarioService,
-      OfficeService 
+      OfficeService,
+      SucursalService 
     ],
     declarations: []
   })

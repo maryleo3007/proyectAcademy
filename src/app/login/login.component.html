@@ -23,18 +23,18 @@
             <form>
                 <mat-form-field appearance="outline">
                     <mat-label for="email">Email</mat-label>
-                    <input matInput id="email" [(ngModel)]="email" name="email" required>
+                    <input matInput id="email" [(ngModel)]="loggin.user" name="email" required>
                     <mat-icon matSuffix class="secondary-text">mail</mat-icon>
 
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label for="password">Password</mat-label>
-                    <input id="password" matInput type="password" [(ngModel)]="password" name="password" required>
+                    <input id="password" matInput type="password" [(ngModel)]="loggin.password" name="password" required>
                     <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
                 </mat-form-field>
 
-                <button (keyup.enter)="login(username,password)" (click)="login(username,password)" mat-raised-button class="submit-button " aria-label="LOGIN ">
+                <button (keyup.enter)="login()" (click)="login()" mat-raised-button class="submit-button " aria-label="LOGIN ">
                         LOGIN
                     </button>
 

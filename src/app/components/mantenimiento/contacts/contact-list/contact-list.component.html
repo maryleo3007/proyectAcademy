@@ -14,11 +14,12 @@
        </span>
             </div>
 
-            <mat-form-field appearance="outline" class="category-selector">
-                <mat-label>Sedes</mat-label>
+            <mat-form-field appearance="outline" class="category-selector officeList">
+                <mat-label>Buscar por Sucursal</mat-label>
                 <mat-select [(ngModel)]="currentOffice"
                                 (selectionChange)="filterbyOffice()">
-                    <mat-option [value]="0">
+                    <mat-option 
+                    [value]="0">
                         TODOS
                     </mat-option>
                     <mat-option *ngFor="let office of officeList" [value]="office.id">

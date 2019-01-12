@@ -33,6 +33,9 @@ export class AlumnoService {
   //    * @param  alumno
   //    */
   public saveOrUpdateAlumno(alumno: PersonaModel): Observable<any> {
+
+    console.log(JSON.stringify(alumno));
+
     return this.http.post<any>(this.api1, JSON.stringify(alumno));
   }
 

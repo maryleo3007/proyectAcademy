@@ -66,6 +66,7 @@ export class ControlComponent implements OnInit {
         }
       this.verMensaje = true;
     });
+    this.documentNumber = '';
   }
 }
 }

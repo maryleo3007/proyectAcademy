@@ -10,6 +10,7 @@ export class BienvenidoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+   
   }
 
 }
