@@ -53,9 +53,14 @@ th {
     background: transparent;
     box-shadow: none;
     .mat-header-cell {
-        width: 220px;
+        width: 240px;
         @include media-breakpoint('lt-md') {
             width: 320px;
+        }
+    }
+    @media only screen and (min-device-width: 1440px) and (max-device-width: 2000px) and (orientation:portrait) {
+        .mat-header-cell {
+            width: 280px;
         }
     }
     .mat-column-avatar {
