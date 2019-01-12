@@ -18,7 +18,9 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
 {
     fuseConfig: any;
     navigation: any;
-
+    nombre: any;
+    variable: any;
+    correo: any;
     // Private
     private _fusePerfectScrollbar: FusePerfectScrollbarDirective;
     private _unsubscribeAll: Subject<any>;
@@ -128,6 +130,10 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
             .subscribe(() => {
                 this.navigation = this._fuseNavigationService.getCurrentNavigation();
             });
+            this.variable = JSON.parse(localStorage.getItem('usuario'));                    
+        this.nombre = this.variable.data.fullName;
+        this.correo = this.variable.data.email;
+
     }
 
     /**

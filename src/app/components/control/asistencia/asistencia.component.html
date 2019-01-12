@@ -60,7 +60,7 @@
                                 {{semana.weekName}}
                                 <p #link1 class="selector"> {{semana.startDate | slice:0:5}} - {{semana.endDate | slice:0:5}} </p>
                             </h3>
-                            <p>{{semana.startDate | date: 'dd/MM'}} - {{semana.endDate | date: 'dd/MM'}} </p>
+                            <!-- <p>{{semana.startDate | slice:0:5}} - {{semana.endDate | slice:0:5}} </p> -->
                         </th>
                     </tr>
                     <!-- <tr *ngFor="let semana of semanas">

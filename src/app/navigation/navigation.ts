@@ -62,4 +62,3 @@ import { FuseNavigation } from '@fuse/types';
         ]
     }
 ];
-

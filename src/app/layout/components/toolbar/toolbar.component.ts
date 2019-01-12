@@ -19,6 +19,9 @@ import { Router } from '@angular/router';
 
 export class ToolbarComponent implements OnInit, OnDestroy
 {
+    nombre: any;
+    variable: any;
+    correo: any;
     horizontalNavbar: boolean;
     rightNavbar: boolean;
     hiddenNavbar: boolean;
@@ -112,6 +115,9 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {'id': this._translateService.currentLang});
+        this.variable = JSON.parse(localStorage.getItem('usuario'));                    
+        this.nombre = this.variable.data.fullName;
+        this.correo = this.variable.data.email;
     }
 
     /**
