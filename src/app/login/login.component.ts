@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit
  
   ngOnInit(): void
   {  //quitar esto para producción
-    this.loggin.user ='jquijana';
-    this.loggin.password ='123456';    
+    this.loggin.user ='';
+    this.loggin.password ='';    
   }
   login () {
     this.auntSrv.attemptAuth(this.loggin).subscribe(res => {
