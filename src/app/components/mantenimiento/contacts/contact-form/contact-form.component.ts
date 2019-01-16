@@ -19,6 +19,9 @@ export class ContactsContactFormDialogComponent implements OnInit {
     dialogTitle: string;
     tipo: any;
     itemselect: any;
+    faltaNombre: boolean;
+    faltaApellido: boolean;
+    disable: boolean;
     ;
     constructor(   
         private _officeService: OfficeService,     
@@ -41,7 +44,10 @@ export class ContactsContactFormDialogComponent implements OnInit {
             this.dialogTitle = 'Nuevo ' +this.tipo;            
         }
     }
-    ngOnInit() {      
+    ngOnInit() {    
+        this.faltaNombre = false;         
+         this.faltaApellido = false; 
+
         this.getOffices()  
     }   
 
@@ -52,7 +58,6 @@ export class ContactsContactFormDialogComponent implements OnInit {
       this.officeList = data.data; 
     });
   }
-
     radioclick(radio) {
         if(radio === "Femenino"){
             this.data.gender = "F"
@@ -61,13 +66,15 @@ export class ContactsContactFormDialogComponent implements OnInit {
         } else {
             this.data.gender = null;
         }
-
-
     }
    
     onNoClick(): void {
-        this.dialogRef.close();
-       
+            this.dialogRef.close();
+    }
+    validacion() {
+        if(this.data.nombre === '' && this.data.lastName === '' && this.data.secondLastName === '' && this.data.documentNumber === '') {
+            this.disable = false;
+        }
     }
 
 }

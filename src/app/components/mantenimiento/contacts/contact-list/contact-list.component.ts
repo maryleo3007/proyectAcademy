@@ -51,7 +51,7 @@ export class ContactsContactListComponent implements OnInit {
 
   ELEMENT_DATA1: Array<PersonaModel>;
   dialogRef: any;
-  displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'address', 'birthday'];
+  displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'birthday'];
   dataSource = new MatTableDataSource<PersonaModel>(this.ELEMENT_DATA1);
   selection = new SelectionModel<PersonaModel>(true, []);
   listaEliminar: any;
@@ -164,7 +164,7 @@ export class ContactsContactListComponent implements OnInit {
     if (tipo === 'Alumno') {
       this._alumnoSrv.getPersonaAlumno().subscribe((res: any) => {
         this.listapersona = res.data;        
-        this.displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'address', 'birthday'];
+        this.displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'birthday'];
         this.dataSource = new MatTableDataSource<PersonaModel>(this.listapersona);
         this.selection = new SelectionModel<PersonaModel>(true, []);
         this.dataSource.paginator = this.paginator;
@@ -173,7 +173,7 @@ export class ContactsContactListComponent implements OnInit {
     if (tipo === 'Profesor') {
       this._profeSrv.getPersonaProfesor().subscribe((res: any) => {
         this.listapersona = res.data;
-        this.displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'address', 'birthday'];
+        this.displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'birthday'];
         this.dataSource = new MatTableDataSource<PersonaModel>(this.listapersona);
         this.selection = new SelectionModel<PersonaModel>(true, []);
         this.dataSource.paginator = this.paginator;

@@ -34,6 +34,11 @@
         text-align: center!important;
         font-size: 14px;
         width: 100%;
+        tbody {
+            td {
+                cursor: pointer;
+            }
+        }
     }
     tr,
     td,
@@ -109,6 +114,4 @@ th {
 .colorAzul {
     background: #3498DB;
     color: white;
-    // -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 50%, 89% 100%, 0% 100%);
-    // clip-path: polygon(0% 0%, 100% 0, 100% 50%, 89% 100%, 0% 100%);
 }

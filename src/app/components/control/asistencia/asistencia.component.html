@@ -63,9 +63,6 @@
                             <!-- <p>{{semana.startDate | slice:0:5}} - {{semana.endDate | slice:0:5}} </p> -->
                         </th>
                     </tr>
-                    <!-- <tr *ngFor="let semana of semanas">
-                        <td>{{semana.startDate}}</td>
-                    </tr> -->
                 </tbody>
             </table>
 
@@ -83,10 +80,6 @@
     </div>
     <!-- / SIDEBAR CONTENT -->
     <div class="tablaasistencia">
-
-
-
-
         <table>
             <thead>
                 <tr class="noboder">
@@ -122,7 +115,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let alumno of  Alumnos | filter:term | paginate: { itemsPerPage: 20, currentPage: p }">
+                <tr *ngFor="let alumno of  Alumnos | filter:term | paginate: { itemsPerPage: 10, currentPage: p }">
                     <!-- <tr *ngFor="let alumno of  alumnos | paginate: { itemsPerPage: 20, currentPage: p }"> -->
                     <th>{{alumno.name}} {{alumno.lastName}} {{alumno.secondLastName}}</th>
                     <td>

@@ -98,7 +98,7 @@ return apertura_anio+'-'+apertura_mes+'-'+apertura_dia;
       console.log(asitencia,tiempo);
       
         this.dialogRef = this._matDialog.open(VentanaComponent, {            
-            width: '25%',
+            width: '30%',
             data      : {
               name: name,
               date: date,

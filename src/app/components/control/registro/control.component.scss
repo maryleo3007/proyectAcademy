@@ -4,7 +4,6 @@ mat-form-field {
 }
 
 .search-wrapper {
-    //separacion
     width: 100%;
     max-width: 480px;
     border-radius: 28px;
@@ -30,6 +29,7 @@ mat-form-field {
         }
     }
 }
+
 .content-card {
     background: #fff;
     border-radius: 8px 8px 0 0;
@@ -38,9 +38,9 @@ mat-form-field {
 }
 
 .tag {
-    flex-direction: row; 
-    display: flex; 
-    max-height: 100%; 
+    flex-direction: row;
+    display: flex;
+    max-height: 100%;
     place-content: center flex-start;
     align-items: center;
     color: #A40808;
@@ -50,27 +50,12 @@ mat-form-field {
     padding: 3px 8px;
     background-color: rgba(214, 116, 116, 0.38);
 }
+
 .tag-color {
     width: 8px;
     height: 8px;
     margin-right: 8px;
     border-radius: 50%;
-}
-.example-container {
-    display: block;
-    padding: 50px;
-    background: #3498DB !important;
-    margin: 40px;
-    border-radius: 25px;
-    // margin-right: auto;
-    mat-form-field {
-        background: white;
-        border-radius: 20%;
-    }
-}
-
-.example-container>* {
-    width: 100%;
 }
 
 .control {
@@ -79,65 +64,4 @@ mat-form-field {
         font-family: 'Courier New', Courier, monospace;
         font-size: 30px;
     }
-}
-
-table.redTable {
-    border: 1px solid #A40808;
-    background-color: rgb(255, 255, 255);
-    width: 150%;
-    text-align: center;
-    border-collapse: collapse;
-}
-
-table.redTable td,
-table.redTable th {
-    border: 1px solid rgb(255, 255, 255);
-    padding: 2px 2px;
-}
-
-table.redTable tbody td {
-    font-size: 20px;
-}
-
-table.redTable tr:nth-child(even) {
-    background: white;
-}
-
-table.redTable thead {
-    background: #A40808;
-}
-
-table.redTable thead th {
-    font-size: 14px;
-    font-weight: bold;
-    color: #FFFFFF;
-    text-align: center;
-    border-left: 2px solid #A40808;
-}
-
-table.redTable thead th:first-child {
-    border-left: none;
-}
-
-table.redTable tfoot {
-    font-size: 19px;
-    font-weight: bold;
-    color: #FFFFFF;
-    background: #A40808;
-}
-
-table.redTable tfoot td {
-    font-size: 13px;
-}
-
-table.redTable tfoot .links {
-    text-align: right;
-}
-
-table.redTable tfoot .links a {
-    display: inline-block;
-    background: #FFFFFF;
-    color: #A40808;
-    padding: 2px 8px;
-    border-radius: 5px;
 }

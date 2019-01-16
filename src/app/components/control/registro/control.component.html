@@ -1,15 +1,14 @@
-
 <div class="search-wrapper mx-auto">
     <div class="search bg-white" fxFlex fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>search</mat-icon>
         <input (keyup.enter)="controlbarra()" [(ngModel)]="documentNumber" name="documentNumber" class="bg-white" placeholder="Ingrese DNI">
     </div>
 </div>
+
 <div *ngIf="verMensaje" class="control">
     <div *ngIf="!verRojo">
         <p class="text-center">{{mensaje}}</p>
     </div>
-
     <div class="content-card">
         <div *ngIf="verTabla" class="section">
             <div class="customer mb-32">
@@ -42,13 +41,11 @@
             </div>
         </div>
         <div *ngIf="verRojo">
-            <div  class="tag ng-star-inserted" fxlayout="row" fxlayoutalign="start center">
+            <div class="tag ng-star-inserted" fxlayout="row" fxlayoutalign="start center">
                 <div class="tag-color" style="background-color: rgb(244, 67, 54);"></div>
                 <div class="tag-label">{{mensaje}}</div>
             </div>
         </div>
-        
+
     </div>
 </div>
-
-

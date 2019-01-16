@@ -19,14 +19,14 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label for="name">Nombre</mat-label>
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <input id="name" [(ngModel)]="data.name" name="name" matInput required>
+                    <input id="name" (change)="validacion()" [(ngModel)]="data.name" name="name" matInput required>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Apellidos</mat-label>
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <input [(ngModel)]="data.lastName" name="lastName" matInput required>
+                    <input (change)="validacion()" [(ngModel)]="data.lastName" name="lastName" matInput required>
                 </mat-form-field>
             </div>
 
@@ -34,7 +34,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Apellido2</mat-label>
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <input [(ngModel)]="data.secondLastName" name="secondLastName" matInput required>
+                    <input (change)="validacion()" [(ngModel)]="data.secondLastName" name="secondLastName" matInput required>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
@@ -50,26 +50,17 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Telefono</mat-label>
                     <mat-icon matSuffix class="secondary-text">phone</mat-icon>
-                    <input [(ngModel)]="data.cellphone" name="cellphone" type="text" matInput>
+                    <input (change)="validacion()" [(ngModel)]="data.cellphone" name="cellphone" type="text" matInput>
                 </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>DNI</mat-label>
-                    <mat-icon matSuffix class="secondary-text">email</mat-icon>
-                    <input [(ngModel)]="data.documentNumber" type="number" name="documentNumber" matInput required>
+                    <mat-icon matSuffix class="secondary-text">aspect_ratio</mat-icon>
+                    <input (change)="validacion()" [(ngModel)]="data.documentNumber" type="number" name="documentNumber" matInput required>
                 </mat-form-field>
             </div>
-
-            <!-- <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Aula</mat-label>
-                    <mat-icon matSuffix class="secondary-text">domain</mat-icon>
-                    <input [(ngModel)]="data.classRoom" name="classRoom" matInput>
-                </mat-form-field>
-            </div> -->
-
 
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
@@ -110,9 +101,10 @@
         <button mat-raised-button (click)="onNoClick()" class="warning-button" color="warn" aria-label="warning">
             Cancelar
         </button>
-
-        <button mat-raised-button class="save-button" color="accent" cdkFocusInitial [mat-dialog-close]="data" aria-label="SAVE">
+        <button [disable]="disable" mat-raised-button class="save-button" color="accent" cdkFocusInitial [mat-dialog-close]="data" aria-label="SAVE">
             Guardar
         </button>
+        <p *ngIf="faltaNombre" style="color: red; display: none;">Escriba el nombre</p>
+        <p *ngIf="faltaApellido" style="color: red; display: none;">Escriba el nombre</p>
     </div>
 </div>
