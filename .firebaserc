@@ -1,5 +1,6 @@
 {
   "projects": {
-    "AcademiaSofia": "loginapp-a860c"
+    "AcademiaSofia": "loginapp-a860c",
+    "default": "loginapp-a860c"
   }
 }

@@ -88,14 +88,11 @@ return apertura_anio+'-'+apertura_mes+'-'+apertura_dia;
       var name = asitencia.name +' '+  asitencia.lastName +' '+  asitencia.secondLastName;
       var date = tiempo.date;
       var dayName = tiempo.dayName;
-      var registrationStartDate = tiempo.morning.registrationStartDate;
-      var registrationEndDate = tiempo.morning.registrationEndDate;
-      // var dayName = asitencia.record.monday.dayName;
-      // var dayName = asitencia.record.monday.dayName;
-      // var dayName = asitencia.record.monday.dayName;
-
-
-      console.log(asitencia,tiempo);
+      var morningstart = tiempo.morning.registrationStartDate;
+      var morningend = tiempo.morning.registrationEndDate;
+      var afterstart = tiempo.afternoon.registrationStartDate;
+      var afterend = tiempo.afternoon.registrationEndDate;
+      console.log(tiempo);
       
         this.dialogRef = this._matDialog.open(VentanaComponent, {            
             width: '30%',
@@ -103,8 +100,10 @@ return apertura_anio+'-'+apertura_mes+'-'+apertura_dia;
               name: name,
               date: date,
               dayName: dayName,
-              registrationStartDate: registrationStartDate, 
-              registrationEndDate: registrationEndDate,         
+              morningstart: morningstart, 
+              morningend: morningend,
+              afterstart: afterstart,
+              afterend: afterend
             }
         });
 
