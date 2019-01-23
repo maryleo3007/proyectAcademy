@@ -115,9 +115,11 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {'id': this._translateService.currentLang});
-        this.variable = JSON.parse(localStorage.getItem('usuario'));                    
-        this.nombre = this.variable.data.fullName;
-        this.correo = this.variable.data.email;
+        if(this.variable = JSON.parse(localStorage.getItem('usuario'))) {
+            this.variable = JSON.parse(localStorage.getItem('usuario'));                    
+            this.nombre = this.variable.data.fullName;
+            this.correo = this.variable.data.email;
+        }
     }
 
     /**

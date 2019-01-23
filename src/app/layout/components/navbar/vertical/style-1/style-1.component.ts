@@ -130,9 +130,11 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
             .subscribe(() => {
                 this.navigation = this._fuseNavigationService.getCurrentNavigation();
             });
-            this.variable = JSON.parse(localStorage.getItem('usuario'));                    
-        this.nombre = this.variable.data.fullName;
-        this.correo = this.variable.data.email;
+            if(this.variable = JSON.parse(localStorage.getItem('usuario'))) {
+                this.variable = JSON.parse(localStorage.getItem('usuario'));                    
+                this.nombre = this.variable.data.fullName;
+                this.correo = this.variable.data.email;
+            }
 
     }
 

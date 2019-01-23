@@ -60,13 +60,14 @@ export class LoginComponent implements OnInit
   }
   login () {
     this.auntSrv.attemptAuth(this.loggin).subscribe(res => {
-        const accessToken = 'KJAJSKDDSAKJDAJ32424324ASDA';
-        localStorage.setItem('usertoken', accessToken);
-        localStorage.setItem('usuario', JSON.stringify(res));
-        localStorage.setItem('menu', JSON.stringify(res.data.lstMenus));
+        console.log(res);        
         if(res.data === null) {
             swal('Importante', 'Credenciales incorrectos!', 'warning');    
         }  else {
+            const accessToken = 'KJAJSKDDSAKJDAJ32424324ASDA';
+            localStorage.setItem('usertoken', accessToken);
+            localStorage.setItem('usuario', JSON.stringify(res));
+            localStorage.setItem('menu', JSON.stringify(res.data.lstMenus));
             this.router.navigate(['Academia/Bienvenido']);
         }       
     }    
