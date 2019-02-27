@@ -4,7 +4,8 @@
 // Import app.theme.scss
 @import "app/app.theme";
 //radio inicio 
-$md-radio-checked-color: rgb(23, 66, 184);
+$md-radio-checked-color: #3498DB;
+// $md-radio-checked-color: rgb(23, 66, 184);
 $md-radio-border-color: rgba(0, 0, 0, 0.54);
 $md-radio-size: 20px;
 $md-radio-checked-size: 10px;
@@ -81,7 +82,7 @@ thead td {
 select.mdb-select {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #097c99;
+    border-bottom: 1px solid #3498DB;
     border-radius: 0;
     outline: 0;
     height: 2.1rem;

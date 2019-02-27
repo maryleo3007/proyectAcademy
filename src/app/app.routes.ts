@@ -10,26 +10,30 @@ import { ProfesorComponent } from './components/mantenimiento/profesor/profesor.
 import { AuthGuard } from './core/auth.guard';
 import { ControlComponent } from './components/control/registro/control.component';
 import { AsistenciaComponent } from './components/control/asistencia/asistencia.component';
+import { AcademyCoursesComponent } from './components/academy/courses/courses.component';
+import { AcademyCourseComponent } from './components/academy/course/course.component';
 
 
-const appRoutes: Routes = [ 
+const appRoutes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
-    { 
-        path: 'Academia', 
+    {
+        path: 'Academia',
         component: ComponentsComponent,
-        canActivate: [AuthGuard],       
-        children: 
-        [        
-            { path: 'Bienvenido', component: BienvenidoComponent  , data: { titulo: 'Bienvenidos' }}, 
-            { path: 'Alumno', component: AlumnoComponent  , data: { titulo: 'Alumnos' }}, 
-            { path: 'Profesor', component: ProfesorComponent  , data: { titulo: 'Profesores' }}, 
-            { path: 'Registro', component: ControlComponent  , data: { titulo: 'Registro' }}, 
-            { path: 'Asistencia', component: AsistenciaComponent  , data: { titulo: 'Asistencia' }}, 
-            // { path: '**', component: NopagefoundComponent }
-          ]      
-      },
-  ];
-  
-  export const APP_ROUTES = RouterModule.forRoot( appRoutes, { useHash: true } );
-  
+        canActivate: [AuthGuard],
+        children:
+            [
+                { path: 'Bienvenido', component: BienvenidoComponent, data: { titulo: 'Bienvenidos' } },
+                { path: 'Alumno', component: AlumnoComponent, data: { titulo: 'Alumnos' } },
+                { path: 'Profesor', component: ProfesorComponent, data: { titulo: 'Profesores' } },
+                { path: 'Registro', component: ControlComponent, data: { titulo: 'Registro' } },
+                { path: 'Asistencia', component: AsistenciaComponent, data: { titulo: 'Asistencia' } },
+                { path: 'Cursos', component: AcademyCoursesComponent, data: { titulo: 'Asistencia' } },
+                { path: 'Cursos/:id', component: AcademyCourseComponent, data: { titulo: 'Asistencia' } },
+
+                // { path: '**', component: NopagefoundComponent }
+            ]
+    },
+];
+
+export const APP_ROUTES = RouterModule.forRoot(appRoutes, { useHash: true });

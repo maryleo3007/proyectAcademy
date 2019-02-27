@@ -1,34 +1,36 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { 
-  AlumnoService,  
+import {
+  AlumnoService,
   SidebarService,
   ProfesorService,
   AsistenciaRegistroService,
   AsistenciaListaService,
   CalendarioService,
   OfficeService,
-  SucursalService	
+  SucursalService,
+  AcademiService
 } from './servicio.index';
 
 
 @NgModule({
-    imports: [      
-      CommonModule,
-      HttpClientModule
-    ],
-    providers: [
-      AlumnoService,     
-      ProfesorService,
-      SidebarService,
-      AsistenciaRegistroService,
-      AsistenciaListaService, 
-      CalendarioService,
-      OfficeService,
-      SucursalService 
-    ],
-    declarations: []
-  })
-  export class ServiceModule { }
-  
+  imports: [
+    CommonModule,
+    HttpClientModule
+  ],
+  providers: [
+    AcademiService,
+    AlumnoService,
+    ProfesorService,
+    SidebarService,
+    AsistenciaRegistroService,
+    AsistenciaListaService,
+    CalendarioService,
+    OfficeService,
+    SucursalService
+  ],
+  declarations: []
+})
+export class ServiceModule { }
+

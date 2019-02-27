@@ -1,0 +1,234 @@
+@import "src/@fuse/scss/fuse";
+#academy-course {
+    .sidebar {
+        max-height: 720px;
+        .steps {
+            padding: 16px 0;
+            height: 100%;
+            .step {
+                position: relative;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 16px;
+                cursor: pointer;
+                &.current {
+                    .index {
+                        // circulo al inicio
+                        span {
+                            border: 2px solid;
+                            color: #3498DB;
+                            z-index: 10;
+                            background: white;
+                        }
+                        // ===================
+                        &:before {
+                            color: #3498DB;
+                        }
+                        //la mitad de la linea del circulo para abajo menos el primero
+                        &:after {
+                            color: #3498DB;
+                        }
+                    }
+                    // tutulo en el sidevar al inicio
+                    .title {
+                        font-weight: bold;
+                        color: #3498DB;
+                    }
+                }
+                &.completed {
+                    .index {
+                        // cuando pasas a la siguiente circulo recien se activa esto 
+                        span {
+                            border: 2px solid;
+                            color: #3498DB;
+                        }
+                        &:before {
+                            color: #3498DB;
+                        }
+                        //la mitad de la linea del circulo para abajo menos el primero
+                        &:after {
+                            color: #3498DB;
+                        }
+                    }
+                }
+                &.first {
+                    .index {
+                        &:before {
+                            display: none;
+                            border-left: 2px solid black;
+                        }
+                        //la mitad de la barra ya al iniciar
+                        // &:after {                            
+                        //      border-left: 2px solid #3498DB;
+                        // }
+                    }
+                }
+                &.last {
+                    .index {
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
+                // la linea al inicio
+                .index {
+                    display: flex;
+                    margin-right: 12px;
+                    &:before,
+                    &:after {
+                        position: absolute;
+                        display: block;
+                        content: ' ';
+                        border-left: 2px solid;
+                        width: 1px;
+                        height: 50%;
+                        left: 29px;
+                        z-index: 8;
+                    }
+                    //la mitad de la linea del circulo para arriba menos el primero
+                    &:before {
+                        top: 0;
+                    }
+                    //la mitad de la linea del circulo para abajo menos el primero sin click
+                    &:after {
+                        bottom: 0;
+                    }
+                    span {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        width: 28px;
+                        min-width: 28px;
+                        max-width: 28px;
+                        height: 28px;
+                        border-radius: 100%;
+                        border: 2px solid;
+                        font-weight: bold;
+                        font-size: 12px;
+                        z-index: 10;
+                        background: white;
+                    }
+                }
+                // titulo al inicio sin que se haga click
+                .title {
+                    display: flex;
+                }
+            }
+        }
+    }
+    .center {
+        position: relative;
+        overflow: hidden;
+        .header {
+            height: 42px;
+            min-height: 52px;
+            max-height: 52px;
+            display: grid;
+            grid-template-columns: 30% 70% 20%;
+            .description {
+                width: 85%;
+            }
+            .minuto {
+                padding: 0 10px 0 10px;
+                border: 1px solid white;
+                box-shadow: 3px 3px 2px grey;
+            }
+        }
+        .content {
+            position: relative;
+            display: flex;
+            .course-step {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                padding: 0px;
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+                &.ng-animating {
+                    overflow: hidden;
+                }
+                @media (max-width: 720px) {
+                    padding: 0 0 10px 0;
+                }
+                .course-step-content {
+                    padding: 14px;
+                    // max-width: 720px;
+                    margin: 0 auto;
+                    width: 100% !important;
+                    border-radius: 8px;
+                    // height: 720px;
+                    @include mat-elevation(1);
+                    p {
+                        color: #3498DB;
+                    }
+                    #separar {
+                        display: grid !important;
+                        grid-template-columns: 50% 50% !important;
+                        .alterna {
+                            width: 100%;
+                            height: 100%;
+                            .example-radio-group {
+                                display: inline-flex;
+                                flex-direction: column;
+                            }
+                            .example-radio-button {
+                                margin: 5px;
+                            }
+                            .example-selected-value {
+                                margin: 15px 0;
+                            }
+                        }
+                        .fuse-card {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        // .step-navigation {
+        //     position: absolute;
+        //     display: flex;
+        //     align-items: center;
+        //     // justify-content: space-between;
+        //     bottom: 32px;
+        //     max-width: 944px;
+        //     padding: 0 24px;
+        //     width: 100%;
+        //     left: 50%;
+        //     transform: translateX(-50%);
+        //     .previous {
+        //         margin-right: auto;
+        //     }
+        //     .next,
+        //     .done {
+        //         margin-left: auto;
+        //     }
+        // }
+    }
+}
+
+.previous {
+    top: 90%;
+    font-size: 20px;
+    position: fixed;
+    bottom: 32px;
+    right: 82px;
+    padding: 0;
+    z-index: 99;
+}
+
+.next,
+.done {
+    top: 90%;
+    font-size: 20px;
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    z-index: 99;
+}

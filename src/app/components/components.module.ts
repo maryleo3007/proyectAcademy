@@ -35,8 +35,10 @@ import { AsistenciaComponent } from './control/asistencia/asistencia.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { VentanaComponent } from './control/asistencia/ventana/ventana.component';
+import { AcademyCoursesComponent } from './academy/courses/courses.component';
+import { AcademyCourseComponent } from './academy/course/course.component';
 @NgModule({
-  imports: [
+  imports: [    
     Ng2SearchPipeModule,
     NgxPaginationModule,
     MatSelectModule,
@@ -70,6 +72,8 @@ import { VentanaComponent } from './control/asistencia/ventana/ventana.component
     VentanaComponent
   ],
   declarations: [
+    AcademyCoursesComponent,
+    AcademyCourseComponent,
     ComponentsComponent,
     BienvenidoComponent,
     AlumnoComponent,
