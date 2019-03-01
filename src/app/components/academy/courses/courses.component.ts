@@ -24,7 +24,14 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
     private _unsubscribeAll: Subject<any>;
     Estado: any;
     Tipo: any;
-
+    today: string;
+    fechainicio: any;
+    hoy: Date;
+    maniana: Date;
+    idEstudiante: number;
+    tipeExamen: number;
+    dateInit: string;
+    dateFin: string;
     /**
      * Constructor
      *
@@ -33,6 +40,10 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
     constructor(
         private _academiSrv: AcademiService,
     ) {
+        // fecha de hoy
+        this.hoy = new Date();
+        this.maniana = new Date();
+        this.today = new Date().toISOString().substr(0, 10);
         // Set the defaults
         this.currentCategoryEstado = 0;
         this.currentCategoryTipo = 0;
@@ -50,8 +61,12 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this.idEstudiante = 442;
+        this.tipeExamen = 0;
+        this.dateInit = '2019-02-27';
+        this.dateFin = '2019-02-28';
         this.imprimirTipo();
-        this.impirmircursos();
+        this.impirmircursos(this.idEstudiante, this.tipeExamen, this.dateInit, this.dateFin);
         // this.categories = this._academiSrv.categories;
         // this.filteredCourses = this.coursesFilteredByCategory = this.courses = .data;
 
@@ -66,19 +81,34 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         this._unsubscribeAll.complete();
     }
     imprimirTipo() {
-        this._academiSrv.geListaEstados().subscribe((res: any) => {
-            this.Estado = res.data;
-        })
+        //     this._academiSrv.geListaEstados().subscribe((res: any) => {
+        //         this.Estado = res.data;
+        //     })
         this._academiSrv.geListaTipos().subscribe((res: any) => {
             this.Tipo = res.data;
         })
     }
-    impirmircursos() {
-        this._academiSrv.geListaExamenes().subscribe((res: any) => {
-            this.filteredCourses = this.coursesFilteredByCategory = this.courses = res.data;            
+    impirmircursos(idEstudiante, tipeExamen, dateInit, dateFin) {
+        this._academiSrv.geListaCursosxFechas(idEstudiante, tipeExamen, dateInit, dateFin).subscribe((res: any) => {
+            this.filteredCourses = this.coursesFilteredByCategory = this.courses = res;
 
         })
     }
+
+    filtroFechainicio(evento): void {
+        this.dateInit = this.ordenar(evento);
+
+        this.impirmircursos(this.idEstudiante, this.tipeExamen, this.dateInit, this.dateFin);
+
+    }
+    filtroFechaFin(evento) {
+        this.dateFin = this.ordenar(evento);
+        this.impirmircursos(this.idEstudiante, this.tipeExamen, this.dateInit, this.dateFin);
+    }
+    ordenar(fecha) {
+        return fecha.toISOString().substr(8, 2) + '-' + fecha.toISOString().substr(5, 2) + '-' + fecha.toISOString().substr(0, 4);
+    }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -88,6 +118,7 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
      */
     filterCoursesByTipo(): void {
         // Filter
+        console.log(this.currentCategoryTipo);
         if (this.currentCategoryTipo === 0) {
             this.coursesFilteredByCategory = this.courses;
             this.filteredCourses = this.courses;

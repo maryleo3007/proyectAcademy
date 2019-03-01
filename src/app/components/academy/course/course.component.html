@@ -36,14 +36,13 @@
             </div>
 
             <div class="description" *ngIf="descritionExamen.examName">
-                <h2 class="text-center">{{descritionExamen.examName}}</h2>
+                <h2 class="text-center">Titulo</h2>
             </div>
             <div class="minuto">
                 <h2 class="text-center">{{minutos | number:'2.0-0'}}:{{segundos | number:'2.0-0'}}</h2>
             </div>
         </div>
         <!-- / HEADER -->
-
         <!-- CONTENT -->
         <div id="course-content" class="content">
             <ng-container *ngFor="let step of laspreguntas; let i = index;">
@@ -91,11 +90,11 @@
                 <mat-icon>chevron_left</mat-icon>
             </button>
 
-            <button mat-fab class="next mat-accent fuse-white-fg" (click)="gotoNextStep()" [disabled]="currentStep === cursos.totalSteps - 1" [fxHide]="currentStep === cursos.totalSteps - 1">
+            <button mat-fab class="next mat-accent fuse-white-fg" (click)="gotoNextStep()" [disabled]="currentStep ===paginador - 1" [fxHide]="currentStep ===paginador - 1">
                 <mat-icon>chevron_right</mat-icon>
             </button>
 
-            <button mat-fab class="done green-600" (click)="enviarResultado()" [disabled]="currentStep !== cursos.totalSteps - 1" [fxShow]="currentStep === cursos.totalSteps - 1">
+            <button mat-fab class="done green-600" (click)="enviarResultado()" [disabled]="currentStep !==paginador - 1" [fxShow]="currentStep ===paginador - 1">
                 <mat-icon>check</mat-icon>
             </button>
 

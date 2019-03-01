@@ -23,12 +23,13 @@
 
             <div class="filters" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
 
-                <mat-form-field appearance="outline" floatLabel="always" class="course-search">
+                <!-- <mat-form-field appearance="outline" floatLabel="always" class="course-search">
                     <mat-label>Search for a course</mat-label>
                     <input matInput placeholder="Enter a keyword..." [(ngModel)]="searchTerm" (input)="filterCoursesByTerm()">
-                </mat-form-field>
+                </mat-form-field> -->
 
-                <mat-form-field appearance="outline" class="category-selector">
+
+                <!-- <mat-form-field appearance="outline" class="category-selector">
                     <mat-label>Estado</mat-label>
                     <mat-select [(ngModel)]="currentCategoryEstado" (selectionChange)="filterCoursesByEstado()">
                         <mat-option [value]="'all'">
@@ -38,17 +39,29 @@
                             {{ category.name }}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field>-->
                 <mat-form-field appearance="outline" class="category-selector">
                     <mat-label>Tipo de examen</mat-label>
                     <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">
-                        <mat-option [value]="'all'">
+                        <mat-option [value]="0">
                             All
                         </mat-option>
                         <mat-option *ngFor="let category of Tipo" [value]="category.id">
                             {{ category.name }}
                         </mat-option>
                     </mat-select>
+                </mat-form-field>
+
+                <mat-form-field color="accent">
+                    <input matInput [(ngModel)]="hoy" [matDatepicker]="picker1" placeholder="Choose a date" (ngModelChange)="filtroFechainicio($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field color="accent">
+                    <input matInput [(ngModel)]="maniana" [matDatepicker]="picker2" placeholder="Choose a date" (ngModelChange)="filtroFechaFin($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
             </div>
@@ -73,8 +86,9 @@
                         </div>
 
                         <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
-                            <div class="h1">{{course.name}}</div>
-                            <div class="updated">Updated {{course.examDate}}</div>
+                            <div class="h1" color="accent">{{course.name}}</div>
+                            <div class="updated">Fecha {{course.examDate}}</div>
+                            <div class="updated">Duración {{course.time}}:00 minutos</div>
                         </div>
 
                         <div class="footer" fxLayout="row" fxLayoutAlign="center center">

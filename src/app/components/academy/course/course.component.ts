@@ -19,8 +19,6 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     segundos: number;
     devolver: any;
     animationDirection: 'left' | 'right' | 'none';
-    course: any;
-    courseStepContent: any;
     currentStep: number;
 
     @ViewChildren(FusePerfectScrollbarDirective)
@@ -28,15 +26,13 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
 
     // Private
     private _unsubscribeAll: Subject<any>;
-    preguntas: any;
     descritionExamen: any;
-    titulo = 'prueba'
     ExamenDescip: any;
-    PreguntasDescip: any;
 
     laspreguntas: Array<any>;
     public cursos: CursospModel;
     favoriteSeason: any
+    paginador: number;
     /**
      * Constructor
      *
@@ -54,189 +50,12 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         this.segundos = 59;
         setInterval(() => this.tick(), 1000);
         this.descritionExamen = new AcademiModel();
-        this.PreguntasDescip = new PreguntaDescripModel();
+
         // Set the defaults
         this.animationDirection = 'none';
         this.currentStep = 0;
         // Set the private defaults
         this._unsubscribeAll = new Subject();
-        this.cursos = new CursospModel();
-
-        this.laspreguntas = [
-            {
-                id: 200011,
-                title: 'HISTORIA DEL PERU I',
-                pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-1",
-                image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
-                estatusId: 1,
-                time: 30,
-                alternatives: [
-                    {
-                        id: ' 2000111-a',
-                        description: "caral - Alba Jose"
-                    },
-                    {
-                        id: ' 2000111-b',
-                        description: "Moche - Alba Walter"
-                    },
-                    {
-                        id: ' 2000111-c',
-                        description: "caral - Chimú - Alba Walter"
-                    },
-                    {
-                        id: '2000111-d',
-                        description: "caral - Lambayeque - Alba Luis"
-                    },
-                    {
-                        id: '2000111-e',
-                        description: "caral - Huaca Sikan - Alba Walter"
-                    }
-                ],
-                response: {
-                    id: null
-                }
-            },
-            {
-                id: 200011,
-                title: 'HISTORIA DEL PERU I',
-                pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-1",
-                image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
-                estatusId: 1,
-                time: 30,
-                alternatives: [
-                    {
-                        id: ' 2000111-a',
-                        description: "caral - Alba Jose"
-                    },
-                    {
-                        id: ' 2000111-b',
-                        description: "Moche - Alba Walter"
-                    },
-                    {
-                        id: ' 2000111-c',
-                        description: "caral - Chimú - Alba Walter"
-                    },
-                    {
-                        id: '2000111-d',
-                        description: "caral - Lambayeque - Alba Luis"
-                    },
-                    {
-                        id: '2000111-e',
-                        description: "caral - Huaca Sikan - Alba Walter"
-                    }
-                ],
-                response: {
-                    id: null
-                }
-            },
-            {
-                id: 200011,
-                title: 'HISTORIA DEL PERU I',
-                pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-1",
-                image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
-                estatusId: 1,
-                time: 30,
-                alternatives: [
-                    {
-                        id: ' 2000111-a',
-                        description: "caral - Alba Jose"
-                    },
-                    {
-                        id: ' 2000111-b',
-                        description: "Moche - Alba Walter"
-                    },
-                    {
-                        id: ' 2000111-c',
-                        description: "caral - Chimú - Alba Walter"
-                    },
-                    {
-                        id: '2000111-d',
-                        description: "caral - Lambayeque - Alba Luis"
-                    },
-                    {
-                        id: '2000111-e',
-                        description: "caral - Huaca Sikan - Alba Walter"
-                    }
-                ],
-                response: {
-                    id: null
-                }
-            },
-            {
-                id: 200011,
-                title: 'HISTORIA DEL PERU I',
-                pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-1",
-                image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
-                estatusId: 1,
-                time: 30,
-                alternatives: [
-                    {
-                        id: ' 2000111-a',
-                        description: "caral - Alba Jose"
-                    },
-                    {
-                        id: ' 2000111-b',
-                        description: "Moche - Alba Walter"
-                    },
-                    {
-                        id: ' 2000111-c',
-                        description: "caral - Chimú - Alba Walter"
-                    },
-                    {
-                        id: '2000111-d',
-                        description: "caral - Lambayeque - Alba Luis"
-                    },
-                    {
-                        id: '2000111-e',
-                        description: "caral - Huaca Sikan - Alba Walter"
-                    }
-                ],
-                response: {
-                    id: null
-                }
-            },
-            {
-                id: 200011,
-                title: 'HISTORIA DEL PERU I',
-                pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-1",
-                image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
-                estatusId: 1,
-                time: 30,
-                alternatives: [
-                    {
-                        id: ' 2000111-a',
-                        description: "caral - Alba Jose"
-                    },
-                    {
-                        id: ' 2000111-b',
-                        description: "Moche - Alba Walter"
-                    },
-                    {
-                        id: ' 2000111-c',
-                        description: "caral - Chimú - Alba Walter"
-                    },
-                    {
-                        id: '2000111-d',
-                        description: "caral - Lambayeque - Alba Luis"
-                    },
-                    {
-                        id: '2000111-e',
-                        description: "caral - Huaca Sikan - Alba Walter"
-                    }
-                ],
-                response: {
-                    id: null
-                }
-            }
-
-        ]
-
-
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -247,17 +66,10 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-        // this.minutos = 
-        console.log(this.laspreguntas.length);
-
-        this.cursos.totalSteps = this.laspreguntas.length;
-        // const dato = this._route.snapshot.paramMap.get('historial');
+        // console.log(this.laspreguntas.length);
+        //this.paginador = this.laspreguntas.length;
         const dato = this._route.snapshot.paramMap.get('id');
-        // console.log(dato);
         this.obtenerExamen(dato);
-        // this.course = this.prueba;
-        // console.log(this.course);
-
     }
     tick(): void {
         if (--this.segundos < 0) {
@@ -270,11 +82,8 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     }
     obtenerExamen(id) {
         this._academiSrv.getExamenesxId(id).subscribe((res: any) => {
-            this.preguntas = res.data.questions;
-            this.descritionExamen = res.data;
-            this.ExamenDescip = res.data.questions;
-            this.PreguntasDescip = res.data.questions.questionDetail;
-            console.log(this.descritionExamen);
+            this.laspreguntas = res;
+            this.paginador = this.laspreguntas.length;
         });
     }
 
@@ -292,18 +101,12 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         this._unsubscribeAll.complete();
     }
     onSelectionChangeRadio(alternativa: any, pregunta: any) {
-        // pregunta.response.id = alternativa.id;
-        // this.devolver = pregunta;
-        // for (let entry of this.laspreguntas) {
-        // if (entry.id === pregunta.id)
-
         this.laspreguntas.map(function (dato) {
             if (dato.id === pregunta.id) {
                 dato.response.id = alternativa.id;
             }
             return dato;
         });
-        //  }
 
     }
     // -----------------------------------------------------------------------------------------------------
@@ -331,7 +134,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      * Go to next step
      */
     gotoNextStep(): void {
-        if (this.currentStep === this.cursos.totalSteps - 1) {
+        if (this.currentStep === this.paginador - 1) {
             return;
         }
         // Set the animation direction
