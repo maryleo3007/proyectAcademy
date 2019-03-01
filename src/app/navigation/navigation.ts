@@ -29,7 +29,7 @@ export const navigation: FuseNavigation[] =
                     ],
                     badge: {
                         title: '2',
-                        bg: '#EC0C8E',
+                        bg: '#F44336',
                         fg: '#FFFFFF'
                     }
                 },
@@ -54,7 +54,7 @@ export const navigation: FuseNavigation[] =
                     ],
                     badge: {
                         title: '2',
-                        bg: '#EC0C8E',
+                        bg: '#09d261',
                         fg: '#FFFFFF'
                     }
 
@@ -63,7 +63,7 @@ export const navigation: FuseNavigation[] =
                     id: 'cursos',
                     title: 'CURSOS',
                     type: 'collapsable',
-                    icon: 'change_history',
+                    icon: 'cast_for_education',
                     children: [
                         {
                             id: 'cusos1',
@@ -75,7 +75,7 @@ export const navigation: FuseNavigation[] =
                     ],
                     badge: {
                         title: '1',
-                        bg: '#EC0C8E',
+                        bg: '#525e8a',
                         fg: '#FFFFFF'
                     }
 

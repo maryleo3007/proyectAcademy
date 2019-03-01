@@ -98,12 +98,13 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
                 }
             },
             {
-                id: 200012,
-                title: 'HISTORIA DEL PERU II',
+                id: 200011,
+                title: 'HISTORIA DEL PERU I',
                 pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-2",
-                image: "assets/images/cards/card1.jpg",
+                type: "CBBX-1",
+                image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
                 estatusId: 1,
+                time: 30,
                 alternatives: [
                     {
                         id: ' 2000111-a',
@@ -131,12 +132,13 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
                 }
             },
             {
-                id: 200013,
-                title: 'HISTORIA DEL PERU III',
+                id: 200011,
+                title: 'HISTORIA DEL PERU I',
                 pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-3",
+                type: "CBBX-1",
                 image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
                 estatusId: 1,
+                time: 30,
                 alternatives: [
                     {
                         id: ' 2000111-a',
@@ -164,46 +166,13 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
                 }
             },
             {
-                id: 200014,
-                title: 'HISTORIA DEL PERU IV',
+                id: 200011,
+                title: 'HISTORIA DEL PERU I',
                 pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-4",
+                type: "CBBX-1",
                 image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
                 estatusId: 1,
-                alternatives: [
-                    {
-                        id: ' 2000111-a',
-                        description: "caral - Alba Jose"
-                    },
-                    {
-                        id: ' 2000111-b',
-                        description: "Moche - Alba Walter"
-                    },
-                    {
-                        id: ' 2000111-c',
-                        description: "caral - Chimú - Alba Walter"
-                    },
-                    {
-                        id: '2000111-d',
-                        description: "caral - Lambayeque - Alba Luis"
-                    },
-                    {
-                        id: '2000111-e',
-                        description: "caral - Huaca Sikan - Alba Walter"
-                    }
-                ],
-                response: {
-                    id: null
-                }
-            }
-            ,
-            {
-                id: 200015,
-                title: 'HISTORIA DEL PERU V',
-                pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-5",
-                image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
-                estatusId: 1,
+                time: 30,
                 alternatives: [
                     {
                         id: ' 2000111-a',
@@ -231,12 +200,13 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
                 }
             },
             {
-                id: 200016,
-                title: 'HISTORIA DEL PERU VI',
+                id: 200011,
+                title: 'HISTORIA DEL PERU I',
                 pregunta: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
-                type: "CBBX-6",
+                type: "CBBX-1",
                 image: "https://s3.amazonaws.com/imagenessofia/imagen1.jpg",
                 estatusId: 1,
+                time: 30,
                 alternatives: [
                     {
                         id: ' 2000111-a',
