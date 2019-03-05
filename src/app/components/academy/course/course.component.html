@@ -30,13 +30,12 @@
             </button> -->
             <div class="arrow">
 
-                <button mat-icon-button class="mr-16" [routerLink]="'/Academia/Cursos'">
+                <button (click)="salirdelExamen()" mat-icon-button class="mr-16">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
             </div>
-
-            <div class="description" *ngIf="descritionExamen.examName">
-                <h2 class="text-center">Titulo</h2>
+            <div class="description">
+                <h2 class="text-center">{{Titulo}}</h2>
             </div>
             <div class="minuto">
                 <h2 class="text-center">{{minutos | number:'2.0-0'}}:{{segundos | number:'2.0-0'}}</h2>
@@ -73,8 +72,8 @@
                                 </table>
 
                             </div>
-                            <div class="fuse-card">
-                                <img src="{{step.image}}">
+                            <div>
+                                <img src="{{step.image}}" width="100%" height="100%">
                             </div>
                         </div>
                     </div>

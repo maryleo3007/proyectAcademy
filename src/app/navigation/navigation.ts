@@ -3,7 +3,7 @@ export const navigation: FuseNavigation[] =
     [
         {
             id: 'applications',
-            title: 'Applications',
+            title: 'Academia',
             translate: 'NAV.APPLICATIONS',
             type: 'group',
             icon: 'apps',
@@ -70,11 +70,16 @@ export const navigation: FuseNavigation[] =
                             title: 'Cursos',
                             type: 'item',
                             url: '/Academia/Cursos'
+                        },
+                        {
+                            id: 'preguntas',
+                            title: 'Preguntas',
+                            type: 'item',
+                            url: '/Academia/Preguntas'
                         }
-
                     ],
                     badge: {
-                        title: '1',
+                        title: '2',
                         bg: '#525e8a',
                         fg: '#FFFFFF'
                     }

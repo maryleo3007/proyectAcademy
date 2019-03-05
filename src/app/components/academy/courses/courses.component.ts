@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-
+declare var swal: any;
 import { fuseAnimations } from '@fuse/animations';
 import { AcademiService } from 'app/servicios/servicio.index';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
      */
     constructor(
         private _academiSrv: AcademiService,
+        private _router: Router
     ) {
         // fecha de hoy
         this.hoy = new Date();
@@ -64,7 +66,7 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         this.idEstudiante = 442;
         this.tipeExamen = 0;
         this.dateInit = '2019-02-27';
-        this.dateFin = '2019-02-28';
+        this.dateFin = '2019-03-28';
         this.imprimirTipo();
         this.impirmircursos(this.idEstudiante, this.tipeExamen, this.dateInit, this.dateFin);
         // this.categories = this._academiSrv.categories;
@@ -89,6 +91,7 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         })
     }
     impirmircursos(idEstudiante, tipeExamen, dateInit, dateFin) {
+        console.log(dateInit, dateFin);
         this._academiSrv.geListaCursosxFechas(idEstudiante, tipeExamen, dateInit, dateFin).subscribe((res: any) => {
             this.filteredCourses = this.coursesFilteredByCategory = this.courses = res;
 
@@ -97,8 +100,8 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
 
     filtroFechainicio(evento): void {
         this.dateInit = this.ordenar(evento);
-
         this.impirmircursos(this.idEstudiante, this.tipeExamen, this.dateInit, this.dateFin);
+
 
     }
     filtroFechaFin(evento) {
@@ -106,7 +109,7 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         this.impirmircursos(this.idEstudiante, this.tipeExamen, this.dateInit, this.dateFin);
     }
     ordenar(fecha) {
-        return fecha.toISOString().substr(8, 2) + '-' + fecha.toISOString().substr(5, 2) + '-' + fecha.toISOString().substr(0, 4);
+        return fecha.toISOString().substr(0, 4) + '-' + fecha.toISOString().substr(5, 2) + '-' + fecha.toISOString().substr(8, 2);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -118,7 +121,7 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
      */
     filterCoursesByTipo(): void {
         // Filter
-        console.log(this.currentCategoryTipo);
+
         if (this.currentCategoryTipo === 0) {
             this.coursesFilteredByCategory = this.courses;
             this.filteredCourses = this.courses;
@@ -170,5 +173,26 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
                 return course.title.toLowerCase().includes(searchTerm);
             });
         }
+    }
+    empezarExamen(id, name, time) {
+        // swal('Entrar!', 'Desea empezar examen?', 'success').then(() => { 
+        //     this._router.navigate(['/Academia/Cursos',id,name]);
+        // });
+
+
+        swal({
+            title: "Empezar examen?",
+            text: "¿DESEA EMPEZAR EL " + name + '? TIENES ' + time + ':00 MINUTOS',
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this._router.navigate(['/Academia/Cursos', id, name]);
+                } else {
+                    swal("Cancelado!");
+                }
+            });
     }
 }

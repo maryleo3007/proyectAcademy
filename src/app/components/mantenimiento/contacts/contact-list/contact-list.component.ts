@@ -1,10 +1,7 @@
-import { element } from 'protractor';
 import { Component, OnInit, ViewChild, ViewEncapsulation, Input, EventEmitter, Output } from '@angular/core';
-import { MatDialog, PageEvent } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 //models
 import { PersonaModel, IdModel } from '../../../../models/persona.model';
 import { ContactsContactFormDialogComponent } from '../contact-form/contact-form.component';
@@ -13,7 +10,6 @@ import { AlumnoService } from '../../../../servicios/alumno/alumno.service';
 import { ProfesorService } from 'app/servicios/servicio.index';
 import { SelectionModel } from '@angular/cdk/collections';
 import { OfficeService } from '../../../../servicios/office/office.service';
-
 declare var swal: any;
 
 @Component({
@@ -54,14 +50,15 @@ export class ContactsContactListComponent implements OnInit {
   displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'birthday'];
   dataSource = new MatTableDataSource<PersonaModel>(this.ELEMENT_DATA1);
   selection = new SelectionModel<PersonaModel>(true, []);
+
   listaEliminar: any;
   _id: number;
   editarPersona: any;
-  officeList:any = [];
-  studentList:any = [];
+  officeList: any = [];
+  studentList: any = [];
   filteredOfficeList: any = [];
   currentOffice: number;
-  
+
   constructor(
     private _alumnoSrv: AlumnoService,
     private _profeSrv: ProfesorService,
@@ -84,39 +81,39 @@ export class ContactsContactListComponent implements OnInit {
     this.ELEMENT_DATA1 = this.listapersona;
     this.dataSource.paginator = this.paginator;
     this.getOffices()
-    
+
   }
   // office list  
   getOffices() {
     this.officeList = [];
     this._officeService.getOffice().subscribe((data) => {
-      this.officeList = data.data; 
+      this.officeList = data.data;
     });
   }
 
-  getStudents(){
-    
+  getStudents() {
+
     return this.studentList
   }
 
-  filterbyOffice(){
-      if (this.tipo === 'Alumno') {
+  filterbyOffice() {
+    if (this.tipo === 'Alumno') {
       this._alumnoSrv.getStudents().subscribe((data) => {
-        this.studentList = data.data; 
+        this.studentList = data.data;
       });
       setTimeout(() => {
         if (this.currentOffice == 0) {
           this.dataSource.data = this.studentList;
-        }else{
+        } else {
           this.dataSource.data = this.studentList;
-        this.dataSource.data = this.studentList.filter(data => data.branchOffice == this.currentOffice)  
+          this.dataSource.data = this.studentList.filter(data => data.branchOffice == this.currentOffice)
         }
       }, 1000);
     }
   }
 
   applyFilter(filterValue: string) {
-     
+
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -154,7 +151,7 @@ export class ContactsContactListComponent implements OnInit {
       this.persona.address = res.address;
       this.persona.birthday = res.birthday;
       this.persona.gender = res.gender;
-      this.persona.documentNumber = res.documentNumber; 
+      this.persona.documentNumber = res.documentNumber;
       this.persona.branchOffice = res.branchOffice;
       this.saveOrUpdatePersona();
     });
@@ -163,7 +160,7 @@ export class ContactsContactListComponent implements OnInit {
   imprimirlista(tipo: string) {
     if (tipo === 'Alumno') {
       this._alumnoSrv.getPersonaAlumno().subscribe((res: any) => {
-        this.listapersona = res.data;        
+        this.listapersona = res.data;
         this.displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'birthday'];
         this.dataSource = new MatTableDataSource<PersonaModel>(this.listapersona);
         this.selection = new SelectionModel<PersonaModel>(true, []);
@@ -177,24 +174,25 @@ export class ContactsContactListComponent implements OnInit {
         this.dataSource = new MatTableDataSource<PersonaModel>(this.listapersona);
         this.selection = new SelectionModel<PersonaModel>(true, []);
         this.dataSource.paginator = this.paginator;
-      })  
-     }
+      })
+    }
     return;
   }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;    
+    const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => {
-          console.log(row);          
-          this.selection.select(row)});
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => {
+        console.log(row);
+        this.selection.select(row)
+      });
   }
 
   eventCheckbox(event, contactId) {
@@ -208,14 +206,14 @@ export class ContactsContactListComponent implements OnInit {
       this.selecteparticipaAct.splice(elimanarcontac, 1);
       this.cambioValor.emit(this.selecteparticipaAct);
     }
-  } 
+  }
 
   saveOrUpdatePersona(): void {
     this.persona.documentType = 'DNI';
     if (this.tipo === 'Alumno') {
       if (this.isValid) {
         this._alumnoSrv.saveOrUpdateAlumno(this.persona).subscribe(res => {
-          console.log(res);          
+          console.log(res);
           this.imprimirlista(this.tipo);
         });
       } else {
@@ -225,7 +223,7 @@ export class ContactsContactListComponent implements OnInit {
     }
     if (this.tipo === 'Profesor') {
       if (this.isValid) {
-        this._profeSrv.saveOrUpdateProfesor(this.persona).subscribe(res => {         
+        this._profeSrv.saveOrUpdateProfesor(this.persona).subscribe(res => {
           this.imprimirlista(this.tipo);
         });
       } else {

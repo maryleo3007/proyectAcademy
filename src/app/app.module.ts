@@ -25,35 +25,37 @@ import { AuthGuard } from './core/auth.guard';
 import { TokenStorage } from './core/token.storage';
 import { Interceptor } from './core/app.interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+// import { ActivoPipe } from './pipes/activo.pipe';
 
 @NgModule({
     declarations: [
-        AppComponent,        
+        AppComponent,
+        // ActivoPipe,        
     ],
-    imports     : [
-        Ng2SearchPipeModule, 
-        NgxPaginationModule,       
+    imports: [
+        Ng2SearchPipeModule,
+        NgxPaginationModule,
         FormsModule,
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         BrowserModule,
         BrowserAnimationsModule,
-        HttpClientModule,       
-        TranslateModule.forRoot(),        
-        MatMomentDateModule,   
+        HttpClientModule,
+        TranslateModule.forRoot(),
+        MatMomentDateModule,
         MatButtonModule,
-        MatIconModule,        
+        MatIconModule,
         FuseModule.forRoot(fuseConfig),
         FuseProgressBarModule,
         FuseSharedModule,
         FuseSidebarModule,
-        FuseThemeOptionsModule,       
+        FuseThemeOptionsModule,
         LayoutModule,
         SampleModule,
         ServiceModule,
         APP_ROUTES,
         LoginModule,
-        ComponentsModule,        
+        ComponentsModule,
     ],
     providers: [
         AuthService,
@@ -61,16 +63,15 @@ import {NgxPaginationModule} from 'ngx-pagination';
         TokenStorage,
         TokenStorage,
         {
-          provide: HTTP_INTERCEPTORS,
-          useClass: Interceptor,
-          multi: true
+            provide: HTTP_INTERCEPTORS,
+            useClass: Interceptor,
+            multi: true
         }
-    
+
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }

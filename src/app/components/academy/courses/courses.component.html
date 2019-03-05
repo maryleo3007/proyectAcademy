@@ -71,40 +71,31 @@
                 <div class="course" *ngFor="let course of filteredCourses" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" [ngClass]="course.category" [@animate]="{value:'*',params:{y:'100%'}}">
 
                     <div class="course-content" fxLayout="column" fxFlex="1 1 auto">
-
                         <div class="header" fxLayout="row" fxLayoutAlign="center center" [ngClass]="course.statusName + '-bg'">
-
                             <div class="category" fxFlex>
                                 {{course.statusName}}
                             </div>
-
                             <div class="length" fxLayout="row" fxLayoutAlign="center center">
                                 <mat-icon class="length-icon s-20">access_time</mat-icon>
                                 <div class="min">{{course.time}} min</div>
                             </div>
-
                         </div>
-
                         <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
                             <div class="h1" color="accent">{{course.name}}</div>
                             <div class="updated">Fecha {{course.examDate}}</div>
                             <div class="updated">Duración {{course.time}}:00 minutos</div>
                         </div>
-
                         <div class="footer" fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-button color="accent" [routerLink]="['/Academia/Cursos',course.id]">
-                                ENTRAR
+                            <!-- <button mat-button color="accent" [routerLink]="['/Academia/Cursos',course.id,course.name]"> -->
+                            <button (click)="empezarExamen(course.id,course.name,course.time )" mat-button color="accent">
+                                INICIAR
                             </button>
                         </div>
-
                     </div>
-
                 </div>
-
                 <!-- <div class="no-courses" *ngIf="filteredCourses.length === 0">
                     No courses found!
                 </div> -->
-
             </div>
 
         </div>

@@ -7,6 +7,55 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class AcademiService {
 
+    public data: any = [
+        {
+            id: 1,
+            name: "EXAMEN DIARIO MATEMATICA",
+            examTypeId: 1,
+            examTypeName: "EXAMEN DIARIO",
+            indActivo: true,
+            time: "30",
+            examDate: "27/02/2019"
+        },
+        {
+            id: 2,
+            name: "EXAMEN DIARIO HISTORIA DEL PERU",
+            examTypeId: 1,
+            examTypeName: "EXAMEN DIARIO",
+            indActivo: true,
+            time: "30",
+            examDate: "27/02/2019"
+        },
+        {
+            id: 3,
+            name: "EXAMEN DIARIO LENGUAJE",
+            examTypeId: 1,
+            examTypeName: "EXAMEN DIARIO",
+            indActivo: false,
+            time: "30",
+            examDate: "27/02/2019"
+        },
+        {
+            id: 4,
+            name: "EXAMEN DIARIO HISTORIA UNIVERSAL",
+            examTypeId: 1,
+            examTypeName: "EXAMEN DIARIO",
+            indActivo: true,
+            time: "30",
+            examDate: "27/02/2019"
+        },
+        {
+            id: 5,
+            name: "EXAMEN DIARIO HISTORIA GEOMETRIA",
+            examTypeId: 1,
+            examTypeName: "EXAMEN DIARIO",
+            indActivo: false,
+            time: "30",
+            examDate: "27/02/2019"
+        }
+    ]
+
+
     constructor(private http: HttpClient) {
         const httpOptions = {
             headers: new HttpHeaders({

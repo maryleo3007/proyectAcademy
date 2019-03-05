@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { AcademiService } from 'app/servicios/servicio.index';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AcademiModel, PreguntaDescripModel, CursospModel } from 'app/models/academi.model';
+declare var swal: any;
 
 @Component({
     selector: 'academy-course',
@@ -15,6 +16,7 @@ import { AcademiModel, PreguntaDescripModel, CursospModel } from 'app/models/aca
     animations: fuseAnimations
 })
 export class AcademyCourseComponent implements OnInit, OnDestroy {
+    suscrition: Subscription;
     minutos: number;
     segundos: number;
     devolver: any;
@@ -33,6 +35,8 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     public cursos: CursospModel;
     favoriteSeason: any
     paginador: number;
+    Titulo: string;
+    intervalo: NodeJS.Timer;
     /**
      * Constructor
      *
@@ -42,13 +46,14 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      */
     constructor(
         private _route: ActivatedRoute,
+        private _router: Router,
         private _academiSrv: AcademiService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseSidebarService: FuseSidebarService
     ) {
-        this.minutos = 29;
+        this.minutos = 1;
         this.segundos = 59;
-        setInterval(() => this.tick(), 1000);
+        this.intervalo = setInterval(() => this.tick(), 1000);
         this.descritionExamen = new AcademiModel();
 
         // Set the defaults
@@ -69,14 +74,21 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         // console.log(this.laspreguntas.length);
         //this.paginador = this.laspreguntas.length;
         const dato = this._route.snapshot.paramMap.get('id');
+        this.Titulo = this._route.snapshot.paramMap.get('nombre');
+        console.log(this.Titulo);
         this.obtenerExamen(dato);
     }
+
     tick(): void {
         if (--this.segundos < 0) {
             this.segundos = 59;
             if (--this.minutos < 0) {
                 this.minutos = 0;
                 this.segundos = 0;
+                if (this.minutos === 0) {
+                    clearInterval(this.intervalo)
+                    this._router.navigate(['/Academia/Cursos']);
+                }
             }
         }
     }
@@ -86,10 +98,13 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
             this.paginador = this.laspreguntas.length;
         });
     }
+    // window.onhashchange = function () {
+    //     console.log('hola');
 
+    // }
     /**
-     * After view init
-     */
+ * After view init
+ */
 
 
     /**
@@ -99,6 +114,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+        clearInterval(this.intervalo);
     }
     onSelectionChangeRadio(alternativa: any, pregunta: any) {
         this.laspreguntas.map(function (dato) {
@@ -173,5 +189,21 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     }
     enviarResultado() {
         console.log(this.laspreguntas);
+    }
+    salirdelExamen() {
+        swal({
+            title: "Salir del examen?",
+            text: "Desea salir del examen? sus respuesta serán enviadas automaticamente",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this._router.navigate(['/Academia/Cursos'])
+                } else {
+                    swal("Cancelado!");
+                }
+            });
     }
 }

@@ -1,0 +1,113 @@
+<div id="products" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+
+
+            <!-- <mat-form-field appearance="outline" class="category-selector">
+          <mat-label>Tipo de examen</mat-label>
+          <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">
+              <mat-option [value]="0">
+                  All
+              </mat-option>
+              <mat-option *ngFor="let category of Tipo" [value]="category.id">
+                  {{ category.name }}
+              </mat-option>
+          </mat-select>
+      </mat-form-field> -->
+
+            <!-- <div class="search-wrapper mt-16 m-10 mt-sm-0">
+              <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon>search</mat-icon>
+                  <input (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+              </div>
+
+          </div> -->
+        </div>
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <div class="mat-elevation-z8">
+                <mat-table class="products-table" matSort #table [dataSource]="dataSource" [@animateStagger]="{value:'350'}" fusePerfectScrollbar>
+                    <!-- Checkbox Column -->
+                    <!-- <ng-container matColumnDef="select">
+                      <th *matHeaderCellDef>
+                          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                          </mat-checkbox>
+                      </th>                      
+                      <td mat-cell *matCellDef="let contact">                        
+                          <mat-checkbox (change)="eventCheckbox($event, contact)" [checked]="selection.isSelected(contact)">
+                          </mat-checkbox>
+                      </td>
+                  </ng-container> -->
+
+                    <!-- DNI Column -->
+                    <ng-container matColumnDef="examTypeName">
+                        <th class="dni" *matHeaderCellDef>Tipo de Examen</th>
+                        <td mat-cell *matCellDef="let contact">
+                            <p class="text-truncate font-weight-600">{{contact.examTypeName}}</p>
+                        </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+                        <mat-cell *matCellDef="let contact">
+                            <p class="text-truncate font-weight-600">{{contact.name}}</p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="examDate">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Fecha de examen</mat-header-cell>
+                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-sm>
+                            <p class="email text-truncate">
+                                {{contact.examDate}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Phone Column -->
+                    <ng-container matColumnDef="indActivo">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Estado</mat-header-cell>
+                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                            <p class="phone text-truncate">
+                                {{contact.indActivo | activo}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- adress Column -->
+                    <ng-container matColumnDef="time">
+                        <mat-header-cell *matHeaderCellDef>Tiempo</mat-header-cell>
+                        <mat-cell *matCellDef="let contact">
+                            <p class="text-truncate font-weight-600">
+                                {{contact.time}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <!-- Job Title Column -->
+                    <ng-container matColumnDef="boton">
+                        <mat-header-cell *matHeaderCellDef>Boton</mat-header-cell>
+                        <mat-cell *matCellDef="let contact">
+                            <p class="text-truncate font-weight-600">
+                                <button mat-raised-button color="accent">Pregunta</button>
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+</div>
