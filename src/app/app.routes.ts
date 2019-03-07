@@ -30,7 +30,7 @@ const appRoutes: Routes = [
                 { path: 'Registro', component: ControlComponent, data: { titulo: 'Registro' } },
                 { path: 'Asistencia', component: AsistenciaComponent, data: { titulo: 'Asistencia' } },
                 { path: 'Cursos', component: AcademyCoursesComponent, data: { titulo: 'Asistencia' } },
-                { path: 'Cursos/:id/:nombre', component: AcademyCourseComponent, data: { titulo: 'Asistencia' } },
+                { path: 'Cursos/:id/:nombre/:time', component: AcademyCourseComponent, data: { titulo: 'Asistencia' } },
                 { path: 'Preguntas', component: PreguntasComponent, data: { titulo: 'Bienvenidos' } },
 
                 // { path: '**', component: NopagefoundComponent }

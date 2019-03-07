@@ -142,6 +142,8 @@
         .content {
             position: relative;
             display: flex;
+            width: 100%;
+            height: 100%;
             .course-step {
                 // position: absolute;
                 top: 0;
@@ -167,21 +169,27 @@
                         color: #3498DB;
                     }
                     #separar {
-                        display: grid !important;
-                        grid-template-columns: 50% 50% !important;
+                        // display: grid !important;
+                        // grid-template-columns: 100% 100% !important;
                         .alterna {
                             width: 100%;
                             height: 100%;
-                            .example-radio-group {
-                                display: inline-flex;
-                                flex-direction: column;
+                            table {
+                                td {
+                                    width: 150%;
+                                    height: 150%;
+                                }
                             }
-                            .example-radio-button {
-                                margin: 5px;
-                            }
-                            .example-selected-value {
-                                margin: 15px 0;
-                            }
+                            // .example-radio-group {
+                            //     display: inline-flex;
+                            //     flex-direction: column;
+                            // }
+                            // .example-radio-button {
+                            //     margin: 5px;
+                            // }
+                            // .example-selected-value {
+                            //     margin: 15px 0;
+                            // }
                         }
                         .fuse-card {
                             width: 100%;

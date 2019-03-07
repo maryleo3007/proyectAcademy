@@ -51,7 +51,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseSidebarService: FuseSidebarService
     ) {
-        this.minutos = 1;
+        // this.minutos = 1;
         this.segundos = 59;
         this.intervalo = setInterval(() => this.tick(), 1000);
         this.descritionExamen = new AcademiModel();
@@ -75,6 +75,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         //this.paginador = this.laspreguntas.length;
         const dato = this._route.snapshot.paramMap.get('id');
         this.Titulo = this._route.snapshot.paramMap.get('nombre');
+        this.minutos = parseInt(this._route.snapshot.paramMap.get('time'));
         console.log(this.Titulo);
         this.obtenerExamen(dato);
     }
@@ -105,8 +106,6 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     /**
  * After view init
  */
-
-
     /**
      * On destroy
      */
@@ -117,12 +116,13 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         clearInterval(this.intervalo);
     }
     onSelectionChangeRadio(alternativa: any, pregunta: any) {
-        this.laspreguntas.map(function (dato) {
+        this.laspreguntas.map(function (dato: any) {
             if (dato.id === pregunta.id) {
-                dato.response.id = alternativa.id;
+                dato.response = alternativa;
             }
             return dato;
         });
+
 
     }
     // -----------------------------------------------------------------------------------------------------
@@ -165,6 +165,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      * Go to previous step
      */
     gotoPreviousStep(): void {
+        // console.log(pregunta);        
         if (this.currentStep === 0) {
             return;
         }

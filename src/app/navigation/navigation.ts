@@ -70,16 +70,10 @@ export const navigation: FuseNavigation[] =
                             title: 'Cursos',
                             type: 'item',
                             url: '/Academia/Cursos'
-                        },
-                        {
-                            id: 'preguntas',
-                            title: 'Preguntas',
-                            type: 'item',
-                            url: '/Academia/Preguntas'
-                        }
+                        }                        
                     ],
                     badge: {
-                        title: '2',
+                        title: '1',
                         bg: '#525e8a',
                         fg: '#FFFFFF'
                     }

@@ -49,7 +49,7 @@
                 <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i" [@slideIn]="animationDirection">
                     <div id="course-step-content" class="course-step-content">
                         <blockquote>
-                            <p class="mat-headline">{{step.pregunta}}</p>
+                            <p class="mat-headline">{{step.description}}</p>
                         </blockquote>
                         <div class="separar" id="separar">
                             <div class="alterna">
@@ -63,7 +63,7 @@
                                         <tr *ngFor="let alternativa of step.alternatives">
                                             <td>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="{{alternativa.id}}" name="radio" [checked]="alternativa.descripcion === ''" [value]="alternativa.descripcion" (change)="onSelectionChangeRadio(alternativa, step)">
+                                                    <input type="radio" id="{{alternativa.id}}" name="radio" [checked]="alternativa.description === 'step.response.description'" [value]="alternativa.descripcion" (change)="onSelectionChangeRadio(alternativa, step)">
                                                     <label for="{{alternativa.id}}">{{alternativa.description}}</label>
                                                 </div>
                                             </td>
@@ -72,8 +72,10 @@
                                 </table>
 
                             </div>
-                            <div>
-                                <img src="{{step.image}}" width="100%" height="100%">
+                            <br>
+                            <br>
+                            <div *ngIf="step.image !== ''" class="mt-10">
+                                <img src="{{step.image}}" width="400px" height="400px">
                             </div>
                         </div>
                     </div>

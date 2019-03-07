@@ -189,7 +189,7 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    this._router.navigate(['/Academia/Cursos', id, name]);
+                    this._router.navigate(['/Academia/Cursos', id, name, time]);
                 } else {
                     swal("Cancelado!");
                 }
