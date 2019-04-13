@@ -10,7 +10,7 @@ export class AcademiService {
     public data: any = [
         {
             id: 1,
-            name: "EXAMEN DIARIO MATEMATICA",
+            name: "MATEMATICA",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
             indActivo: true,
@@ -19,7 +19,7 @@ export class AcademiService {
         },
         {
             id: 2,
-            name: "EXAMEN DIARIO HISTORIA DEL PERU",
+            name: "HISTORIA DEL PERU",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
             indActivo: true,
@@ -28,7 +28,7 @@ export class AcademiService {
         },
         {
             id: 3,
-            name: "EXAMEN DIARIO LENGUAJE",
+            name: "LENGUAJE",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
             indActivo: false,
@@ -37,7 +37,7 @@ export class AcademiService {
         },
         {
             id: 4,
-            name: "EXAMEN DIARIO HISTORIA UNIVERSAL",
+            name: "HISTORIA UNIVERSAL",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
             indActivo: true,
@@ -46,7 +46,7 @@ export class AcademiService {
         },
         {
             id: 5,
-            name: "EXAMEN DIARIO HISTORIA GEOMETRIA",
+            name: "HISTORIA GEOMETRIA",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
             indActivo: false,
@@ -68,6 +68,7 @@ export class AcademiService {
 
     private api = 'https://77u1gf7xyj.execute-api.us-east-1.amazonaws.com/Prod/api/v1'
     private api2 = 'https://pbem4cq4f1.execute-api.us-east-1.amazonaws.com/Prod/api/v1'
+    // private api3 = 'https://77u1gf7xyj.execute-api.us-east-1.amazonaws.com/Prod/api/v1/catalogue/2'
 
     // public geListaEstados(): Observable<any[]> {
     //     return this.http.get<any[]>(this.api + '/catalogue/1');

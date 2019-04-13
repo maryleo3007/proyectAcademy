@@ -15,7 +15,7 @@ td {
 }
 
 #products {
-    width: 100%!important;
+    width: 100% !important;
     .top-bg {
         @include media-breakpoint('lt-md') {
             height: 256px;

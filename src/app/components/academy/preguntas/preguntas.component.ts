@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AcademiService } from 'app/servicios/servicio.index';
 import { fuseAnimations } from '@fuse/animations';
+import { PreguntaFormComponent } from '../pregunta-form/pregunta-form.component';
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.component.html',
@@ -22,12 +23,9 @@ export class PreguntasComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   currentOffice = '';
 
-
-
-
-
   constructor(
-    private _academiSrv: AcademiService
+    private _academiSrv: AcademiService,
+    private _matDialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -55,6 +53,48 @@ export class PreguntasComponent implements OnInit {
 
     // Re-filter by search term
     // this.filterCoursesByTerm();
+  }
+
+  EditExamen(contact: any) {
+    this.dialogRef = this._matDialog.open(PreguntaFormComponent, {
+      panelClass: 'contact-form-dialog',
+      width: '50%',
+      data: {
+        action: 'Edit',
+        contact: contact
+      }
+    });
+
+    this.dialogRef.afterClosed().subscribe((res: any) => {
+      if (!res) {
+        return;
+      }
+      console.log(res);
+
+
+    });
+  }
+  newExamen() {
+    this.dialogRef = this._matDialog.open(PreguntaFormComponent, {
+      panelClass: 'contact-form-dialog',
+      width: '50%',
+      data: {
+        action: 'Nuevo'
+      }
+    });
+
+    this.dialogRef.afterClosed().subscribe((res: any) => {
+      if (!res) {
+        return;
+      }
+      console.log(res);
+      console.log(res.examDate._i.date + '-' + res.examDate._i.month + '-' + res.examDate._i.year);
+
+
+    });
+  }
+  eliminar() {
+
   }
 
 }

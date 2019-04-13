@@ -63,7 +63,7 @@
                                         <tr *ngFor="let alternativa of step.alternatives">
                                             <td>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="{{alternativa.id}}" name="radio" [checked]="alternativa.description === 'step.response.description'" [value]="alternativa.descripcion" (change)="onSelectionChangeRadio(alternativa, step)">
+                                                    <input type="radio" id="{{alternativa.id}}" name="radio" [checked]="alternativa.description === marcado" [value]="alternativa.descripcion" (change)="onSelectionChangeRadio(alternativa, step, i)">
                                                     <label for="{{alternativa.id}}">{{alternativa.description}}</label>
                                                 </div>
                                             </td>
@@ -79,27 +79,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="step-navigation">
+
+                        <button mat-fab class="previous mat-accent fuse-white-fg" (click)="gotoPreviousStep(i -1)" [disabled]="currentStep === 0" [fxHide]="currentStep === 0">
+                            <mat-icon>chevron_left</mat-icon>
+                        </button>
+
+                        <button mat-fab class="next mat-accent fuse-white-fg" (click)="gotoNextStep(i + 1)" [disabled]="currentStep ===paginador - 1" [fxHide]="currentStep ===paginador - 1">
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+
+                        <button mat-fab class="done green-600" (click)="enviarResultado()" [disabled]="currentStep !==paginador - 1" [fxShow]="currentStep ===paginador - 1">
+                            <mat-icon>check</mat-icon>
+                        </button>
+
+                    </div>
                 </div>
             </ng-container>
 
         </div>
         <!-- / CONTENT -->
 
-        <div class="step-navigation">
 
-            <button mat-fab class="previous mat-accent fuse-white-fg" (click)="gotoPreviousStep()" [disabled]="currentStep === 0" [fxHide]="currentStep === 0">
-                <mat-icon>chevron_left</mat-icon>
-            </button>
-
-            <button mat-fab class="next mat-accent fuse-white-fg" (click)="gotoNextStep()" [disabled]="currentStep ===paginador - 1" [fxHide]="currentStep ===paginador - 1">
-                <mat-icon>chevron_right</mat-icon>
-            </button>
-
-            <button mat-fab class="done green-600" (click)="enviarResultado()" [disabled]="currentStep !==paginador - 1" [fxShow]="currentStep ===paginador - 1">
-                <mat-icon>check</mat-icon>
-            </button>
-
-        </div>
 
     </div>
     <!-- / CENTER -->

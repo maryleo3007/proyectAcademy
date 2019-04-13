@@ -16,6 +16,9 @@ declare var swal: any;
     animations: fuseAnimations
 })
 export class AcademyCourseComponent implements OnInit, OnDestroy {
+    marcado: any;
+    respuestas: Array<RespuestasModel>;
+    // respuestas: Array<any>;
     suscrition: Subscription;
     minutos: number;
     segundos: number;
@@ -37,9 +40,9 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     paginador: number;
     Titulo: string;
     intervalo: NodeJS.Timer;
+    respositori: RespuestasModel;
     /**
-     * Constructor
-     *
+     * Constructor     
      * @param {AcademyCourseService} _academyCourseService
      * @param {ChangeDetectorRef} _changeDetectorRef
      * @param {FuseSidebarService} _fuseSidebarService
@@ -52,6 +55,8 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         private _fuseSidebarService: FuseSidebarService
     ) {
         // this.minutos = 1;
+        this.respositori = new RespuestasModel();
+        this.respuestas = new Array({ id_pregunta: 0, id: 0, description: 'xxxxx' });
         this.segundos = 59;
         this.intervalo = setInterval(() => this.tick(), 1000);
         this.descritionExamen = new AcademiModel();
@@ -71,12 +76,9 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-        // console.log(this.laspreguntas.length);
-        //this.paginador = this.laspreguntas.length;
         const dato = this._route.snapshot.paramMap.get('id');
         this.Titulo = this._route.snapshot.paramMap.get('nombre');
         this.minutos = parseInt(this._route.snapshot.paramMap.get('time'));
-        console.log(this.Titulo);
         this.obtenerExamen(dato);
     }
 
@@ -97,7 +99,17 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         this._academiSrv.getExamenesxId(id).subscribe((res: any) => {
             this.laspreguntas = res;
             this.paginador = this.laspreguntas.length;
+            for (let i = 0; i < this.laspreguntas.length; i++) {
+                const respo = new RespuestasModel()
+                respo.id_pregunta = i;
+                respo.id = 0;
+                respo.description = 'x';
+                this.respuestas[i] = respo;
+            }
+
         });
+        // console.log(this.respuestas);
+
     }
     // window.onhashchange = function () {
     //     console.log('hola');
@@ -115,13 +127,37 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         this._unsubscribeAll.complete();
         clearInterval(this.intervalo);
     }
-    onSelectionChangeRadio(alternativa: any, pregunta: any) {
+    onSelectionChangeRadio(alternativa: any, pregunta: any, i) {
         this.laspreguntas.map(function (dato: any) {
             if (dato.id === pregunta.id) {
                 dato.response = alternativa;
             }
             return dato;
         });
+        // console.log(alternativa, pregunta);
+        const respo = new RespuestasModel()
+        respo.id_pregunta = pregunta.id;
+        respo.id = alternativa.id;
+        respo.description = alternativa.description;
+        this.respuestas[i] = respo;
+        // for (let respuesta of this.respuestas) {
+
+        //     if (respuesta.id_pregunta === pregunta.id) {
+        //         // this.respuestas.map(function (dato: any) {
+        //         //     if (dato.id_pregunta === pregunta.id) {
+        //         //         const date = [pregunta.id, alternativa]
+        //         //         console.log(date);
+
+        //         //         // dato = date;
+        //         //     }
+        //         //     return dato;
+        //         // });
+        //     } else {
+        //         this.respuestas.push(alternativa);
+
+        //     }
+        // }
+        // console.log(this.respuestas);
 
 
     }
@@ -149,7 +185,8 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     /**
      * Go to next step
      */
-    gotoNextStep(): void {
+    gotoNextStep(step): void {
+        this.marcado = this.respuestas[step].description;
         if (this.currentStep === this.paginador - 1) {
             return;
         }
@@ -164,8 +201,8 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     /**
      * Go to previous step
      */
-    gotoPreviousStep(): void {
-        // console.log(pregunta);        
+    gotoPreviousStep(step): void {
+        this.marcado = this.respuestas[step].description;
         if (this.currentStep === 0) {
             return;
         }
@@ -179,7 +216,9 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         // Decrease the current step
         this.currentStep--;
     }
-
+    eventocambio(step) {
+        console.log(step);
+    }
     /**
      * Toggle the sidebar
      *
@@ -207,4 +246,9 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
                 }
             });
     }
+}
+export class RespuestasModel {
+    id_pregunta: number;
+    id: number;
+    description: string;
 }

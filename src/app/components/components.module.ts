@@ -39,6 +39,7 @@ import { AcademyCoursesComponent } from './academy/courses/courses.component';
 import { AcademyCourseComponent } from './academy/course/course.component';
 import { PreguntasComponent } from './academy/preguntas/preguntas.component';
 import { ActivoPipe } from 'app/pipes/activo.pipe';
+import { PreguntaFormComponent } from './academy/pregunta-form/pregunta-form.component';
 @NgModule({
   imports: [
     Ng2SearchPipeModule,
@@ -69,8 +70,8 @@ import { ActivoPipe } from 'app/pipes/activo.pipe';
     BienvenidoComponent,
     Ng2SearchPipeModule,
     NgxPaginationModule,
-    // PruebasComponent,
     ContactsContactFormDialogComponent,
+    PreguntaFormComponent,
     VentanaComponent
   ],
   declarations: [
@@ -89,10 +90,11 @@ import { ActivoPipe } from 'app/pipes/activo.pipe';
     ControlComponent,
     AsistenciaComponent,
     VentanaComponent,
-    PreguntasComponent
+    PreguntasComponent,
+    PreguntaFormComponent
 
   ],
-  entryComponents: [ContactsContactFormDialogComponent, VentanaComponent],
+  entryComponents: [ContactsContactFormDialogComponent, VentanaComponent, PreguntaFormComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class ComponentsModule { }

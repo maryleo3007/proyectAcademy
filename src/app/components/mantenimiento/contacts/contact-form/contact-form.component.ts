@@ -10,10 +10,9 @@ import { OfficeService } from '../../../../servicios/office/office.service';
 })
 export class ContactsContactFormDialogComponent implements OnInit {
 
-    
     favoriteSeason: string;
     seasons: string[] = ['Masculino', 'Femenino'];
-    officeList:any = [];
+    officeList: any = [];
     action: string;
     contact: Contact;
     dialogTitle: string;
@@ -22,44 +21,44 @@ export class ContactsContactFormDialogComponent implements OnInit {
     faltaNombre: boolean;
     faltaApellido: boolean;
     disable: boolean;
-    ;
-    constructor(   
-        private _officeService: OfficeService,     
+
+    constructor(
+        private _officeService: OfficeService,
         public dialogRef: MatDialogRef<ContactsContactFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
-    ) {       
+    ) {
         this.action = data.action;
-        this.tipo = data.tipo;  
-        if(data.gender){
-            if(data.gender === 'F')
-            this.itemselect = 'Femenino';
+        this.tipo = data.tipo;
+        if (data.gender) {
+            if (data.gender === 'F')
+                this.itemselect = 'Femenino';
             else if (data.gender === 'M') {
                 this.itemselect = 'Masculino';
             }
-        }        
+        }
         if (this.action === 'edit') {
-            this.dialogTitle = 'Editar '  +this.tipo;
+            this.dialogTitle = 'Editar ' + this.tipo;
         }
         else {
-            this.dialogTitle = 'Nuevo ' +this.tipo;            
+            this.dialogTitle = 'Nuevo ' + this.tipo;
         }
     }
-    ngOnInit() {    
-        this.faltaNombre = false;         
-         this.faltaApellido = false; 
+    ngOnInit() {
+        this.faltaNombre = false;
+        this.faltaApellido = false;
 
-        this.getOffices()  
-    }   
+        this.getOffices()
+    }
 
-      // office list  
-  getOffices() {
-    this.officeList = [];
-    this._officeService.getOffice().subscribe((data) => {
-      this.officeList = data.data; 
-    });
-  }
+    // office list  
+    getOffices() {
+        this.officeList = [];
+        this._officeService.getOffice().subscribe((data) => {
+            this.officeList = data.data;
+        });
+    }
     radioclick(radio) {
-        if(radio === "Femenino"){
+        if (radio === "Femenino") {
             this.data.gender = "F"
         } else if (radio === "Masculino") {
             this.data.gender = "M"
@@ -67,12 +66,12 @@ export class ContactsContactFormDialogComponent implements OnInit {
             this.data.gender = null;
         }
     }
-   
+
     onNoClick(): void {
-            this.dialogRef.close();
+        this.dialogRef.close();
     }
     validacion() {
-        if(this.data.nombre === '' && this.data.lastName === '' && this.data.secondLastName === '' && this.data.documentNumber === '') {
+        if (this.data.nombre === '' && this.data.lastName === '' && this.data.secondLastName === '' && this.data.documentNumber === '') {
             this.disable = false;
         }
     }

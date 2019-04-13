@@ -91,7 +91,6 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         })
     }
     impirmircursos(idEstudiante, tipeExamen, dateInit, dateFin) {
-        console.log(dateInit, dateFin);
         this._academiSrv.geListaCursosxFechas(idEstudiante, tipeExamen, dateInit, dateFin).subscribe((res: any) => {
             this.filteredCourses = this.coursesFilteredByCategory = this.courses = res;
 

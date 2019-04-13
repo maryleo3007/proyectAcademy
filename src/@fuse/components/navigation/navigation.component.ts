@@ -3,16 +3,17 @@ import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { FuseNavigation } from '@fuse/types';
 
 @Component({
-    selector       : 'fuse-navigation',
-    templateUrl    : './navigation.component.html',
-    styleUrls      : ['./navigation.component.scss'],
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'fuse-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FuseNavigationComponent implements OnInit
-{
+export class FuseNavigationComponent implements OnInit {
+    otronavigate: FuseNavigation[];
     @Input()
     layout = 'vertical';
 
@@ -30,10 +31,13 @@ export class FuseNavigationComponent implements OnInit
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseNavigationService: FuseNavigationService
-    )
-    {
+    ) {
+        if (localStorage.getItem('menu')) {
+            this.otronavigate = JSON.parse(localStorage.getItem('menu'));
+        }
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -43,10 +47,16 @@ export class FuseNavigationComponent implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
-        // Load the navigation either from the input or from the service
-        this.navigation = this.navigation || this._fuseNavigationService.getCurrentNavigation();
+    ngOnInit(): void {
+        if (localStorage.getItem('menu')) {
+            this.navigation = this.otronavigate;
+            console.log(this.otronavigate);
+        } else {
+            // Load the navigation either from the input or from the service
+            this.navigation = this.navigation || this._fuseNavigationService.getCurrentNavigation();
+        }
+
+
 
         // Subscribe to the current navigation changes
         this._fuseNavigationService.onNavigationChanged
@@ -66,10 +76,10 @@ export class FuseNavigationComponent implements OnInit
             this._fuseNavigationService.onNavigationItemUpdated,
             this._fuseNavigationService.onNavigationItemRemoved
         ).pipe(takeUntil(this._unsubscribeAll))
-         .subscribe(() => {
+            .subscribe(() => {
 
-             // Mark for check
-             this._changeDetectorRef.markForCheck();
-         });
+                // Mark for check
+                this._changeDetectorRef.markForCheck();
+            });
     }
 }

@@ -1,3 +1,4 @@
+import { FuseNavigation } from './../../@fuse/types/fuse-navigation';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,7 +17,7 @@ declare var swal: any;
     animations: fuseAnimations
 })
 export class LoginComponent implements OnInit {
-
+    newnavigate: FuseNavigation[];
     loginForm: FormGroup;
     loggin: loginModel;
     /**
@@ -31,6 +32,99 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private auntSrv: AuthService
     ) {
+
+        this.newnavigate =
+            [
+                {
+                    id: 'applications',
+                    title: 'Academia',
+                    translate: 'NAV.APPLICATIONS',
+                    type: 'group',
+                    icon: 'apps',
+                    children: [
+                        {
+                            id: 'mantenimiento',
+                            title: 'MANTENIMIENTO',
+                            type: 'collapsable',
+                            icon: 'album',
+                            children: [
+                                {
+                                    id: 'alumnos',
+                                    title: 'Mantenimiento de alumnos',
+                                    type: 'item',
+                                    url: '/Academia/Alumno',
+                                },
+                                {
+                                    id: 'profesor',
+                                    title: 'Mantenimiento de docentes',
+                                    type: 'item',
+                                    url: '/Academia/Profesor'
+                                }
+                            ],
+                            badge: {
+                                title: '2',
+                                bg: '#F44336',
+                                fg: '#FFFFFF'
+                            }
+                        },
+                        {
+                            id: 'control',
+                            title: 'CONTROL DE ASISTENCIA',
+                            type: 'collapsable',
+                            icon: 'change_history',
+                            children: [
+                                {
+                                    id: 'registro',
+                                    title: 'Registro de asistencia',
+                                    type: 'item',
+                                    url: '/Academia/Registro'
+                                },
+                                {
+                                    id: 'asistencia',
+                                    title: 'Control de asistencia',
+                                    type: 'item',
+                                    url: '/Academia/Asistencia'
+                                }
+                            ],
+                            badge: {
+                                title: '2',
+                                bg: '#09d261',
+                                fg: '#FFFFFF'
+                            }
+
+                        },
+                        {
+                            id: 'cursos',
+                            title: 'CURSOS',
+                            type: 'collapsable',
+                            icon: 'cast_for_education',
+                            children: [
+                                {
+                                    id: 'cusos1',
+                                    title: 'Cursos',
+                                    type: 'item',
+                                    url: '/Academia/Cursos'
+                                },
+                                {
+                                    id: 'cusos2',
+                                    title: 'Mantenimiento',
+                                    type: 'item',
+                                    url: '/Academia/Preguntas'
+                                }
+                            ],
+                            badge: {
+                                title: '2',
+                                bg: '#525e8a',
+                                fg: '#FFFFFF'
+                            }
+
+                        }
+                    ]
+                }
+            ];
+
+
+
         this.loggin = new loginModel();
         // Configure the layout
         this._fuseConfigService.config = {
@@ -64,7 +158,11 @@ export class LoginComponent implements OnInit {
                 const accessToken = 'KJAJSKDDSAKJDAJ32424324ASDA';
                 localStorage.setItem('usertoken', accessToken);
                 localStorage.setItem('usuario', JSON.stringify(res));
-                localStorage.setItem('menu', JSON.stringify(res.data.lstMenus));
+                // localStorage.setItem('menu', JSON.stringify(res.data.lstMenus));
+
+                localStorage.setItem('menu', JSON.stringify(this.newnavigate));
+
+
                 this.router.navigate(['Academia/Bienvenido']);
             }
         }
