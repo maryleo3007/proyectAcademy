@@ -151,7 +151,7 @@ export class LoginComponent implements OnInit {
     }
     login() {
         this.auntSrv.attemptAuth(this.loggin).subscribe(res => {
-            console.log(res);
+            // console.log(res);
             if (res.data === null) {
                 swal('Importante', 'Credenciales incorrectos!', 'warning');
             } else {
