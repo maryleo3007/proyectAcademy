@@ -1,6 +1,25 @@
 @import "src/@fuse/scss/fuse";
-th.tipo {
-    width: 100px;
+th.selection {
+    margin-left: 30px;
+    margin-right: 25px;
+}
+
+td.selection {
+    margin-right: 20px;
+}
+
+th.titulo {
+    margin-left: 10px;
+    margin-right: 65px;
+}
+
+th.estado {
+    margin-left: 30px;
+    margin-right: 25px;
+}
+
+td.estado {
+    margin-right: 20px;
 }
 
 #products {
@@ -47,67 +66,43 @@ th.tipo {
     }
 }
 
-th.estado {
-    margin-left: 30px;
-    margin-right: 25px;
+.products-table {
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    .mat-header-cell {
+        width: 180px;
+        border-color: green;
+        color: blue;
+        @include media-breakpoint('lt-md') {
+            color: blue;
+            width: 320px;
+        }
+    }
+    .mat-header-cell.grande {
+        width: 480px;
+        color: red;
+        @include media-breakpoint('lt-md') {
+            width: 320px;
+        }
+    }
+    .mat-row {
+        position: relative;
+        cursor: pointer;
+        padding: 8px;
+    }
+    // .mat-cell {
+    //     min-width: 0;
+    //     &.mat-column-detail-button {
+    //         flex: 0 1 auto;
+    //         padding: 0 24px 0 0;
+    //         @include media-breakpoint('gt-md') {
+    //             display: none;
+    //         }
+    //     }
+    // }
 }
 
-td.estado {
-    margin-right: 50px;
-}
-
-th.tiempo,
-th.tipo,
-th.fecha {
-    margin-left: 30px;
-    margin-right: 25px;
-}
-
-th.boton {
-    margin-left: 30px;
-    margin-right: 25px;
-}
-
-td.tiempo,
-td.tipo {
-    margin-right: 50px;
-    margin-left: 20px;
-}
-
-td.boton {
-    margin-right: 30px;
-}
-
-td.fecha {
-    margin-right: 60px;
-}
-
-// .products-table {
-//     width: 100%;
-//     background: transparent;
-//     box-shadow: none;
-//     .mat-header-cell {
-//         width: 380px;
-//         @include media-breakpoint('lt-md') {
-//             width: 320px;
-//         }
-//     }
-//     .mat-row {
-//         position: relative;
-//         cursor: pointer;
-//         padding: 8px;
-//     }
-//     .mat-cell {
-//         min-width: 0;
-//         &.mat-column-detail-button {
-//             flex: 0 1 auto;
-//             padding: 0 24px 0 0;
-//             @include media-breakpoint('gt-md') {
-//                 display: none;
-//             }
-//         }
-//     }
-// }
 #add-contact-button {
     top: 70%;
     position: fixed;

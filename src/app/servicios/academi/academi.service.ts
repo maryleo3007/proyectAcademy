@@ -9,7 +9,7 @@ export class AcademiService {
 
     public data: any = [
         {
-            id: 1,
+            id: 101,
             name: "MATEMATICA",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
@@ -18,7 +18,7 @@ export class AcademiService {
             examDate: "27/02/2019"
         },
         {
-            id: 2,
+            id: 102,
             name: "HISTORIA DEL PERU",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
@@ -27,7 +27,7 @@ export class AcademiService {
             examDate: "27/02/2019"
         },
         {
-            id: 3,
+            id: 103,
             name: "LENGUAJE",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
@@ -36,7 +36,7 @@ export class AcademiService {
             examDate: "27/02/2019"
         },
         {
-            id: 4,
+            id: 104,
             name: "HISTORIA UNIVERSAL",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
@@ -45,7 +45,7 @@ export class AcademiService {
             examDate: "27/02/2019"
         },
         {
-            id: 5,
+            id: 105,
             name: "HISTORIA GEOMETRIA",
             examTypeId: 1,
             examTypeName: "EXAMEN DIARIO",
@@ -54,7 +54,26 @@ export class AcademiService {
             examDate: "27/02/2019"
         }
     ]
-
+    public preguntas: any = [
+        {
+            id: 1,
+            title: "PREGUNTA 1",
+            description: "¡El señor de Sipan, fue un gobernante de la cultura ........., cuya tumba fue descubierta y escabada por ........?",
+            active: true
+        },
+        {
+            id: 2,
+            title: "PREGUNTA 2",
+            description: "¡El señor de Sipan, fue descubierta Por ........?",
+            active: true
+        },
+        {
+            id: 3,
+            title: "PREGUNTA 3",
+            description: "¡El señor de Sipan, Pertenece a la cultura ........?",
+            active: false
+        }
+    ]
 
     constructor(private http: HttpClient) {
         const httpOptions = {

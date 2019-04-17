@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AcademiService } from 'app/servicios/servicio.index';
 import { fuseAnimations } from '@fuse/animations';
-import { ExamenModel } from 'app/models/examen.model';
+import { EvaluacionesModel } from 'app/models/evaluaciones.model';
 
 @Component({
   selector: 'app-pregunta-form',
@@ -11,30 +11,34 @@ import { ExamenModel } from 'app/models/examen.model';
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class PreguntaFormComponent implements OnInit {
+export class PreguntaFormComponent implements OnInit, OnDestroy {
   action: any;
   favoriteSeason: string;
   Tipos: any;
-  examen: ExamenModel;
+  examen: EvaluacionesModel;
   itemselect: string;
   constructor(
     private AcademiSrv: AcademiService,
     public dialogRef: MatDialogRef<PreguntaFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.examen = new ExamenModel();
+    this.examen = new EvaluacionesModel();
     this.action = data.action;
     if (this.action === 'Nuevo') {
-      this.examen.indActivo = false;
+      this.examen.active = false;
+      this.examen.id === null
     } else {
       if (data.contact) {
-        if (data.contact.examTypeName === 'EXAMEN DIARIO')
+        if (data.contact.evaluationTypeName === 'EXAMEN DIARIO')
           this.itemselect = 'EXAMEN DIARIO';
-        else if (data.contact.examTypeName === 'EXAMEN SEMANAL') {
+        else if (data.contact.evaluationTypeName === 'EXAMEN SEMANAL') {
           this.itemselect = 'EXAMEN SEMANAL';
         }
+
+        this.examen.active = data.contact.active;
+        this.examen.id = data.contact.id;
         this.examen.name = data.contact.name;
-        this.examen.examDate = data.contact.examDate;
+        this.examen.evaluationDate = data.contact.evaluationDate;
         this.examen.time = data.contact.time;
       }
     }
@@ -45,6 +49,7 @@ export class PreguntaFormComponent implements OnInit {
   }
   onNoClick(): void {
     this.dialogRef.close();
+    this.examen = new EvaluacionesModel();
   }
   imprimirTipo() {
     this.AcademiSrv.geListaTipos().subscribe((res: any) => {
@@ -52,12 +57,14 @@ export class PreguntaFormComponent implements OnInit {
     })
   }
   activado() {
-    this.examen.indActivo = true;
+    this.examen.active = true;
   }
   radioclick(radio) {
-    console.log(radio);
-    this.examen.examTypeName = radio.name;
-    this.examen.examTypeId = radio.id;
+    this.examen.evaluationTypeName = radio.name;
+    this.examen.evaluationTypeId = radio.id;
 
+  }
+  ngOnDestroy() {
+    this.examen = new EvaluacionesModel();
   }
 }

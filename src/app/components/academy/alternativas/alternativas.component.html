@@ -1,0 +1,97 @@
+<div id="products" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+
+
+            <!-- <mat-form-field appearance="outline" class="category-selector">
+        <mat-label>Tipo de examen</mat-label>
+        <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">
+            <mat-option [value]="0">
+                All
+            </mat-option>
+            <mat-option *ngFor="let category of Tipo" [value]="category.id">
+                {{ category.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+            <!-- <div class="search-wrapper mt-16 m-10 mt-sm-0">
+            <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon>search</mat-icon>
+                <input (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+            </div>
+
+        </div> -->
+        </div>
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <div class="mat-elevation-z8">
+                <mat-table class="products-table" matSort #table [dataSource]="dataSource" [@animateStagger]="{value:'350'}" fusePerfectScrollbar>
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <th class="selection" *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <td class="selection" mat-cell *matCellDef="let contact">
+                            <mat-checkbox (change)="eventCheckbox($event, contact)" [checked]="selection.isSelected(contact)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+
+                    <!-- DNI Column -->
+                    <ng-container matColumnDef="Titulo">
+                        <th class="selection titulo" class="titulo" *matHeaderCellDef>Titulo</th>
+                        <td class="selection" *matCellDef="let contact" (dblclick)="Alternative(contact)">
+                            <p class="text-truncate font-weight-600">{{contact.title}}</p>
+                        </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Descripción">
+                        <mat-header-cell class=grande *matHeaderCellDef>Description</mat-header-cell>
+                        <mat-cell *matCellDef="let contact" (dblclick)="Alternative(contact)">
+                            <p class="text-truncate font-weight-600">{{contact.description}}</p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="Estado">
+                        <th class="estado" *matHeaderCellDef fxHide fxShow.gt-sm>Estado</th>
+                        <td class="estado" *matCellDef="let contact" (dblclick)="Alternative(contact)">
+                            <p class="email text-truncate">
+                                {{contact.active | activo}}
+                            </p>
+                        </td>
+                    </ng-container>
+
+
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+
+    <div class="iconos">
+        <!-- ADD CONTACT BUTTON -->
+        <button mat-fab class="accent" id="add-contact-button" aria-label="Agregar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+          <mat-icon matSuffix>ibrary_books</mat-icon>
+      </button>
+        <button mat-fab color="warn" id="delete-contact-button" aria-label="Eliminar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+              <mat-icon matSuffix>delete_forever</mat-icon>
+          </button>
+
+    </div>
+</div>

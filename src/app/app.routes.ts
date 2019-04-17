@@ -13,6 +13,7 @@ import { AsistenciaComponent } from './components/control/asistencia/asistencia.
 import { AcademyCoursesComponent } from './components/academy/courses/courses.component';
 import { AcademyCourseComponent } from './components/academy/course/course.component';
 import { PreguntasComponent } from './components/academy/preguntas/preguntas.component';
+import { AlternativasComponent } from './components/academy/alternativas/alternativas.component';
 
 
 const appRoutes: Routes = [
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
                 { path: 'Asistencia', component: AsistenciaComponent, data: { titulo: 'Asistencia' } },
                 { path: 'Cursos', component: AcademyCoursesComponent, data: { titulo: 'Asistencia' } },
                 { path: 'Cursos/:id/:nombre/:time', component: AcademyCourseComponent, data: { titulo: 'Asistencia' } },
+                { path: 'Alternativa/:id', component: AlternativasComponent, data: { titulo: 'Asistencia' } },
                 { path: 'Preguntas', component: PreguntasComponent, data: { titulo: 'Bienvenidos' } },
 
                 // { path: '**', component: NopagefoundComponent }

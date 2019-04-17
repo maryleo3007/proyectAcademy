@@ -1,3 +1,5 @@
+export { EvaluacionesService } from './evaluaciones/evaluaciones.service';
+
 export { AcademiService } from './academi/academi.service';
 
 export {

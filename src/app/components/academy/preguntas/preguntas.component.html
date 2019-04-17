@@ -47,11 +47,11 @@
                   </ng-container> -->
 
                     <!-- DNI Column -->
-                    <ng-container matColumnDef="examTypeName">
-                        <mat-header-cell *matHeaderCellDef>Tipo de Examen</mat-header-cell>
-                        <mat-cell *matCellDef="let contact" (dblclick)="EditExamen(contact)">
-                            <p class="text-truncate font-weight-600">{{contact.examTypeName}}</p>
-                        </mat-cell>
+                    <ng-container matColumnDef="evaluationTypeName">
+                        <th class="tipo" *matHeaderCellDef>Tipo de Examen</th>
+                        <td class="tipo" *matCellDef="let contact" (dblclick)="EditExamen(contact)">
+                            <p class="text-truncate font-weight-600">{{contact.evaluationTypeName}}</p>
+                        </td>
                     </ng-container>
                     <!-- Name Column -->
                     <ng-container matColumnDef="name">
@@ -62,42 +62,42 @@
                     </ng-container>
 
                     <!-- Email Column -->
-                    <ng-container matColumnDef="examDate">
-                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Fecha de examen</mat-header-cell>
-                        <mat-cell *matCellDef="let contact">
+                    <ng-container matColumnDef="evaluationDate">
+                        <th class="fecha" *matHeaderCellDef>Fecha de examen</th>
+                        <td class="fecha" *matCellDef="let contact" (dblclick)="EditExamen(contact)">
                             <p class="email text-truncate">
-                                {{contact.examDate}}
+                                {{contact.evaluationDate}}
                             </p>
-                        </mat-cell>
+                        </td>
                     </ng-container>
 
                     <!-- Phone Column -->
-                    <ng-container matColumnDef="indActivo">
-                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Estado</mat-header-cell>
-                        <mat-cell *matCellDef="let contact">
+                    <ng-container matColumnDef="active">
+                        <th class="estado" *matHeaderCellDef>Estado</th>
+                        <td class="estado" *matCellDef="let contact" (dblclick)="EditExamen(contact)">
                             <p class="phone text-truncate">
-                                {{contact.indActivo | activo}}
+                                {{contact.active | activo}}
                             </p>
-                        </mat-cell>
+                        </td>
                     </ng-container>
 
                     <!-- adress Column -->
                     <ng-container matColumnDef="time">
-                        <mat-header-cell *matHeaderCellDef>Tiempo</mat-header-cell>
-                        <mat-cell *matCellDef="let contact">
+                        <th class="tiempo" *matHeaderCellDef>Tiempo</th>
+                        <td class="tiempo" *matCellDef="let contact" (dblclick)="EditExamen(contact)">
                             <p class="text-truncate font-weight-600">
                                 {{contact.time}}
                             </p>
-                        </mat-cell>
+                        </td>
                     </ng-container>
                     <!-- Job Title Column -->
                     <ng-container matColumnDef="boton">
-                        <mat-header-cell *matHeaderCellDef>Boton</mat-header-cell>
-                        <mat-cell *matCellDef="let contact">
+                        <th class="boton" *matHeaderCellDef>Boton</th>
+                        <td class="boton" *matCellDef="let contact">
                             <p class="text-truncate font-weight-600">
-                                <button mat-raised-button color="accent">Pregunta</button>
+                                <button mat-raised-button color="accent" [routerLink]="['/Academia/Alternativa', contact.id]">Pregunta</button>
                             </p>
-                        </mat-cell>
+                        </td>
                     </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
