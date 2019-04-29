@@ -1,6 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms/src/forms';
+import { EvaluacionesService } from 'app/servicios/servicio.index';
+import { DOCUMENT } from '@angular/platform-browser';
+declare var swal: any;
 @Component({
   selector: 'app-alternativa-form',
   templateUrl: './alternativa-form.component.html',
@@ -8,129 +11,109 @@ import { NgForm } from '@angular/forms/src/forms';
 })
 export class AlternativaFormComponent implements OnInit {
   card: any;
-
+  chekeadodescripcion = '';
+  PreguntaNew: PreguntaModel;
+  descriptionnuew = '';
+  alternativasmandar: Array<CuestionModel>;
+  nuevoAlterna: { id: number; questionId: number; description: string; isAnswer: boolean };
+  activarAdd = true;
   constructor(
-
+    @Inject(DOCUMENT) private _document,
+    private _alternativaSrv: EvaluacionesService,
     public dialogRef: MatDialogRef<AlternativaFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-
-    this.card = {
-      id: 12,
-      name: 'Add alternative authentication pages',
-      description: 'hola esta es de felix',
-      idAttachmentCover: '',
-      idMembers: [
-        '36027j1930450d8bf7b10158'
-      ],
-      idLabels: [
-        '6540635g19ad3s5dc31412b2',
-        '56027e4119ad3a5dc28b36cd'
-      ],
-      attachments: [],
-      subscribed: false,
-      checklists: [
-        {
-          id: 2,
-          name: 'Preguntas',
-          checkItemsChecked: 1,
-          checkItems: [
-            {
-              name: 'Login',
-              checked: true
-            },
-            {
-              name: 'Register',
-              checked: true
-            },
-            {
-              name: 'Lost Password',
-              checked: false
-            },
-            {
-              name: 'Recover Password',
-              checked: false
-            },
-            {
-              name: 'Activate Account',
-              checked: false
-            }
-          ]
-        }
-      ],
-      checkItems: 5,
-      checkItemsChecked: 2,
-      comments: [],
-      activities: [],
-      due: null
+    // console.log(data);
+    this.PreguntaNew = new PreguntaModel();
+    this.alternativasmandar = new Array<CuestionModel>();
+    this.PreguntaNew.evaluationId = this.data.id;
+    if (data.action === 'Edit') {
+      this.PreguntaNew.id = data.contact.id;
+      this.PreguntaNew.title = data.contact.title;
+      this.PreguntaNew.description = data.contact.description;
+      this.PreguntaNew.active = data.contact.active;
+      this.alternativasmandar = data.contact.answers;
+      this.chekeadodescripcion = data.marcado;
     }
   }
-
   ngOnInit() {
 
   }
-
-
+  cambios(newObj) {
+    // console.log(newObj.length);
+    if (newObj.length !== 0) {
+      this.activarAdd = false;
+    } else {
+      this.activarAdd = true;
+    }
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
-  addCheckItem(form: NgForm, checkList): void {
-    const checkItemVal = form.value.checkItem;
 
-    if (!checkItemVal || checkItemVal === '') {
-      return;
+  addNewCuestion(description) {
+    this.nuevoAlterna = { id: null, questionId: null, description: '', isAnswer: false };
+    this.nuevoAlterna.description = description;
+    this.nuevoAlterna.id = null;
+    if (this.data.action === 'Edit') {
+      this.nuevoAlterna.questionId = this.data.contact.id;
+    } else {
+      this.nuevoAlterna.questionId = null;
     }
+    this.nuevoAlterna.isAnswer = false;
+    this.alternativasmandar.push(this.nuevoAlterna);
+    console.log(this.nuevoAlterna);
 
-    const newCheckItem = {
-      name: checkItemVal,
-      checked: false
-    };
-
-    checkList.checkItems.push(newCheckItem);
-
-    this.updateCheckedCount(checkList);
-
-    form.setValue({ checkItem: '' });
-
-    this.updateCard();
+    this.descriptionnuew = '';
   }
-  removeChecklistItem(checkItem, checklist): void {
-    checklist.checkItems.splice(checklist.checkItems.indexOf(checkItem), 1);
+  addCheckItem(form: NgForm): void {
 
-    this.updateCheckedCount(checklist);
-
-    this.updateCard();
   }
-  updateCheckedCount(list): void {
-    const checkItems = list.checkItems;
-    let checkedItems = 0;
-    let allCheckedItems = 0;
-    let allCheckItems = 0;
-
-    for (const checkItem of checkItems) {
-      if (checkItem.checked) {
-        checkedItems++;
+  removeChecklistItem(indice): void {
+    console.log(this.alternativasmandar[indice]);
+    this.alternativasmandar.splice(indice, 1);
+  }
+  updateCheckedCount(list: any): void {
+    this.alternativasmandar.map(function (dato) {
+      if (dato.isAnswer === true) {
+        dato.isAnswer = false;
       }
-    }
-
-    list.checkItemsChecked = checkedItems;
-
-    for (const item of this.card.checklists) {
-      allCheckItems += item.checkItems.length;
-      allCheckedItems += item.checkItemsChecked;
-    }
-
-    this.card.checkItems = allCheckItems;
-    this.card.checkItemsChecked = allCheckedItems;
-
-    this.updateCard();
-  }
-  updateCard(): void {
+      if (dato.description === list.description) {
+        dato.isAnswer = true;
+      }
+      return dato;
+    });
 
   }
+
   removeChecklist(checklist): void {
     this.card.checklists.splice(this.card.checklists.indexOf(checklist), 1);
-
-    this.updateCard();
   }
+  GuardarPregunta() {
+    this.PreguntaNew.answers = this.alternativasmandar;
+    console.log(this.PreguntaNew);
+    console.log('----------');
+    this._alternativaSrv.saveOrUpdatePreguntas(this.PreguntaNew).subscribe(res => {
+      if (res.code === 1) {
+        swal('Bien!', 'Guardado!', 'success').then(() => {
+          this.onNoClick();
+        });
+      } else {
+        console.error('error');
+      }
+    });
+  }
+}
+export class CuestionModel {
+  id: number;
+  description: string;
+  isAnswer: boolean;
+}
+export class PreguntaModel {
+  id: number = null;
+  evaluationId: number;
+  title: string = 'PREGUNTA';
+  description: string;
+  active: boolean = true;
+  answers: Array<any>;
 }

@@ -83,9 +83,6 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         this._unsubscribeAll.complete();
     }
     imprimirTipo() {
-        //     this._academiSrv.geListaEstados().subscribe((res: any) => {
-        //         this.Estado = res.data;
-        //     })
         this._academiSrv.geListaTipos().subscribe((res: any) => {
             this.Tipo = res.data;
         })

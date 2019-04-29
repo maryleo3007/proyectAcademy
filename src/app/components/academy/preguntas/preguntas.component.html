@@ -5,26 +5,27 @@
         <!-- HEADER -->
         <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
 
+            <div class="filters" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+                <!-- <mat-form-field appearance="outline" class="category-selector">
+                    <mat-label>Tipo de examen</mat-label>
+                    <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">
+                        <mat-option [value]="0">
+                            All
+                        </mat-option>
+                        <mat-option *ngFor="let category of Tipo" [value]="category.id">
+                            {{ category.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->                
 
-            <!-- <mat-form-field appearance="outline" class="category-selector">
-          <mat-label>Tipo de examen</mat-label>
-          <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">
-              <mat-option [value]="0">
-                  All
-              </mat-option>
-              <mat-option *ngFor="let category of Tipo" [value]="category.id">
-                  {{ category.name }}
-              </mat-option>
-          </mat-select>
-      </mat-form-field> -->
+                <div class="search-wrapper mt-16 m-10 mt-sm-0">
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon>search</mat-icon>
+                        <input (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+                    </div>
 
-            <!-- <div class="search-wrapper mt-16 m-10 mt-sm-0">
-              <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                  <mat-icon>search</mat-icon>
-                  <input (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-              </div>
-
-          </div> -->
+                </div>
+            </div>
         </div>
 
         <!-- / HEADER -->
@@ -35,16 +36,16 @@
             <div class="mat-elevation-z8">
                 <mat-table class="products-table" matSort #table [dataSource]="dataSource" [@animateStagger]="{value:'350'}" fusePerfectScrollbar>
                     <!-- Checkbox Column -->
-                    <!-- <ng-container matColumnDef="select">
-                      <th *matHeaderCellDef>
-                          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-                          </mat-checkbox>
-                      </th>                      
-                      <td mat-cell *matCellDef="let contact">                        
-                          <mat-checkbox (change)="eventCheckbox($event, contact)" [checked]="selection.isSelected(contact)">
-                          </mat-checkbox>
-                      </td>
-                  </ng-container> -->
+                    <ng-container matColumnDef="select">
+                        <th class="cheked" *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <td class="cheked" mat-cell *matCellDef="let contact">
+                            <mat-checkbox (change)="eventCheckbox($event, contact)" [checked]="selection.isSelected(contact)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
 
                     <!-- DNI Column -->
                     <ng-container matColumnDef="evaluationTypeName">

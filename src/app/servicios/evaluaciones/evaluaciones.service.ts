@@ -30,11 +30,11 @@ export class EvaluacionesService {
 
     // Alternativas
     public getListaPreguntas(id: any = 1): Observable<any[]> {
-        return this.http.get<any[]>(this.api + `?evaluationId=${id}`)
+        return this.http.get<any[]>(this.api2 + `?evaluationId=${id}`)
             .pipe(map((res: any) => { return res.data; }));
     }
-    public deletePreguntas(id: number): void {
-        this.http.post(this.api2 + '/delete', JSON.stringify(id));
+    public deletePreguntas(id: any): Observable<any> {
+        return this.http.post<any>(this.api2 + '/delete', JSON.stringify(id));
     }
     public saveOrUpdatePreguntas(preguntas: any): Observable<any> {
         return this.http.post<any>(this.api2, JSON.stringify(preguntas));

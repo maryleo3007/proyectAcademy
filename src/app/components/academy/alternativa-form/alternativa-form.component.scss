@@ -18,6 +18,12 @@
     }
     .section-content {
         padding: 24px 16px 32px 32px;
+        .juntar {
+            display: flex;
+            input {
+                margin: 0;
+            }
+        }
     }
     .labels {
         .section-content {
@@ -31,51 +37,6 @@
                 .chip-remove {
                     cursor: pointer;
                 }
-            }
-        }
-    }
-    .members {
-        .section-content {
-            padding: 8px 0 32px 0;
-        }
-        .member-chips {
-            box-shadow: none;
-            padding: 0;
-            .member-chip {
-                margin: 4px;
-                .member-chip-avatar {
-                    width: 32px;
-                    border-radius: 50%;
-                }
-                .chip-remove {
-                    cursor: pointer;
-                }
-            }
-        }
-    }
-    .attachments {
-        .attachment {
-            padding: 0 24px 24px 0;
-            .attachment-preview {
-                font-weight: 600;
-                border-radius: 4px;
-                overflow: hidden;
-            }
-            .attachment-content {
-                .attachment-url,
-                .attachment-name {
-                    font-weight: 600;
-                    font-size: 16px;
-                }
-                .attachment-is-cover {
-                    margin-left: 6px;
-                }
-            }
-        }
-        .add-attachment-button {
-            margin: 0;
-            mat-icon {
-                margin-right: 8px;
             }
         }
     }

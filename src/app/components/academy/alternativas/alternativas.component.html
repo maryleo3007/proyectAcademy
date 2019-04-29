@@ -55,7 +55,7 @@
                     </ng-container>
                     <!-- Name Column -->
                     <ng-container matColumnDef="Descripción">
-                        <mat-header-cell class=grande *matHeaderCellDef>Description</mat-header-cell>
+                        <mat-header-cell class=grande *matHeaderCellDef>Descripción</mat-header-cell>
                         <mat-cell *matCellDef="let contact" (dblclick)="Alternative(contact)">
                             <p class="text-truncate font-weight-600">{{contact.description}}</p>
                         </mat-cell>
@@ -86,10 +86,10 @@
 
     <div class="iconos">
         <!-- ADD CONTACT BUTTON -->
-        <button mat-fab class="accent" id="add-contact-button" aria-label="Agregar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+        <button mat-fab class="accent" id="add-contact-button" (click)="nuevaPregunta()" aria-label="Agregar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
           <mat-icon matSuffix>ibrary_books</mat-icon>
       </button>
-        <button mat-fab color="warn" id="delete-contact-button" aria-label="Eliminar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+        <button mat-fab color="warn" id="delete-contact-button" (click)="eliminar()" aria-label="Eliminar contacto" [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
               <mat-icon matSuffix>delete_forever</mat-icon>
           </button>
 

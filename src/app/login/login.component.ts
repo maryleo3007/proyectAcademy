@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private auntSrv: AuthService
     ) {
+        localStorage.setItem('hoy', '100');
 
         this.newnavigate =
             [

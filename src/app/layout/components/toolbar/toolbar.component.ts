@@ -164,8 +164,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this._translateService.use(lang.id);
     }
     salir() {
-        // localStorage.removeItem('usertoken');   
-        localStorage.clear();
+        localStorage.removeItem('menu');
+        localStorage.removeItem('usuario');
+        localStorage.removeItem('usertoken');
+
         this.router.navigate(['/login'])
     }
 }

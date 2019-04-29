@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { EvaluacionesService } from 'app/servicios/servicio.index';
+import { EvaluacionesService, AcademiService } from 'app/servicios/servicio.index';
 import { fuseAnimations } from '@fuse/animations';
 import { PreguntaFormComponent } from '../pregunta-form/pregunta-form.component';
 import { EvaluacionesModel } from '../../../models/evaluaciones.model';
+import { IdModel } from 'app/models/persona.model';
+declare var swal: any;
+
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.component.html',
@@ -14,57 +17,104 @@ import { EvaluacionesModel } from '../../../models/evaluaciones.model';
 })
 export class PreguntasComponent implements OnInit {
   selectedContacts: any[];
+  selecteparticipaAct: Array<IdModel>;
   examenes: any;
+  examenesFilter: any;
   examen: EvaluacionesModel;
   checkboxes: {};
   currentCategoryTipo = 0;
   ELEMENT_DATA1: Array<any>;
   dialogRef: any;
-  displayedColumns = ['evaluationTypeName', 'name', 'evaluationDate', 'active', 'time', 'boton'];
+  displayedColumns = ['select', 'evaluationTypeName', 'name', 'evaluationDate', 'active', 'time', 'boton'];
   dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA1);
   selection = new SelectionModel<any>(true, []);
   currentOffice = '';
+  Tipo: any;
+  AlterEliminar: { id: any; };
+  // AlterEliminarall: Array<any>;
 
   constructor(
+    private _academiSrv: AcademiService,
     private _EvaluationSrv: EvaluacionesService,
     private _matDialog: MatDialog
   ) {
     this.examen = new EvaluacionesModel();
+    this.selecteparticipaAct = new Array<IdModel>();
   }
 
   ngOnInit() {
     this.imprimir();
+    this.imprimirTipo();
+  }
+  imprimirTipo() {
+    this._academiSrv.geListaTipos().subscribe((res: any) => {
+      this.Tipo = res.data;
+    })
   }
 
   filterCoursesByTipo(): void {
     // Filter
+    console.log(this.currentCategoryTipo);
 
-    // if (this.currentCategoryTipo === 0) {
-    //     this.coursesFilteredByCategory = this.courses;
-    //     this.filteredCourses = this.courses;
-    // }
-    // else {
-    //     this.coursesFilteredByCategory = this.courses.filter((course) => {
-    //         return course.examTypeId === this.currentCategoryTipo;
-    //     });
+    if (this.currentCategoryTipo === 0) {
+      this.mostrartabla(this.examenes)
+    }
+    else {
+      this.examenes = this.examenes.filter((course) => {
+        return course.evaluationTypeId === this.currentCategoryTipo;
+      });
 
-    //     this.filteredCourses = [...this.coursesFilteredByCategory];
+      this.examenesFilter = [...this.examenes];
 
-    // }
+      this.mostrartabla(this.examenesFilter)
+    }
 
     // Re-filter by search term
     // this.filterCoursesByTerm();
   }
+  applyFilter(filterValue: string) {
+
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   imprimir() {
     this._EvaluationSrv.getListaEvaluaciones().subscribe(res => {
       if (res !== null)
-        this.examenes = res;
-      this.displayedColumns = ['evaluationTypeName', 'name', 'evaluationDate', 'active', 'time', 'boton'];
-      this.dataSource = new MatTableDataSource<any>(this.examenes);
+        this.examenesFilter = this.examenes = res;
+      this.mostrartabla(this.examenesFilter)
     })
 
   }
+  mostrartabla(informacio: any) {
+    this.displayedColumns = ['select', 'evaluationTypeName', 'name', 'evaluationDate', 'active', 'time', 'boton'];
+    this.dataSource = new MatTableDataSource<any>(informacio);
+  }
 
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => {
+        this.AlterEliminar = { id: null };
+        this.selection.select(row);
+        this.AlterEliminar.id = row.id;
+        this.selecteparticipaAct.push(this.AlterEliminar);
+      });
+    console.log(this.selecteparticipaAct);
+  }
+  eventCheckbox(event, contactId) {
+    this.AlterEliminar = { id: null };
+    if (event.checked) {
+      this.AlterEliminar.id = contactId.id;
+      this.selecteparticipaAct.push(this.AlterEliminar);
+    } else {
+      const elimanarcontac = this.selecteparticipaAct.findIndex(element => element.id === contactId.id);
+      this.selecteparticipaAct.splice(elimanarcontac, 1);
+    }
+  }
   EditExamen(contact: any) {
     this.dialogRef = this._matDialog.open(PreguntaFormComponent, {
       panelClass: 'contact-form-dialog',
@@ -112,7 +162,6 @@ export class PreguntasComponent implements OnInit {
       if (!res) {
         return;
       }
-
       this.examen.id = res.id;
       this.examen.active = res.active;
       this.examen.branchOfficeId = res.branchOfficeId;
@@ -129,14 +178,18 @@ export class PreguntasComponent implements OnInit {
     });
   }
   eliminar() {
-
+    this._EvaluationSrv.deletePreguntas(this.selecteparticipaAct).subscribe(res => {
+      console.log(res);
+      this.imprimir();
+    });
   }
 
   saveOrUpdateEvaluation(examen: EvaluacionesModel) {
     this._EvaluationSrv.saveOrUpdateEvaluation(examen).subscribe(res => {
-      console.log(res);
       this.imprimir();
-      this.examen = new EvaluacionesModel();
+      swal('Bien!', 'Guardado!', 'success').then(() => {
+        this.examen = new EvaluacionesModel();
+      });
     })
   }
 
