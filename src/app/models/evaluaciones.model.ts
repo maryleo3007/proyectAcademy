@@ -5,6 +5,6 @@ export class EvaluacionesModel {
     active = true;
     evaluationTypeName = "EXAMEN DIARIO";
     time = "30";
-    evaluationDate = "04/03/2019";
+    evaluationDate: Date;
     branchOfficeId = 1;
 }

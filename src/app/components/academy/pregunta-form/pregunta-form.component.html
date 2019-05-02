@@ -33,12 +33,12 @@
                     </mat-radio-button>
                 </mat-radio-group>
 
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Fecha de Examen</mat-label>
-                    <input [(ngModel)]="examen.evaluationDate" name="evaluationDate" matInput [matDatepicker]="birthdayDatePicker">
-                    <mat-datepicker-toggle matSuffix [for]="birthdayDatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #birthdayDatePicker></mat-datepicker>
-                </mat-form-field>
+                <div appearance="outline" fxFlex>
+                    <label>Fecha de Examen</label>
+                    <input [(ngModel)]="examen.evaluationDate" name="evaluationDate" type="date">
+                    <!-- <mat-datepicker-toggle matSuffix [for]="birthdayDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #birthdayDatePicker></mat-datepicker> -->
+                </div>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>

@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AcademiService } from 'app/servicios/servicio.index';
 import { fuseAnimations } from '@fuse/animations';
 import { EvaluacionesModel } from 'app/models/evaluaciones.model';
-
 @Component({
   selector: 'app-pregunta-form',
   templateUrl: './pregunta-form.component.html',
@@ -34,7 +33,6 @@ export class PreguntaFormComponent implements OnInit, OnDestroy {
         else if (data.contact.evaluationTypeName === 'EXAMEN SEMANAL') {
           this.itemselect = 'EXAMEN SEMANAL';
         }
-
         this.examen.active = data.contact.active;
         this.examen.id = data.contact.id;
         this.examen.name = data.contact.name;

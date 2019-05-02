@@ -8,6 +8,7 @@ import { EvaluacionesModel } from '../../../models/evaluaciones.model';
 import { IdModel } from 'app/models/persona.model';
 declare var swal: any;
 
+
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.component.html',
@@ -55,7 +56,7 @@ export class PreguntasComponent implements OnInit {
 
   filterCoursesByTipo(): void {
     // Filter
-    console.log(this.currentCategoryTipo);
+    // console.log(this.currentCategoryTipo);
 
     if (this.currentCategoryTipo === 0) {
       this.mostrartabla(this.examenes)
@@ -80,7 +81,6 @@ export class PreguntasComponent implements OnInit {
   imprimir() {
     this._EvaluationSrv.getListaEvaluaciones().subscribe(res => {
       if (res !== null) {
-        console.log(res);
         this.examenesFilter = this.examenes = res;
         this.mostrartabla(this.examenesFilter)
       }
@@ -100,7 +100,7 @@ export class PreguntasComponent implements OnInit {
           localId.id = pregunta.id;
           this.selecteparticipaAct.push(localId);
         }
-        console.log(this.selecteparticipaAct);
+        // console.log(this.selecteparticipaAct);
       } else {
         this.selecteparticipaAct = new Array<IdModel>();
       }
@@ -125,7 +125,7 @@ export class PreguntasComponent implements OnInit {
         this.AlterEliminar.id = row.id;
         this.selecteparticipaAct.push(this.AlterEliminar);
       });
-    console.log(this.selecteparticipaAct);
+    // console.log(this.selecteparticipaAct);
   }
   eventCheckbox(event, contactId) {
     this.AlterEliminar = { id: null };
@@ -159,14 +159,7 @@ export class PreguntasComponent implements OnInit {
       this.examen.evaluationTypeName = res.evaluationTypeName;
       this.examen.name = res.name;
       this.examen.time = res.time;
-      // console.log(res.evaluationDate.length);
-
-      if (res.evaluationDate.length === undefined) {
-        this.examen.evaluationDate = res.evaluationDate._i.date + '/' + (parseInt(res.evaluationDate._i.month) + 1) + '/' + res.evaluationDate._i.year;
-      } else {
-        this.examen.evaluationDate = res.evaluationDate;
-      }
-      console.log(this.examen);
+      this.examen.evaluationDate = res.evaluationDate;
       this.saveOrUpdateEvaluation(this.examen);
 
     });
@@ -191,12 +184,11 @@ export class PreguntasComponent implements OnInit {
       this.examen.evaluationTypeName = res.evaluationTypeName;
       this.examen.name = res.name;
       this.examen.time = res.time;
-      if (res.evaluationDate.length === undefined) {
-        this.examen.evaluationDate = (parseInt(res.evaluationDate._i.date) + 1) + '/' + res.evaluationDate._i.month + '/' + res.evaluationDate._i.year;
-      } else {
-        this.examen.evaluationDate = res.evaluationDate;
-      }
+      this.examen.evaluationDate = res.evaluationDate;
+      console.log(this.examen);
       this.saveOrUpdateEvaluation(this.examen);
+
+
     });
   }
   eliminar() {
@@ -222,19 +214,17 @@ export class PreguntasComponent implements OnInit {
           swal("Cancelado!");
         }
       });
-
-
-  }
-  salirPregunta() {
-
   }
   saveOrUpdateEvaluation(examen: EvaluacionesModel) {
     this._EvaluationSrv.saveOrUpdateEvaluation(examen).subscribe(res => {
-      this.imprimir();
-      swal('Bien!', 'Guardado!', 'success').then(() => {
-        this.examen = new EvaluacionesModel();
-      });
-    })
+      console.log(res);
+      if (res.code === 1) {
+        this.imprimir();
+        swal('Bien!', 'Guardado!', 'success').then(() => {
+          this.examen = new EvaluacionesModel();
+        });
+      }
+    });
   }
 
 }
