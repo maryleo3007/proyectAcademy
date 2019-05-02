@@ -21,8 +21,8 @@ export class EvaluacionesService {
         return this.http.get<any[]>(this.api + `?branchOfficeId=${id}`)
             .pipe(map((res: any) => { return res.data; }));
     }
-    public deleteEvaluation(id: number): void {
-        this.http.post(this.api + '/delete', JSON.stringify(id));
+    public deleteEvaluation(id: any): Observable<any> {
+        return this.http.post(this.api + '/delete', JSON.stringify(id));
     }
     public saveOrUpdateEvaluation(evaluation: EvaluacionesModel): Observable<any> {
         return this.http.post<any>(this.api, JSON.stringify(evaluation));

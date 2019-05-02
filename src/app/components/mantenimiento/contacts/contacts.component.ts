@@ -62,7 +62,6 @@ export class ContactsComponent implements OnInit {
 
     eliminar() {
         if (this.progreso1) {
-
             swal({
                 title: "Desea eliminar?",
                 text: "Esta seguro de eliminar!",

@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { IdModel } from 'app/models/persona.model';
 import { fuseAnimations } from '@fuse/animations';
 import { AlternativaFormComponent } from '../alternativa-form/alternativa-form.component';
+declare var swal: any;
 
 @Component({
   selector: 'app-alternativas',
@@ -15,10 +16,11 @@ import { AlternativaFormComponent } from '../alternativa-form/alternativa-form.c
   animations: fuseAnimations
 })
 export class AlternativasComponent implements OnInit {
+  chekeado = false;
   preguntas: any;
   valores: any;
   ELEMENT_DATA1: Array<any>;
-  dialogRef: any;
+  // dialogRef: any;
   alternativas: Array<any>;
   displayedColumns = ['select', 'Titulo', 'Descripción', 'Estado'];
   dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA1);
@@ -61,16 +63,35 @@ export class AlternativasComponent implements OnInit {
 
     }
   }
+  selecionardor() {
+    if (this.chekeado === false) {
+      if (this.preguntas !== null) {
+        for (let pregunta of this.preguntas) {
+          let localId = new IdModel();
+          localId.id = pregunta.id;
+          this.selecteparticipaAct.push(localId);
+        }
+        console.log(this.selecteparticipaAct);
+      } else {
+        this.selecteparticipaAct = new Array<IdModel>();
+      }
+    } else {
+      this.selecteparticipaAct = new Array<IdModel>();
+    }
+    this.chekeado = !this.chekeado;
+
+  }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
+
   }
   masterToggle() {
+    this.selecionardor();
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => {
-        // console.log(row);
         this.selection.select(row)
       });
   }
@@ -82,7 +103,7 @@ export class AlternativasComponent implements OnInit {
       }
     }
 
-    this.dialogRef = this._matDialog.open(AlternativaFormComponent, {
+    const dialogRef = this._matDialog.open(AlternativaFormComponent, {
       panelClass: 'contact-form-dialog',
       width: '70%',
       data: {
@@ -93,18 +114,14 @@ export class AlternativasComponent implements OnInit {
       }
     });
 
-    this.dialogRef.afterClosed().subscribe((res: any) => {
-      if (!res) {
-        return;
-      }
+    dialogRef.afterClosed().subscribe((res: any) => {
       console.log('paso por editar');
       this.ImprimirPreguntas();
-
 
     });
   }
   nuevaPregunta() {
-    this.dialogRef = this._matDialog.open(AlternativaFormComponent, {
+    const dialogRef = this._matDialog.open(AlternativaFormComponent, {
       panelClass: 'contact-form-dialog',
       width: '70%',
       data: {
@@ -113,20 +130,31 @@ export class AlternativasComponent implements OnInit {
       }
     });
 
-    this.dialogRef.afterClosed().subscribe((res: any) => {
-      if (!res) {
-        return;
-      }
+    dialogRef.afterClosed().subscribe((res: any) => {
       console.log('paso por nueva');
-
       this.ImprimirPreguntas();
     });
   }
   eliminar() {
-    this._EvaluationSrv.deletePreguntas(this.selecteparticipaAct).subscribe(res => {
-      this.ImprimirPreguntas();
+    swal({
+      title: "Desea eliminar?",
+      text: "Esta seguro de eliminar!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-
+      .then((willDelete) => {
+        if (willDelete) {
+          this._EvaluationSrv.deletePreguntas(this.selecteparticipaAct).subscribe(res => {
+            this.ImprimirPreguntas();
+          });
+          swal("Eliminado!", {
+            icon: "success",
+          });
+        } else {
+          swal("Cancelado!");
+        }
+      });
   }
 
 }

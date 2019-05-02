@@ -4,8 +4,11 @@
 
         <!-- HEADER -->
         <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
-
-
+            <div class="arrow">
+                <button [routerLink]="['/Academia/Preguntas']" mat-icon-button class="mr-16">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
             <!-- <mat-form-field appearance="outline" class="category-selector">
         <mat-label>Tipo de examen</mat-label>
         <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">

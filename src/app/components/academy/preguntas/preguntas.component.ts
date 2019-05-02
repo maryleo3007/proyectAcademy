@@ -31,6 +31,7 @@ export class PreguntasComponent implements OnInit {
   currentOffice = '';
   Tipo: any;
   AlterEliminar: { id: any; };
+  chekeado = false;;
   // AlterEliminarall: Array<any>;
 
   constructor(
@@ -78,15 +79,36 @@ export class PreguntasComponent implements OnInit {
   }
   imprimir() {
     this._EvaluationSrv.getListaEvaluaciones().subscribe(res => {
-      if (res !== null)
+      if (res !== null) {
+        console.log(res);
         this.examenesFilter = this.examenes = res;
-      this.mostrartabla(this.examenesFilter)
+        this.mostrartabla(this.examenesFilter)
+      }
     })
 
   }
   mostrartabla(informacio: any) {
     this.displayedColumns = ['select', 'evaluationTypeName', 'name', 'evaluationDate', 'active', 'time', 'boton'];
     this.dataSource = new MatTableDataSource<any>(informacio);
+  }
+
+  selecionardor() {
+    if (this.chekeado === false) {
+      if (this.examenesFilter !== null) {
+        for (let pregunta of this.examenesFilter) {
+          let localId = new IdModel();
+          localId.id = pregunta.id;
+          this.selecteparticipaAct.push(localId);
+        }
+        console.log(this.selecteparticipaAct);
+      } else {
+        this.selecteparticipaAct = new Array<IdModel>();
+      }
+    } else {
+      this.selecteparticipaAct = new Array<IdModel>();
+    }
+    this.chekeado = !this.chekeado;
+
   }
 
   isAllSelected() {
@@ -178,12 +200,34 @@ export class PreguntasComponent implements OnInit {
     });
   }
   eliminar() {
-    this._EvaluationSrv.deletePreguntas(this.selecteparticipaAct).subscribe(res => {
-      console.log(res);
-      this.imprimir();
-    });
-  }
 
+    swal({
+      title: "Desea eliminar?",
+      text: "Esta seguro de eliminar!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          console.log(this.selecteparticipaAct);
+          this._EvaluationSrv.deleteEvaluation(this.selecteparticipaAct).subscribe(res => {
+
+            this.imprimir();
+          });
+          swal("Eliminado!", {
+            icon: "success",
+          });
+        } else {
+          swal("Cancelado!");
+        }
+      });
+
+
+  }
+  salirPregunta() {
+
+  }
   saveOrUpdateEvaluation(examen: EvaluacionesModel) {
     this._EvaluationSrv.saveOrUpdateEvaluation(examen).subscribe(res => {
       this.imprimir();
