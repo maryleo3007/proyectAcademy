@@ -1,0 +1,117 @@
+@import "src/@fuse/scss/fuse";
+.header {
+    .logo {
+        .logo-icon {
+            margin: 12px;
+        }
+        .logo-text {
+            font-size: 15px;
+            line-height: 15px;
+        }
+    }
+    .account {
+        width: 15%;
+    }
+}
+
+.contenedor {
+    width: 14%;
+    float: left;
+    .sucursal {
+        margin-top: auto;
+    }
+}
+
+.tablaasistencia {
+    width: 85%;
+    float: right;
+    z-index: 2;
+    margin-top: -40px;
+    background: white;
+    border-radius: 20px;
+    // border: solid 2px white;
+    table {
+        text-align: center !important;
+        font-size: 14px;
+        width: 100%;
+        tbody {
+            td {
+                cursor: pointer;
+            }
+        }
+    }
+    tr,
+    td,
+    th {
+        // border: solid 1px black;
+        text-align: center !important;
+    }
+    th {
+        background: rgb(247, 247, 189);
+    }
+    .noboder {
+        border: none;
+        background: none;
+    }
+}
+
+th {
+    h3 {
+        padding: 10px 0 5px 0;
+        margin: 10px 0 5px 0;
+        font-size: 15px;
+        font-weight: bold;
+        margin: 0;
+        mat-icon {
+            font-size: 17px;
+        }
+        p {
+            font-size: 13px;
+            padding: 10px 0 5px 0;
+            margin: 10px 0 5px 0;
+            margin-top: -20px;
+            margin-block-end: 0 !important;
+            margin-block-start: 0 !important;
+        }
+    }
+     :hover {
+        cursor: pointer;
+    }
+}
+
+.search-wrapper {
+    margin-left: auto;
+    width: 30%;
+    margin-left: auto;
+    // max-width: 480px;
+    border-radius: 28px;
+    overflow: hidden;
+    @include mat-elevation(1);
+    @include media-breakpoint('xs') {
+        width: 100%;
+    }
+    .search {
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        padding: 0 18px;
+        background: #3498DB;
+        input {
+            color: blue !important;
+            font-weight: bold;
+            background-color: #fff;
+            width: 100%;
+            height: 48px;
+            min-height: 48px;
+            max-height: 48px;
+            padding: 0 16px;
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+.colorAzul {
+    background: #3498DB;
+    color: white;
+}

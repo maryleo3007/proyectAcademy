@@ -26,12 +26,12 @@ import { TokenStorage } from './core/token.storage';
 import { Interceptor } from './core/app.interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
-// import { ActivoPipe } from './pipes/activo.pipe';
+
 
 @NgModule({
     declarations: [
         AppComponent,
-        // ActivoPipe,        
+
     ],
     imports: [
         Ng2SearchPipeModule,

@@ -12,24 +12,24 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
                 <div class="logo ml-16">
-                    <img class="logo-icon" src="assets/images/logos/fuse.svg">
+                    <img class="logo-icon" src={{foto}}>
                 </div>
             </div>
 
             <div class="px-8 px-md-16">
                 <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts>
             </div>
-
         </div>
 
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/Velazquez.jpg">
-                    <span class="username mr-12" fxHide fxShow.gt-sm>{{nombre}}</span>
+                    <img class="avatar mr-0 mr-sm-16" src={{foto}}>
+                    <span class="mr-12" fxHide fxShow.gt-sm>{{nombre}}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
+                <!-- <span class="username mr-6" fxHide fxShow.gt-sm>{{tipo}}</span> -->
             </button>
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">

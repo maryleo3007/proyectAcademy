@@ -1,20 +1,5 @@
 <div id="academy-courses" class="page-layout simple">
 
-    <!-- HEADER -->
-    <!-- <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
-
-        <div class="hero-text">
-            <mat-icon class="hero-icon">school</mat-icon>
-            <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
-                WELCOME TO ACADEMY
-            </h1>
-            <h3 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
-                Our courses will step you through the process of building a small application, or adding a new feature to an existing application.
-            </h3>
-        </div>
-
-    </div> -->
-    <!-- / HEADER -->
 
     <!-- CONTENT -->
     <div class="content p-24">
@@ -22,24 +7,6 @@
         <div fxLayout="column" fxLayoutAlign="center">
 
             <div class="filters" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
-
-                <!-- <mat-form-field appearance="outline" floatLabel="always" class="course-search">
-                    <mat-label>Search for a course</mat-label>
-                    <input matInput placeholder="Enter a keyword..." [(ngModel)]="searchTerm" (input)="filterCoursesByTerm()">
-                </mat-form-field> -->
-
-
-                <!-- <mat-form-field appearance="outline" class="category-selector">
-                    <mat-label>Estado</mat-label>
-                    <mat-select [(ngModel)]="currentCategoryEstado" (selectionChange)="filterCoursesByEstado()">
-                        <mat-option [value]="'all'">
-                            All
-                        </mat-option>
-                        <mat-option *ngFor="let category of Estado" [value]="category.id">
-                            {{ category.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>-->
                 <mat-form-field appearance="outline" class="category-selector">
                     <mat-label>Tipo de examen</mat-label>
                     <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">

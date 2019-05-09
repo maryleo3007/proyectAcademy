@@ -70,7 +70,6 @@ export class ContactsContactListComponent implements OnInit {
       this.persona = JSON.parse(sessionStorage.getItem('persona'));
     } else {
       this.persona = new PersonaModel();
-
       this.selecteparticipaAct = new Array<IdModel>();
     }
   }
@@ -80,40 +79,36 @@ export class ContactsContactListComponent implements OnInit {
     this.imprimirlista(this.tipo);
     this.ELEMENT_DATA1 = this.listapersona;
     this.dataSource.paginator = this.paginator;
-    this.getOffices()
+    this.getOffices();
 
   }
   // office list  
   getOffices() {
     this.officeList = [];
-    this._officeService.getOffice().subscribe((data) => {
-      this.officeList = data.data;
+    this._officeService.getOffice().subscribe((res) => {
+      console.log(res);
+      this.officeList = res.data;
     });
   }
 
-  getStudents() {
-
-    return this.studentList
-  }
 
   filterbyOffice() {
     if (this.tipo === 'Alumno') {
-      this._alumnoSrv.getStudents().subscribe((data) => {
-        this.studentList = data.data;
+      this._alumnoSrv.getStudents().subscribe((res) => {
+        this.studentList = res.data;
       });
       setTimeout(() => {
         if (this.currentOffice == 0) {
           this.dataSource.data = this.studentList;
         } else {
           this.dataSource.data = this.studentList;
-          this.dataSource.data = this.studentList.filter(data => data.branchOffice == this.currentOffice)
+          this.dataSource.data = this.studentList.filter(data => data.branchOffice == this.currentOffice);
         }
       }, 1000);
     }
   }
 
   applyFilter(filterValue: string) {
-
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -142,6 +137,7 @@ export class ContactsContactListComponent implements OnInit {
       if (!res) {
         return;
       }
+      console.log(res);
       this.persona.id = res.id;
       this.persona.name = res.name;
       this.persona.lastName = res.lastName;
@@ -191,7 +187,6 @@ export class ContactsContactListComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => {
-        console.log(row);
         this.selection.select(row)
       });
   }

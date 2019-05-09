@@ -124,6 +124,7 @@ export class ContactsComponent implements OnInit {
             this.persona.gender = res.gender;
             this.persona.documentNumber = res.documentNumber;
             this.persona.branchOffice = res.branchOffice;
+
             this.saveOrUpdatePersona();
 
         });

@@ -1,0 +1,54 @@
+<!-- CENTER -->
+<div class="center">
+    <!-- HEADER -->
+    <div class="header accent p-14" fxLayout="row" fxLayoutAlign="start center">
+        <!-- <button mat-icon-button class="sidebar-toggle mr-16" fxHide.gt-md (click)="toggleSidebar('academy-course-left-sidebar-1')">
+                <mat-icon>menu</mat-icon>
+            </button> -->
+        <div class="arrow">
+            <button (click)="salirdelExamen()" mat-icon-button class="mr-16">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+        </div>
+        <div class="description">
+            <h2 class="text-center">RESPUESTAS</h2>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div id="course-content" class="content">
+        <ng-container *ngFor="let step of respuestas; let i = index;">
+
+            <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i" [@slideIn]="animationDirection">
+                <div id="course-step-content" class="course-step-content">
+                    <div class="description">
+                        <h2>{{step.title}}</h2>
+                    </div>
+                    <blockquote>
+                        <p class="mat-headline">{{step.description}}</p>
+                    </blockquote>
+                    <div class="separar" id="separar">
+                        <div class="alterna">
+                            <ul *ngFor="let alternativa of step.answers">
+                                <li [ngClass]="{'verde':alternativa.isMarked === true, 'rojo':alternativa.isAnswer === true}">{{alternativa.description}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-navigation">
+                    <button mat-fab class="previous mat-accent fuse-white-fg" (click)="gotoPreviousStep(i -1)" [disabled]="currentStep === 0" [fxHide]="currentStep === 0">
+                            <mat-icon>chevron_left</mat-icon>
+                        </button>
+                    <button mat-fab class="next mat-accent fuse-white-fg" (click)="gotoNextStep(i + 1)" [disabled]="currentStep ===paginador - 1" [fxHide]="currentStep ===paginador - 1">
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    <button mat-fab class="done green-600" (click)="enviarResultado()" [disabled]="currentStep !==paginador - 1" [fxShow]="currentStep ===paginador - 1">
+                            <mat-icon>check</mat-icon>
+                        </button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <!-- / CONTENT -->
+</div>
+<!-- / CENTER -->

@@ -16,13 +16,10 @@ export class FuseNavigationComponent implements OnInit {
     otronavigate: FuseNavigation[];
     @Input()
     layout = 'vertical';
-
     @Input()
     navigation: any;
-
     // Private
     private _unsubscribeAll: Subject<any>;
-
     /**
      *
      * @param {ChangeDetectorRef} _changeDetectorRef
@@ -37,7 +34,6 @@ export class FuseNavigationComponent implements OnInit {
         }
         // Set the private defaults
         this._unsubscribeAll = new Subject();
-
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -50,7 +46,6 @@ export class FuseNavigationComponent implements OnInit {
     ngOnInit(): void {
         if (localStorage.getItem('menu')) {
             this.navigation = this.otronavigate;
-            console.log(this.otronavigate);
         } else {
             // Load the navigation either from the input or from the service
             this.navigation = this.navigation || this._fuseNavigationService.getCurrentNavigation();
@@ -62,14 +57,11 @@ export class FuseNavigationComponent implements OnInit {
         this._fuseNavigationService.onNavigationChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
-
                 // Load the navigation
                 this.navigation = this._fuseNavigationService.getCurrentNavigation();
-
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });
-
         // Subscribe to navigation item
         merge(
             this._fuseNavigationService.onNavigationItemAdded,
@@ -77,7 +69,6 @@ export class FuseNavigationComponent implements OnInit {
             this._fuseNavigationService.onNavigationItemRemoved
         ).pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
-
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });

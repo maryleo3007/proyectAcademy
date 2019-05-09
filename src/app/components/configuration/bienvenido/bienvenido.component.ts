@@ -11,8 +11,6 @@ export class BienvenidoComponent implements OnInit {
   private anioactual: string;
   constructor() {
     this.anioactual = String(this.date).substr(8, 2);
-    console.log(this.anioactual);
-    // window.location.reload();
   }
 
   ngOnInit() {

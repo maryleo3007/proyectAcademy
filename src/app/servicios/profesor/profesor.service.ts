@@ -6,15 +6,15 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ProfesorService {
-    
+
   constructor(private http: HttpClient) { }
-    private api1 = 'https://jhuy2n337f.execute-api.us-east-1.amazonaws.com/Prod/api/v1/docente'
-  
+  private api1 = 'https://haue79tb60.execute-api.us-east-1.amazonaws.com/Prod/api/v1/docente';
+
   public getPersonaProfesor(): Observable<PersonaModel[]> {
     return this.http.get<PersonaModel[]>(this.api1);
   }
   public deleteProfesor(id: number): void {
-    this.http.post(this.api1, JSON.stringify(id));
+    this.http.post(this.api1 + '/delete', JSON.stringify(id));
   }
   /**
   //    * Metodo que valida campos obligatorios

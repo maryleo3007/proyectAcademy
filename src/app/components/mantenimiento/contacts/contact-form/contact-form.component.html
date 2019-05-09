@@ -19,14 +19,14 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label for="name">Nombre</mat-label>
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <input id="name" (change)="validacion()" [(ngModel)]="data.name" name="name" matInput required>
+                    <input id="name" (click)="validacion()" [(ngModel)]="data.name" name="name" matInput required>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Apellidos</mat-label>
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <input (change)="validacion()" [(ngModel)]="data.lastName" name="lastName" matInput required>
+                    <input (click)="validacion()" [(ngModel)]="data.lastName" name="lastName" matInput required>
                 </mat-form-field>
             </div>
 
@@ -34,7 +34,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Apellido2</mat-label>
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <input (change)="validacion()" [(ngModel)]="data.secondLastName" name="secondLastName" matInput required>
+                    <input (click)="validacion()" [(ngModel)]="data.secondLastName" name="secondLastName" matInput required>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
@@ -50,7 +50,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Telefono</mat-label>
                     <mat-icon matSuffix class="secondary-text">phone</mat-icon>
-                    <input (change)="validacion()" [(ngModel)]="data.cellphone" name="cellphone" type="text" matInput>
+                    <input (click)="validacion()" [(ngModel)]="data.cellphone" name="cellphone" type="text" matInput>
                 </mat-form-field>
             </div>
 
@@ -58,7 +58,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>DNI</mat-label>
                     <mat-icon matSuffix class="secondary-text">aspect_ratio</mat-icon>
-                    <input (change)="validacion()" [(ngModel)]="data.documentNumber" type="number" name="documentNumber" matInput required>
+                    <input (click)="validacion()" [(ngModel)]="data.documentNumber" type="number" name="documentNumber" matInput required>
                 </mat-form-field>
             </div>
 

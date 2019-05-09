@@ -31,6 +31,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    tipo: any;
+    foto: any;
 
     /**
      * Constructor
@@ -115,7 +117,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         if (this.variable = JSON.parse(localStorage.getItem('usuario'))) {
             this.variable = JSON.parse(localStorage.getItem('usuario'));
             this.nombre = this.variable.data.fullName;
-            this.correo = this.variable.data.email;
+            // this.correo = this.variable.data.email;
+            this.tipo = this.variable.data.profileName;
+            this.foto = this.variable.data.photo;
         }
     }
 
@@ -167,7 +171,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         localStorage.removeItem('menu');
         localStorage.removeItem('usuario');
         localStorage.removeItem('usertoken');
-
         this.router.navigate(['/login'])
     }
 }

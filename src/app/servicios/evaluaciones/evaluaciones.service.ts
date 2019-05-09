@@ -8,7 +8,6 @@ import { EvaluacionesModel } from 'app/models/evaluaciones.model';
 @Injectable()
 export class EvaluacionesService {
 
-
     constructor(private http: HttpClient) {
     }
 
@@ -16,7 +15,7 @@ export class EvaluacionesService {
     private api2 = 'https://pbem4cq4f1.execute-api.us-east-1.amazonaws.com/Prod/api/v1/question';
 
 
-
+    //rvaluaciones
     public getListaEvaluaciones(id: any = 1): Observable<any[]> {
         return this.http.get<any[]>(this.api + `?branchOfficeId=${id}`)
             .pipe(map((res: any) => { return res.data; }));

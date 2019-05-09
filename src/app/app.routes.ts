@@ -14,6 +14,8 @@ import { AcademyCoursesComponent } from './components/academy/courses/courses.co
 import { AcademyCourseComponent } from './components/academy/course/course.component';
 import { PreguntasComponent } from './components/academy/preguntas/preguntas.component';
 import { AlternativasComponent } from './components/academy/alternativas/alternativas.component';
+import { NotasComponent } from './components/academy/notas/notas.component';
+import { RespuestasComponent } from './components/academy/respuestas/respuestas.component';
 
 
 const appRoutes: Routes = [
@@ -34,6 +36,8 @@ const appRoutes: Routes = [
                 { path: 'Cursos/:id/:nombre/:time', component: AcademyCourseComponent, data: { titulo: 'Asistencia' } },
                 { path: 'Alternativa/:id', component: AlternativasComponent, data: { titulo: 'Asistencia' } },
                 { path: 'Preguntas', component: PreguntasComponent, data: { titulo: 'Bienvenidos' } },
+                { path: 'Notas', component: NotasComponent, data: { titulo: 'Bienvenidos' } },
+                { path: 'Respuestas', component: RespuestasComponent, data: { titulo: 'Bienvenidos' } },
 
                 // { path: '**', component: NopagefoundComponent }
             ]

@@ -111,10 +111,22 @@ export class LoginComponent implements OnInit {
                                     title: 'Mantenimiento',
                                     type: 'item',
                                     url: '/Academia/Preguntas'
+                                },
+                                {
+                                    id: 'cusos3',
+                                    title: 'Notas',
+                                    type: 'item',
+                                    url: '/Academia/Notas'
+                                },
+                                {
+                                    id: 'cusos4',
+                                    title: 'Respuestas',
+                                    type: 'item',
+                                    url: '/Academia/Respuestas'
                                 }
                             ],
                             badge: {
-                                title: '2',
+                                title: '3',
                                 bg: '#525e8a',
                                 fg: '#FFFFFF'
                             }
@@ -156,12 +168,14 @@ export class LoginComponent implements OnInit {
             if (res.data === null) {
                 swal('Importante', 'Credenciales incorrectos!', 'warning');
             } else {
+                console.log(res);
                 const accessToken = 'KJAJSKDDSAKJDAJ32424324ASDA';
                 localStorage.setItem('usertoken', accessToken);
                 localStorage.setItem('usuario', JSON.stringify(res));
-                // localStorage.setItem('menu', JSON.stringify(res.data.lstMenus));
+                localStorage.setItem('menu', JSON.stringify(res.data.lstMenus));
+                localStorage.setItem('idusuario', JSON.stringify(res.data.studentId));
 
-                localStorage.setItem('menu', JSON.stringify(this.newnavigate));
+                // localStorage.setItem('menu', JSON.stringify(this.newnavigate));
 
 
                 this.router.navigate(['Academia/Bienvenido']);

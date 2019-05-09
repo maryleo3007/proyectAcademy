@@ -42,6 +42,10 @@ import { ActivoPipe } from 'app/pipes/activo.pipe';
 import { PreguntaFormComponent } from './academy/pregunta-form/pregunta-form.component';
 import { AlternativasComponent } from './academy/alternativas/alternativas.component';
 import { AlternativaFormComponent } from './academy/alternativa-form/alternativa-form.component';
+import { NotasComponent } from './academy/notas/notas.component';
+import { NullPipe } from 'app/pipes/null.pipe';
+import { NotaFormComponent } from './academy/nota-form/nota-form.component';
+import { RespuestasComponent } from './academy/respuestas/respuestas.component';
 @NgModule({
   imports: [
     Ng2SearchPipeModule,
@@ -75,11 +79,13 @@ import { AlternativaFormComponent } from './academy/alternativa-form/alternativa
     ContactsContactFormDialogComponent,
     PreguntaFormComponent,
     VentanaComponent,
-    AlternativaFormComponent
+    AlternativaFormComponent,
+    NotaFormComponent
 
   ],
   declarations: [
     ActivoPipe,
+    NullPipe,
     AcademyCoursesComponent,
     AcademyCourseComponent,
     ComponentsComponent,
@@ -97,14 +103,18 @@ import { AlternativaFormComponent } from './academy/alternativa-form/alternativa
     PreguntasComponent,
     PreguntaFormComponent,
     AlternativasComponent,
-    AlternativaFormComponent
+    AlternativaFormComponent,
+    NotasComponent,
+    NotaFormComponent,
+    RespuestasComponent
 
   ],
   entryComponents: [
     ContactsContactFormDialogComponent,
     VentanaComponent,
     PreguntaFormComponent,
-    AlternativaFormComponent
+    AlternativaFormComponent,
+    NotaFormComponent
   ],
   schemas: [NO_ERRORS_SCHEMA],
 })

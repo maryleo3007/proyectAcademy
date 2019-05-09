@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PersonaModel, IdModel } from '../../models/persona.model';
+import { PersonaModel } from '../../models/persona.model';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AlumnoService {
-  objet1: IdModel;
+
   constructor(private http: HttpClient) {
 
   }
@@ -14,15 +14,14 @@ export class AlumnoService {
     let body = res;
     return body || {};
   }
-  private api1 = 'https://mouqx57aif.execute-api.us-east-1.amazonaws.com/Prod/api/v1/alumno'
+  private api1 = 'https://tbmdu9bmii.execute-api.us-east-1.amazonaws.com/Prod/api/v1/alumno';
 
   public getPersonaAlumno(): Observable<PersonaModel[]> {
     return this.http.get<PersonaModel[]>(this.api1);
   }
 
   getStudents(): Observable<any> {
-    return this.http.get(this.api1).pipe(
-      map(this.extractData));
+    return this.http.get(this.api1).pipe(map(this.extractData));
   }
 
   public deleteAlumno(id: any): Observable<any> {

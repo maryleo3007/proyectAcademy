@@ -20,13 +20,14 @@ export class ContactsContactFormDialogComponent implements OnInit {
     itemselect: any;
     faltaNombre: boolean;
     faltaApellido: boolean;
-    disable: boolean;
+    disable = true;
 
     constructor(
         private _officeService: OfficeService,
         public dialogRef: MatDialogRef<ContactsContactFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
+        this.disable = true
         this.action = data.action;
         this.tipo = data.tipo;
         if (data.gender) {
@@ -71,9 +72,11 @@ export class ContactsContactFormDialogComponent implements OnInit {
         this.dialogRef.close();
     }
     validacion() {
-        if (this.data.nombre === '' && this.data.lastName === '' && this.data.secondLastName === '' && this.data.documentNumber === '') {
+        console.log(this.data);
+        if (this.data.name === '' || this.data.lastName === '' || this.data.secondLastName === '' || this.data.documentNumber === '') {
             this.disable = false;
         }
     }
+
 
 }

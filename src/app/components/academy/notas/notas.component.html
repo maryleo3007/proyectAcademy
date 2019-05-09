@@ -1,0 +1,97 @@
+<div fxLayout="column" fxLayoutAlign="space-between start" class="header accent">
+    <div class="logo" fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            check_box
+        </mat-icon>
+        <span class="logo-text" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">NOTAS</span>
+    </div>
+    <div class="search-wrapper mt-16 m-10 mt-sm-0">
+        <div class="search bg-white" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>search</mat-icon>
+            <input type="text" [(ngModel)]="term">
+        </div>
+
+    </div>
+    <div class="account" fxLayout="column" [@animate]="{value:'*',params:{delay:'300ms'}}">
+        <mat-form-field floatLabel="never">
+            <mat-select class="account-selection" placeholder="Seleccione Sucursal">
+                <mat-option *ngFor="let sucursal of sucursales" (click)="selectSucursal(sucursal)" [value]="sucursal.name">
+                    {{sucursal.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="account" fxLayout="column" [@animate]="{value:'*',params:{delay:'300ms'}}" *ngIf="sucursal">
+        <mat-form-field floatLabel="never">
+            <mat-select class="account-selection m-10" placeholder="Seleccione mes">
+                <mat-option *ngFor="let account of accounts" (click)="selectClick(account)" [value]="account.monthName">
+                    {{account.monthName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<!-- / SIDEBAR HEADER -->
+<div class="asistencia">
+    <!-- SIDEBAR CONTENT -->
+    <div class="contenedor">
+        <div>
+            <table *ngIf="verCalendario">
+                <thead>
+                    <tr>
+                        <th>
+                            <h2>Calendario</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let semana of semanas">
+                        <th (click)="SemanaSeleccionada(semana, link1)" [id]='semana.id'>
+                            <h3>
+                                <mat-icon>insert_invitation</mat-icon>
+                                {{semana.weekName}}
+                                <p #link1 class="selector"> {{semana.startDate | slice:5:10}} a {{semana.endDate | slice:5:10}} </p>
+                            </h3>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- / SIDEBAR CONTENT -->
+    <div class="tablaasistencia">
+        <table>
+            <thead>
+                <tr class="noboder">
+                    <th class="noboder" rowspan="4"> APELIIDOS Y NOMBRE</th>
+                </tr>
+                <tr>
+                    <th class="noboder" colspan="14">DIA DE LA SEMANA</th>
+                </tr>
+                <tr>
+                    <th>LUNES</th>
+                    <th>MARTES</th>
+                    <th>MIERCOLES</th>
+                    <th>JUEVES</th>
+                    <th>VIERNES</th>
+                    <th>SABADO</th>
+                    <th>DOMINGO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let nota of  notas | filter:term | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <td>{{nota.fullName}}</td>
+                    <td (dblclick)="EditNotas(nota, nota.record.monday, 'monday')">{{nota.record.monday.score | nulos}}</td>
+                    <td (dblclick)="EditNotas(nota, nota.record.tuesday, 'tuesday')">{{nota.record.tuesday.score | nulos}}</td>
+                    <td (dblclick)="EditNotas(nota, nota.record.wednesday, 'wednesday')">{{nota.record.wednesday.score | nulos}}</td>
+                    <td (dblclick)="EditNotas(nota, nota.record.thursday, 'thursday')">{{nota.record.thursday.score | nulos}}</td>
+                    <td (dblclick)="EditNotas(nota, nota.record.friday, 'friday')">{{nota.record.friday.score | nulos}}</td>
+                    <td (dblclick)="EditNotas(nota, nota.record.saturday, 'saturday')">{{nota.record.saturday.score | nulos}}</td>
+                    <td (dblclick)="EditNotas(nota, nota.record.sunday, 'sunday')">{{nota.record.sunday.score | nulos}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>

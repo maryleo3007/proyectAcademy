@@ -188,7 +188,6 @@ export class PreguntasComponent implements OnInit {
       console.log(this.examen);
       this.saveOrUpdateEvaluation(this.examen);
 
-
     });
   }
   eliminar() {

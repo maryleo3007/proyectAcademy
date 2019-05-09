@@ -1,0 +1,112 @@
+@import "src/@fuse/scss/fuse";
+.center {
+    position: relative;
+    overflow: hidden;
+    .header {
+        height: 42px;
+        min-height: 52px;
+        max-height: 52px;
+        display: grid;
+        grid-template-columns: 30% 70% 20%;
+        .description {
+            width: 85%;
+        }
+        .minuto {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            padding: 0px 10px 0px 10px;
+            border: 2px solid #fff;
+            color: #ffffff;
+            // background: #3498DB;
+            box-shadow: 3px 3px 2px grey;
+        }
+    }
+    .content {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        .course-step {
+            // position: absolute;
+            top: 0;
+            right: 0;
+            // bottom: 0;
+            left: 0;
+            padding: 0px;
+            // overflow: auto;
+            // -webkit-overflow-scrolling: touch;
+            &.ng-animating {
+                overflow: hidden;
+            }
+            @media (max-width: 720px) {
+                padding: 0 0 10px 0;
+            }
+            .course-step-content {
+                padding: 14px;
+                margin: 0 auto;
+                width: 100% !important;
+                border-radius: 8px;
+                @include mat-elevation(1);
+                p {
+                    color: #3498DB;
+                }
+                #separar {
+                    // display: grid !important;
+                    // grid-template-columns: 100% 100% !important;
+                    .alterna {
+                        width: 100%;
+                        height: 100%;
+                        table {
+                            td {
+                                width: 150%;
+                                height: 150%;
+                            }
+                        }
+                        // .example-radio-group {
+                        //     display: inline-flex;
+                        //     flex-direction: column;
+                        // }
+                        // .example-radio-button {
+                        //     margin: 5px;
+                        // }
+                        // .example-selected-value {
+                        //     margin: 15px 0;
+                        // }
+                    }
+                    .fuse-card {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.previous {
+    top: 90%;
+    font-size: 20px;
+    position: fixed;
+    bottom: 32px;
+    right: 82px;
+    padding: 0;
+    z-index: 99;
+}
+
+.next,
+.done {
+    top: 90%;
+    font-size: 20px;
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    z-index: 99;
+}
+
+.rojo {
+    color: red;
+}
+
+.verde {
+    color: green;
+}

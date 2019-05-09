@@ -31,18 +31,12 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-
     </div>
-
-
 </div>
 <!-- / SIDEBAR HEADER -->
 <div class="asistencia">
-
     <!-- SIDEBAR CONTENT -->
     <div class="contenedor">
-
-
         <div>
             <table *ngIf="verCalendario">
                 <thead>
@@ -58,25 +52,13 @@
                             <h3>
                                 <mat-icon>insert_invitation</mat-icon>
                                 {{semana.weekName}}
-                                <p #link1 class="selector"> {{semana.startDate | slice:0:5}} - {{semana.endDate | slice:0:5}} </p>
+                                <p #link1 class="selector"> {{semana.startDate | slice:5:10}} a {{semana.endDate | slice:5:10}} </p>
                             </h3>
-                            <!-- <p>{{semana.startDate | slice:0:5}} - {{semana.endDate | slice:0:5}} </p> -->
                         </th>
                     </tr>
                 </tbody>
             </table>
-
         </div>
-        <!-- <div>
-            <mat-form-field floatLabel="never">
-                <mat-select class="account-selection" placeholder="Seleccione Sucursal">
-                    <mat-option *ngFor="let sucursal of sucursales" (click)="selectSucursal(sucursal)" [value]="sucursal.name">
-                        {{sucursal.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div> -->
-
     </div>
     <!-- / SIDEBAR CONTENT -->
     <div class="tablaasistencia">
@@ -119,46 +101,46 @@
                     <!-- <tr *ngFor="let alumno of  alumnos | paginate: { itemsPerPage: 20, currentPage: p }"> -->
                     <th>{{alumno.name}} {{alumno.lastName}} {{alumno.secondLastName}}</th>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.monday)" *ngIf="alumno.record.monday ">{{alumno.record.monday.morning.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.monday)" *ngIf="alumno.record.monday ">{{alumno.record.monday.morning.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.monday )" *ngIf="alumno.record.monday ">{{alumno.record.monday.afternoon.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.monday )" *ngIf="alumno.record.monday ">{{alumno.record.monday.afternoon.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.tuesday )" *ngIf="alumno.record.tuesday ">{{alumno.record.tuesday.morning.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.tuesday )" *ngIf="alumno.record.tuesday ">{{alumno.record.tuesday.morning.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.tuesday )" *ngIf="alumno.record.tuesday ">{{alumno.record.tuesday.afternoon.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.tuesday )" *ngIf="alumno.record.tuesday ">{{alumno.record.tuesday.afternoon.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.wednesday )" *ngIf="alumno.record.wednesday ">{{alumno.record.wednesday.morning.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.wednesday )" *ngIf="alumno.record.wednesday ">{{alumno.record.wednesday.morning.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.wednesday )" *ngIf="alumno.record.wednesday ">{{alumno.record.wednesday.afternoon.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.wednesday )" *ngIf="alumno.record.wednesday ">{{alumno.record.wednesday.afternoon.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.thursday )" *ngIf="alumno.record.thursday">{{alumno.record.thursday.morning.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.thursday )" *ngIf="alumno.record.thursday">{{alumno.record.thursday.morning.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.thursday )" *ngIf="alumno.record.thursday ">{{alumno.record.thursday.afternoon.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.thursday )" *ngIf="alumno.record.thursday ">{{alumno.record.thursday.afternoon.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.friday )" *ngIf="alumno.record.friday ">{{alumno.record.friday.morning.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.friday )" *ngIf="alumno.record.friday ">{{alumno.record.friday.morning.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.friday )" *ngIf="alumno.record.friday ">{{alumno.record.friday.afternoon.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.friday )" *ngIf="alumno.record.friday ">{{alumno.record.friday.afternoon.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.saturday )" *ngIf="alumno.record.saturday ">{{alumno.record.saturday.morning.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.saturday )" *ngIf="alumno.record.saturday ">{{alumno.record.saturday.morning.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.saturday )" *ngIf="alumno.record.saturday ">{{alumno.record.saturday.afternoon.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.saturday )" *ngIf="alumno.record.saturday ">{{alumno.record.saturday.afternoon.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.sunday )" *ngIf="alumno.record.sunday ">{{alumno.record.sunday.morning.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.sunday )" *ngIf="alumno.record.sunday ">{{alumno.record.sunday.morning.registration}}</p>
                     </td>
                     <td>
-                        <p (click)="lookAsistens(alumno, alumno.record.sunday)" *ngIf="alumno.record.sunday ">{{alumno.record.sunday.afternoon.registration || ['.']}}</p>
+                        <p (click)="lookAsistens(alumno, alumno.record.sunday)" *ngIf="alumno.record.sunday ">{{alumno.record.sunday.afternoon.registration}}</p>
                     </td>
                 </tr>
             </tbody>

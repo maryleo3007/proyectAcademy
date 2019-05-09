@@ -8,35 +8,24 @@ import { map } from 'rxjs/operators';
 export class AcademiService {
 
     constructor(private http: HttpClient) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Access-Control-Allow-Origin': '*',
-                'Authorization': 'authkey',
-                'userid': '1'
-            })
-        };
     }
 
-    private api = 'https://77u1gf7xyj.execute-api.us-east-1.amazonaws.com/Prod/api/v1'
-    private api2 = 'https://pbem4cq4f1.execute-api.us-east-1.amazonaws.com/Prod/api/v1'
-    // private api3 = 'https://77u1gf7xyj.execute-api.us-east-1.amazonaws.com/Prod/api/v1/catalogue/2'
+    private api = 'https://77u1gf7xyj.execute-api.us-east-1.amazonaws.com/Prod/api/v1';
+    private api2 = 'https://6qrbzxo6q4.execute-api.us-east-1.amazonaws.com/Prod/api/v1';
+    // private api3 = 'https://6qrbzxo6q4.execute-api.us-east-1.amazonaws.com/Prod/api/v1';
 
-    // public geListaEstados(): Observable<any[]> {
-    //     return this.http.get<any[]>(this.api + '/catalogue/1');
-    // }
+
     public geListaTipos(): Observable<any[]> {
         return this.http.get<any[]>(this.api + '/catalogue/2');
     }
-    public geListaCursosxFechas(idEstuden: number = 442, tipeExamen: number = 1, dateInit = '2019-02-27', dateFin = '2019-02-28'): Observable<any[]> {
+    public geListaCursosxFechas(idEstuden: number = 124, tipeExamen: number = 1, dateInit = '2019-05-01', dateFin = '2019-06-01'): Observable<any[]> {
         return this.http.get<any[]>(this.api2 + `/examen?studentId=${idEstuden}&examTypeId=${tipeExamen}&examDateIni=${dateInit}&examDateFin=${dateFin}`)
             .pipe(map((res: any) => {
                 return res.data;
             }
             ));
     }
-    // public geListaExamenes(): Observable<any[]> {
-    //     return this.http.get<any[]>(this.api2 + '/examen');
-    // }
+
     public getExamenesxId(id: any = 2): Observable<any[]> {
         return this.http.get<any[]>(this.api2 + `/examen/${id}`)
             .pipe(map((res: any) => {

@@ -63,14 +63,13 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-        this.idEstudiante = 442;
+        // this.idEstudiante = parseInt(localStorage.getItem('idusuario')) || 124;
+        this.idEstudiante = 124;
         this.tipeExamen = 0;
-        this.dateInit = '2019-02-27';
-        this.dateFin = '2019-03-28';
+        this.dateInit = '2019-05-01';
+        this.dateFin = '2019-05-28';
         this.imprimirTipo();
         this.impirmircursos(this.idEstudiante, this.tipeExamen, this.dateInit, this.dateFin);
-        // this.categories = this._academiSrv.categories;
-        // this.filteredCourses = this.coursesFilteredByCategory = this.courses = .data;
 
     }
 
@@ -88,6 +87,9 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy {
         })
     }
     impirmircursos(idEstudiante, tipeExamen, dateInit, dateFin) {
+        console.log('dateInit', dateInit);
+        console.log('dateFin', dateFin);
+
         this._academiSrv.geListaCursosxFechas(idEstudiante, tipeExamen, dateInit, dateFin).subscribe((res: any) => {
             this.filteredCourses = this.coursesFilteredByCategory = this.courses = res;
 
