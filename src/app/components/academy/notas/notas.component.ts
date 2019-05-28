@@ -23,6 +23,8 @@ export class NotasComponent implements OnInit {
   fechafin: string;
   p = 1;
 
+  lunesNew: { id: number; record: { monday: { dayName: string; date: string; score: string } } };
+
   notas = [
     {
       id: 1539,
@@ -63,7 +65,7 @@ export class NotasComponent implements OnInit {
         sunday: {
           'dayName': 'Domingo',
           'date': '31/03/2019',
-          'score': '17'
+          'score': null
         }
       }
     },
@@ -101,7 +103,7 @@ export class NotasComponent implements OnInit {
         saturday: {
           'dayName': 'Sabado',
           'date': '30/03/2019',
-          'score': '14'
+          'score': null
         },
         sunday: {
           'dayName': 'Domingo',
@@ -139,7 +141,7 @@ export class NotasComponent implements OnInit {
         friday: {
           'dayName': 'Viernes',
           'date': '29/03/2019',
-          'score': '10'
+          'score': null
         },
         saturday: {
           'dayName': 'Sabado',
@@ -267,6 +269,22 @@ export class NotasComponent implements OnInit {
       }
       console.log(res);
     });
+  }
+  ChangeNotas(nota, datos, link) {
+    this.lunesNew = { id: null, record: { monday: { dayName: '', date: '', score: '' } } };
+    this.lunesNew.id = nota.id;
+    this.lunesNew.record.monday.dayName = datos.dayName;
+    this.lunesNew.record.monday.date = datos.date;
+    let selectores: any = this._document.getElementsByClassName('selector1');
+    for (let ref of selectores) {
+      ref.classList.remove('colorVerde')
+    }
+    link.classList.add('colorVerde');
+  }
+  onEnter(value) {
+    this.lunesNew.record.monday.score = value;
+    console.log(this.lunesNew);
+
   }
 
 }

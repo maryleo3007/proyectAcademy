@@ -1,9 +1,14 @@
+<!-- SIDEBAR HEADER -->
 <div fxLayout="column" fxLayoutAlign="space-between start" class="header accent">
     <div class="logo" fxFlex fxLayout="row" fxLayoutAlign="start center">
         <mat-icon class="logo-icon s-32" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
             check_box
         </mat-icon>
         <span class="logo-text" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">NOTAS</span>
+    </div>
+    <div class="center">
+        <h5>Editando...</h5>
+        <h5>Guardado</h5>
     </div>
     <div class="search-wrapper mt-16 m-10 mt-sm-0">
         <div class="search bg-white" fxFlex fxLayout="row" fxLayoutAlign="start center">
@@ -82,13 +87,13 @@
             <tbody>
                 <tr *ngFor="let nota of  notas | filter:term | paginate: { itemsPerPage: 10, currentPage: p }">
                     <td>{{nota.fullName}}</td>
-                    <td (dblclick)="EditNotas(nota, nota.record.monday, 'monday')">{{nota.record.monday.score | nulos}}</td>
-                    <td (dblclick)="EditNotas(nota, nota.record.tuesday, 'tuesday')">{{nota.record.tuesday.score | nulos}}</td>
-                    <td (dblclick)="EditNotas(nota, nota.record.wednesday, 'wednesday')">{{nota.record.wednesday.score | nulos}}</td>
-                    <td (dblclick)="EditNotas(nota, nota.record.thursday, 'thursday')">{{nota.record.thursday.score | nulos}}</td>
-                    <td (dblclick)="EditNotas(nota, nota.record.friday, 'friday')">{{nota.record.friday.score | nulos}}</td>
-                    <td (dblclick)="EditNotas(nota, nota.record.saturday, 'saturday')">{{nota.record.saturday.score | nulos}}</td>
-                    <td (dblclick)="EditNotas(nota, nota.record.sunday, 'sunday')">{{nota.record.sunday.score | nulos}}</td>
+                    <td class="selector1" (click)="ChangeNotas(nota, nota.record.monday,lin11)" #lin11> <input type="number" #monday (keyup.enter)="onEnter(monday.value)" name="monday" matInput [(ngModel)]="nota.record.monday.score"></td>
+                    <td class="selector1" (click)="ChangeNotas(nota, nota.record.monday,lin12)" #lin12> <input type="number" #tuesday (keyup.enter)="onEnter(tuesday.value)" name="tuesday" matInput [(ngModel)]="nota.record.tuesday.score"></td>
+                    <td class="selector1" (click)="ChangeNotas(nota, nota.record.monday,lin13)" #lin13> <input type="number" #wednesday (keyup.enter)="onEnter(wednesday.value)" name="wednesday" matInput [(ngModel)]="nota.record.wednesday.score"></td>
+                    <td class="selector1" (click)="ChangeNotas(nota, nota.record.monday,lin14)" #lin14> <input type="number" #thursday (keyup.enter)="onEnter(thursday.value)" name="thursday" matInput [(ngModel)]="nota.record.thursday.score"></td>
+                    <td class="selector1" (click)="ChangeNotas(nota, nota.record.monday,lin15)" #lin15> <input type="number" #friday (keyup.enter)="onEnter(friday.value)" name="friday" matInput [(ngModel)]="nota.record.friday.score"></td>
+                    <td class="selector1" (click)="ChangeNotas(nota, nota.record.monday,lin16)" #lin16> <input type="number" #saturday (keyup.enter)="onEnter(saturday.value)" name="saturday" matInput [(ngModel)]="nota.record.saturday.score"></td>
+                    <td class="selector1" (click)="ChangeNotas(nota, nota.record.monday,lin17)" #lin17> <input type="number" #sunday (keyup.enter)="onEnter(sunday.value)" name="sunday" matInput [(ngModel)]="nota.record.sunday.score"></td>
                 </tr>
             </tbody>
         </table>

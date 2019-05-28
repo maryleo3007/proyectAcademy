@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
+import { Router, ActivatedRoute } from '@angular/router';
+import { EvaluacionesService } from 'app/servicios/servicio.index';
 
 @Component({
   selector: 'app-respuestas',
@@ -12,110 +14,39 @@ export class RespuestasComponent implements OnInit {
   currentStep: number;
   paginador: number;
   animationDirection: 'left' | 'right' | 'none';
-  respuestas = [
-    {
-      id: 47,
-      evaluationId: 3,
-      title: "PREGUNTA 1",
-      description: "Decripción de la pregunta 1",
-      answers: [
-        {
-          id: 165,
-          questionId: 47,
-          description: "Ayacucho",
-          isAnswer: true,
-          isMarked: true
-        },
-        {
-          id: 166,
-          questionId: 47,
-          description: "Lima",
-          isAnswer: false,
-          isMarked: false
 
-        },
-        {
-          id: 167,
-          questionId: 47,
-          description: "Cuzco",
-          isAnswer: false,
-          isMarked: false
-        },
-        {
-          id: 168,
-          questionId: 47,
-          description: "Prueba",
-          isAnswer: false,
-          isMarked: false
-        },
-        {
-          id: 169,
-          questionId: 47,
-          description: "Puno",
-          isAnswer: false,
-          isMarked: false
-        },
-        {
-          id: 170,
-          questionId: 47,
-          description: "Puno",
-          isAnswer: false,
-          isMarked: false
-        },
-        {
-          id: 171,
-          questionId: 47,
-          description: "Iquitos",
-          isAnswer: false,
-          isMarked: false
-        }
-      ]
-    },
-    {
-      id: 58,
-      evaluationId: 3,
-      title: "PREGUNTA 2",
-      description: "Decripción de la pregunta 2",
-      answers: [
-        {
-          id: 201,
-          questionId: 58,
-          description: "Ayacucho",
-          isAnswer: false,
-          isMarked: false
-        },
-        {
-          id: 202,
-          questionId: 58,
-          description: "Lima",
-          isAnswer: false,
-          isMarked: true
-        },
-        {
-          id: 203,
-          questionId: 58,
-          description: "Cuzco",
-          isAnswer: true,
-          isMarked: false
-        }
-      ]
-    }
-  ]
+  respuestas: Array<any>;
+  idEstudiante: number;
+  idpregunta: string;
 
 
   constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _EvaluationSrv: EvaluacionesService,
     private _changeDetectorRef: ChangeDetectorRef,
   ) {
+    this.paginador = 1;
     this.currentStep = 0;
     this.animationDirection = 'none';
-    this.paginador = this.respuestas.length;
+    this.idEstudiante = parseInt(localStorage.getItem('idusuario'));
   }
 
   ngOnInit() {
+    this.idpregunta = this._route.snapshot.paramMap.get('id');
+    this.imprimirRespuestas();
   }
   salirdelExamen() {
-
+    this._router.navigate(['/Academia/Cursos']);
   }
+  imprimirRespuestas() {
+    this._EvaluationSrv.getListaRespuestas(this.idEstudiante, this.idpregunta).subscribe((res: any) => {
+      this.respuestas = res;
+      this.paginador = this.respuestas.length;
+    });
+  }
+
+
   gotoNextStep(step): void {
 
     if (this.currentStep === this.paginador - 1) {
@@ -148,6 +79,18 @@ export class RespuestasComponent implements OnInit {
     this.currentStep--;
   }
   enviarResultado() {
-    console.log('salir');
+    this._router.navigate(['/Academia/Cursos']);
+  }
+  gotoStep(step): void {
+    // Decide the animation direction
+    // this.marcado = this.respuestas[step].answerId;
+    this.animationDirection = this.currentStep < step ? 'left' : 'right';
+
+    // Run change detection so the change
+    // in the animation direction registered
+    this._changeDetectorRef.detectChanges();
+
+    // Set the current step
+    this.currentStep = step;
   }
 }

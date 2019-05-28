@@ -17,7 +17,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { ServiceModule } from './servicios/servicio.module';
 import { APP_ROUTES } from './app.routes';
-import { LoginModule } from './login/login.module';
+import { LoginModule } from './shared/login/login.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
 import { AuthService } from './core/auth.service';
@@ -26,11 +26,13 @@ import { TokenStorage } from './core/token.storage';
 import { Interceptor } from './core/app.interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+// import { PerfilComponent } from './shared/perfil/perfil.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
+        // PerfilComponent,
 
     ],
     imports: [

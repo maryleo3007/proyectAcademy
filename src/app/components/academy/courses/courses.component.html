@@ -44,18 +44,20 @@
                             </div>
                             <div class="length" fxLayout="row" fxLayoutAlign="center center">
                                 <mat-icon class="length-icon s-20">access_time</mat-icon>
-                                <div class="min">{{course.time}} min</div>
+                                <div class="min">{{course.time}}</div>
                             </div>
                         </div>
                         <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
                             <div class="h1" color="accent">{{course.name}}</div>
                             <div class="updated">Fecha {{course.examDate}}</div>
-                            <div class="updated">Duración {{course.time}}:00 minutos</div>
+                            <div class="updated">Duración {{course.time}} minutos</div>
                         </div>
                         <div class="footer" fxLayout="row" fxLayoutAlign="center center">
-                            <!-- <button mat-button color="accent" [routerLink]="['/Academia/Cursos',course.id,course.name]"> -->
-                            <button (click)="empezarExamen(course.id,course.name,course.time )" mat-button color="accent">
+                            <button *ngIf="course.statusName === 'PENDIENTE'" (click)="empezarExamen(course.id,course.name,course.time )" mat-button color="accent">
                                 INICIAR
+                            </button>
+                            <button [routerLink]="['/Academia/Respuestas', course.id]" *ngIf="course.statusName === 'COMPLETADO'" mat-button color="accent">
+                                RESPUESTAS
                             </button>
                         </div>
                     </div>

@@ -46,6 +46,7 @@ import { NotasComponent } from './academy/notas/notas.component';
 import { NullPipe } from 'app/pipes/null.pipe';
 import { NotaFormComponent } from './academy/nota-form/nota-form.component';
 import { RespuestasComponent } from './academy/respuestas/respuestas.component';
+import { PerfilComponent } from 'app/shared/perfil/perfil.component';
 @NgModule({
   imports: [
     Ng2SearchPipeModule,
@@ -86,6 +87,9 @@ import { RespuestasComponent } from './academy/respuestas/respuestas.component';
   declarations: [
     ActivoPipe,
     NullPipe,
+
+    PerfilComponent,
+
     AcademyCoursesComponent,
     AcademyCourseComponent,
     ComponentsComponent,

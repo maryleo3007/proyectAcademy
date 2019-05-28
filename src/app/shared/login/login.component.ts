@@ -1,11 +1,11 @@
-import { FuseNavigation } from './../../@fuse/types/fuse-navigation';
+import { FuseNavigation } from '../../../@fuse/types/fuse-navigation';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { Router } from '@angular/router';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from '../../core/auth.service';
 import { loginModel } from 'app/models/login.model';
 declare var swal: any;
 

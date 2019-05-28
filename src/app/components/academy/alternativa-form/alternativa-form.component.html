@@ -75,7 +75,7 @@
         <button mat-raised-button (click)="onNoClick()" class="warning-button" color="warn" aria-label="warning">
           Cancelar
       </button>
-        <button mat-raised-button class="save-button" (click)="GuardarPregunta()" color="accent" cdkFocusInitial aria-label="SAVE">
+        <button [disabled]="desabilitado" mat-raised-button class="save-button" (click)="GuardarPregunta()" color="accent" cdkFocusInitial aria-label="SAVE">
           Guardar
       </button>
     </div>

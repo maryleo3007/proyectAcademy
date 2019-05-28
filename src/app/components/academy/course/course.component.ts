@@ -3,9 +3,9 @@ import { Subject, Subscription } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-import { AcademiService } from 'app/servicios/servicio.index';
+import { AcademiService, EvaluacionesService } from 'app/servicios/servicio.index';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AcademiModel, PreguntaDescripModel, CursospModel } from 'app/models/academi.model';
+import { AcademiModel } from 'app/models/academi.model';
 declare var swal: any;
 
 @Component({
@@ -17,8 +17,7 @@ declare var swal: any;
 })
 export class AcademyCourseComponent implements OnInit, OnDestroy {
     marcado: any;
-    respuestas: Array<RespuestasModel>;
-    // respuestas: Array<any>;
+    respuestas: Array<any>;
     suscrition: Subscription;
     minutos: number;
     segundos: number;
@@ -35,12 +34,16 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     ExamenDescip: any;
 
     laspreguntas: Array<any>;
-    public cursos: CursospModel;
+    public cursos: any;
     favoriteSeason: any
     paginador: number;
     Titulo: string;
     intervalo: NodeJS.Timer;
-    respositori: RespuestasModel;
+    respositori: Array<any>;
+    idEstudiante: number;
+    respo: { questionId: any; answerId: number; };
+    idpregunta: string;
+    minutosysegundos: string;
     /**
      * Constructor     
      * @param {AcademyCourseService} _academyCourseService
@@ -51,16 +54,15 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _router: Router,
         private _academiSrv: AcademiService,
+        private _EvaluationsSrv: EvaluacionesService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseSidebarService: FuseSidebarService
     ) {
-        // this.minutos = 1;
-        this.respositori = new RespuestasModel();
-        this.respuestas = new Array({ id_pregunta: 0, id: 0, description: 'xxxxx' });
+        this.idEstudiante = parseInt(localStorage.getItem('idusuario'));
+        this.respuestas = new Array({ questionId: 0, answerId: 0 });
         this.segundos = 59;
         this.intervalo = setInterval(() => this.tick(), 1000);
         this.descritionExamen = new AcademiModel();
-
         // Set the defaults
         this.animationDirection = 'none';
         this.currentStep = 0;
@@ -76,10 +78,11 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-        const dato = this._route.snapshot.paramMap.get('id');
+        this.idpregunta = this._route.snapshot.paramMap.get('id');
         this.Titulo = this._route.snapshot.paramMap.get('nombre');
-        this.minutos = parseInt(this._route.snapshot.paramMap.get('time'));
-        this.obtenerExamen(dato);
+        this.minutos = parseInt(this._route.snapshot.paramMap.get('time')) - 1;
+        this.minutosysegundos = this._route.snapshot.paramMap.get('time');
+        this.obtenerExamen(this.idpregunta);
     }
 
     tick(): void {
@@ -98,23 +101,19 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     obtenerExamen(id) {
         this._academiSrv.getExamenesxId(id).subscribe((res: any) => {
             this.laspreguntas = res;
+            console.log(res);
             this.paginador = this.laspreguntas.length;
             for (let i = 0; i < this.laspreguntas.length; i++) {
-                const respo = new RespuestasModel()
-                respo.id_pregunta = i;
-                respo.id = 0;
-                respo.description = 'x';
-                this.respuestas[i] = respo;
+                this.respo = { questionId: null, answerId: null };
+                this.respo.questionId = null;
+                this.respo.answerId = null;
+                this.respuestas[i] = this.respo;
             }
 
         });
         // console.log(this.respuestas);
 
     }
-    // window.onhashchange = function () {
-    //     console.log('hola');
-
-    // }
     /**
  * After view init
  */
@@ -128,38 +127,18 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         clearInterval(this.intervalo);
     }
     onSelectionChangeRadio(alternativa: any, pregunta: any, i) {
+        console.log(alternativa);
+
         this.laspreguntas.map(function (dato: any) {
             if (dato.id === pregunta.id) {
-                dato.response = alternativa;
+                dato.questions = alternativa;
             }
             return dato;
         });
-        // console.log(alternativa, pregunta);
-        const respo = new RespuestasModel()
-        respo.id_pregunta = pregunta.id;
-        respo.id = alternativa.id;
-        respo.description = alternativa.description;
-        this.respuestas[i] = respo;
-        // for (let respuesta of this.respuestas) {
-
-        //     if (respuesta.id_pregunta === pregunta.id) {
-        //         // this.respuestas.map(function (dato: any) {
-        //         //     if (dato.id_pregunta === pregunta.id) {
-        //         //         const date = [pregunta.id, alternativa]
-        //         //         console.log(date);
-
-        //         //         // dato = date;
-        //         //     }
-        //         //     return dato;
-        //         // });
-        //     } else {
-        //         this.respuestas.push(alternativa);
-
-        //     }
-        // }
-        // console.log(this.respuestas);
-
-
+        this.respo = { questionId: null, answerId: null };
+        this.respo.questionId = pregunta.id;
+        this.respo.answerId = alternativa.id;
+        this.respuestas[i] = this.respo;
     }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
@@ -172,6 +151,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      */
     gotoStep(step): void {
         // Decide the animation direction
+        this.marcado = this.respuestas[step].answerId;
         this.animationDirection = this.currentStep < step ? 'left' : 'right';
 
         // Run change detection so the change
@@ -186,7 +166,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      * Go to next step
      */
     gotoNextStep(step): void {
-        this.marcado = this.respuestas[step].description;
+        this.marcado = this.respuestas[step].answerId;
         if (this.currentStep === this.paginador - 1) {
             return;
         }
@@ -202,7 +182,7 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
      * Go to previous step
      */
     gotoPreviousStep(step): void {
-        this.marcado = this.respuestas[step].description;
+        this.marcado = this.respuestas[step].answerId;
         if (this.currentStep === 0) {
             return;
         }
@@ -228,7 +208,19 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         this._fuseSidebarService.getSidebar(name).toggleOpen();
     }
     enviarResultado() {
-        console.log(this.laspreguntas);
+        const mandaRespuesta = { studentId: null, evaluationId: null, time: '', questions: null };
+        mandaRespuesta.studentId = this.idEstudiante;
+        mandaRespuesta.evaluationId = this.idpregunta;
+        mandaRespuesta.time = this.minutosysegundos;
+        mandaRespuesta.questions = this.respuestas;
+        this._EvaluationsSrv.saveOrUpdateRespuestas(mandaRespuesta).subscribe(res => {
+            console.log(res);
+            if (res.code === 1) {
+                swal('Bien!', 'Guardado!', 'success').then(() => {
+                    this._router.navigate(['/Academia/Cursos']);
+                });
+            }
+        });
     }
     salirdelExamen() {
         swal({
@@ -240,7 +232,8 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    this._router.navigate(['/Academia/Cursos'])
+                    this.enviarResultado();
+                    this._router.navigate(['/Academia/Cursos']);
                 } else {
                     swal("Cancelado!");
                 }
@@ -248,7 +241,6 @@ export class AcademyCourseComponent implements OnInit, OnDestroy {
     }
 }
 export class RespuestasModel {
-    id_pregunta: number;
-    id: number;
-    description: string;
+    questionId: number;
+    answerId: number;
 }

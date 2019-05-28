@@ -36,7 +36,10 @@
         width: 100%;
         tbody {
             td {
-                cursor: pointer;
+                // cursor: pointer;
+                input {
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -114,4 +117,9 @@ th {
 .colorAzul {
     background: #3498DB;
     color: white;
+}
+
+.colorVerde {
+    background: rgb(128, 228, 153);
+    color: rgb(49, 17, 192);
 }

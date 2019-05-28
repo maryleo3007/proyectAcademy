@@ -63,7 +63,7 @@
                                         <tr *ngFor="let alternativa of step.alternatives">
                                             <td>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="{{alternativa.id}}" name="radio" [checked]="alternativa.description === marcado" [value]="alternativa.descripcion" (change)="onSelectionChangeRadio(alternativa, step, i)">
+                                                    <input type="radio" id="{{alternativa.id}}" name="radio" [checked]="alternativa.id === marcado" [value]="alternativa.descripcion" (change)="onSelectionChangeRadio(alternativa, step, i)">
                                                     <label for="{{alternativa.id}}">{{alternativa.description}}</label>
                                                 </div>
                                             </td>

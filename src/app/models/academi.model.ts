@@ -11,7 +11,7 @@ export class AcademiModel {
     public questions?;
 }
 
-export class CursospModel {
+export class Cursos {
     id: number;
     title: string;
     totalSteps: number;

@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AcademiService } from 'app/servicios/servicio.index';
 import { fuseAnimations } from '@fuse/animations';
 import { EvaluacionesModel } from 'app/models/evaluaciones.model';
+
 @Component({
   selector: 'app-pregunta-form',
   templateUrl: './pregunta-form.component.html',

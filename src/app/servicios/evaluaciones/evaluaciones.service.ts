@@ -13,6 +13,8 @@ export class EvaluacionesService {
 
     private api = 'https://pbem4cq4f1.execute-api.us-east-1.amazonaws.com/Prod/api/v1/evaluation';
     private api2 = 'https://pbem4cq4f1.execute-api.us-east-1.amazonaws.com/Prod/api/v1/question';
+    private api3 = 'https://6qrbzxo6q4.execute-api.us-east-1.amazonaws.com/Prod/api/v1/examen';
+    // private api4 = 'https://6qrbzxo6q4.execute-api.us-east-1.amazonaws.com/Prod/api/v1/examen';
 
 
     //rvaluaciones
@@ -37,5 +39,22 @@ export class EvaluacionesService {
     }
     public saveOrUpdatePreguntas(preguntas: any): Observable<any> {
         return this.http.post<any>(this.api2, JSON.stringify(preguntas));
+    }
+
+    //respuestas
+    public saveOrUpdateRespuestas(respuestas: any): Observable<any> {
+        return this.http.post<any>(this.api3, JSON.stringify(respuestas));
+    }
+
+    //notas
+    // public Listar(respuestas: any): Observable<any> {
+    //     return this.http.post<any>(this.api3, JSON.stringify(respuestas));
+    // }
+
+    // respuestas
+    // private api4 = 'https://6qrbzxo6q4.execute-api.us-east-1.amazonaws.com/Prod/api/v1/examen/resultados?studentId=1&evaluationId=15';
+    public getListaRespuestas(idestudiante: any, idexamen): Observable<any[]> {
+        return this.http.get<any[]>(this.api3 + `/resultados?studentId=${idestudiante}&evaluationId=${idexamen}`)
+            .pipe(map((res: any) => { return res.data; }));
     }
 }

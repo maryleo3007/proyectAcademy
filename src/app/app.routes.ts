@@ -1,9 +1,6 @@
 import { Routes, RouterModule, CanActivate } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './shared/login/login.component';
 import { ComponentsComponent } from './components/components.component';
-// import { AuthGuard } from './core/auth.guard'
-// import { SampleModule } from 'app/main/sample/sample.module';
-import { SampleComponent } from './main/sample/sample.component';
 import { BienvenidoComponent } from './components/configuration/bienvenido/bienvenido.component';
 import { AlumnoComponent } from './components/mantenimiento/alumno/alumno.component';
 import { ProfesorComponent } from './components/mantenimiento/profesor/profesor.component';
@@ -16,6 +13,7 @@ import { PreguntasComponent } from './components/academy/preguntas/preguntas.com
 import { AlternativasComponent } from './components/academy/alternativas/alternativas.component';
 import { NotasComponent } from './components/academy/notas/notas.component';
 import { RespuestasComponent } from './components/academy/respuestas/respuestas.component';
+import { PerfilComponent } from './shared/perfil/perfil.component';
 
 
 const appRoutes: Routes = [
@@ -27,19 +25,19 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children:
             [
-                { path: 'Bienvenido', component: BienvenidoComponent, data: { titulo: 'Bienvenidos' } },
-                { path: 'Alumno', component: AlumnoComponent, data: { titulo: 'Alumnos' } },
-                { path: 'Profesor', component: ProfesorComponent, data: { titulo: 'Profesores' } },
-                { path: 'Registro', component: ControlComponent, data: { titulo: 'Registro' } },
-                { path: 'Asistencia', component: AsistenciaComponent, data: { titulo: 'Asistencia' } },
-                { path: 'Cursos', component: AcademyCoursesComponent, data: { titulo: 'Asistencia' } },
-                { path: 'Cursos/:id/:nombre/:time', component: AcademyCourseComponent, data: { titulo: 'Asistencia' } },
-                { path: 'Alternativa/:id', component: AlternativasComponent, data: { titulo: 'Asistencia' } },
-                { path: 'Preguntas', component: PreguntasComponent, data: { titulo: 'Bienvenidos' } },
-                { path: 'Notas', component: NotasComponent, data: { titulo: 'Bienvenidos' } },
-                { path: 'Respuestas', component: RespuestasComponent, data: { titulo: 'Bienvenidos' } },
-
-                // { path: '**', component: NopagefoundComponent }
+                { path: 'Bienvenido', component: BienvenidoComponent },
+                { path: 'Perfil', component: PerfilComponent },
+                { path: 'Alumno', component: AlumnoComponent },
+                { path: 'Profesor', component: ProfesorComponent },
+                { path: 'Registro', component: ControlComponent },
+                { path: 'Asistencia', component: AsistenciaComponent },
+                { path: 'Cursos', component: AcademyCoursesComponent },
+                { path: 'Cursos/:id/:nombre/:time', component: AcademyCourseComponent },
+                { path: 'Alternativa/:id', component: AlternativasComponent },
+                { path: 'Preguntas', component: PreguntasComponent },
+                { path: 'Notas', component: NotasComponent },
+                { path: 'Respuestas/:id', component: RespuestasComponent },
+                { path: '**', component: BienvenidoComponent }
             ]
     },
 ];

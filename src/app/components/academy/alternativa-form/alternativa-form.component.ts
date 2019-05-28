@@ -11,6 +11,7 @@ declare var swal: any;
 })
 export class AlternativaFormComponent implements OnInit {
   card: any;
+  desabilitado = true;
   chekeadodescripcion = '';
   PreguntaNew: PreguntaModel;
   descriptionnuew = '';
@@ -23,7 +24,6 @@ export class AlternativaFormComponent implements OnInit {
     public dialogRef: MatDialogRef<AlternativaFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // console.log(data);
     this.PreguntaNew = new PreguntaModel();
     this.alternativasmandar = new Array<CuestionModel>();
     this.PreguntaNew.evaluationId = this.data.id;
@@ -40,7 +40,6 @@ export class AlternativaFormComponent implements OnInit {
 
   }
   cambios(newObj) {
-    // console.log(newObj.length);
     if (newObj.length !== 0) {
       this.activarAdd = false;
     } else {
@@ -50,7 +49,6 @@ export class AlternativaFormComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
   addNewCuestion(description) {
     this.nuevoAlterna = { id: null, questionId: null, description: '', isAnswer: false };
     this.nuevoAlterna.description = description;
@@ -62,8 +60,6 @@ export class AlternativaFormComponent implements OnInit {
     }
     this.nuevoAlterna.isAnswer = false;
     this.alternativasmandar.push(this.nuevoAlterna);
-    console.log(this.nuevoAlterna);
-
     this.descriptionnuew = '';
   }
   addCheckItem(form: NgForm): void {
@@ -92,10 +88,10 @@ export class AlternativaFormComponent implements OnInit {
   GuardarPregunta() {
     this.PreguntaNew.answers = this.alternativasmandar;
     console.log(this.PreguntaNew);
-    console.log('----------');
     this._alternativaSrv.saveOrUpdatePreguntas(this.PreguntaNew).subscribe(res => {
       if (res.code === 1) {
         swal('Bien!', 'Guardado!', 'success').then(() => {
+          console.log(res);          
           this.onNoClick();
         });
       } else {
@@ -112,7 +108,7 @@ export class CuestionModel {
 export class PreguntaModel {
   id: number = null;
   evaluationId: number;
-  title: string = 'PREGUNTA';
+  title: string = 'PREGUNTA Nº ';
   description: string;
   active: boolean = true;
   answers: Array<any>;
