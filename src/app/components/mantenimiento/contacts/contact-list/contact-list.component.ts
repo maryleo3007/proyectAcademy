@@ -20,8 +20,6 @@ declare var swal: any;
   animations: fuseAnimations
 })
 export class ContactsContactListComponent implements OnInit {
-
-  // localId : IdModel;
   cambioLista: any
   public isValid: boolean = true;
   private message: string = '';
@@ -36,7 +34,7 @@ export class ContactsContactListComponent implements OnInit {
   classRoom = '';
   documentType = '';
   documentNumber = '';
-  branchOffice = 0;
+  branchOfficeId = 0;
   @Input() tipo;
   @Input() listapersona;
 
@@ -86,7 +84,6 @@ export class ContactsContactListComponent implements OnInit {
   getOffices() {
     this.officeList = [];
     this._officeService.getOffice().subscribe((res) => {
-      console.log(res);
       this.officeList = res.data;
     });
   }
@@ -102,7 +99,7 @@ export class ContactsContactListComponent implements OnInit {
           this.dataSource.data = this.studentList;
         } else {
           this.dataSource.data = this.studentList;
-          this.dataSource.data = this.studentList.filter(data => data.branchOffice == this.currentOffice);
+          this.dataSource.data = this.studentList.filter(data => data.branchOfficeId == this.currentOffice);
         }
       }, 1000);
     }
@@ -113,6 +110,7 @@ export class ContactsContactListComponent implements OnInit {
   }
 
   editar(contact: PersonaModel) {
+    console.log(contact);
     this._id = contact.id;
     this.dialogRef = this._matDialog.open(ContactsContactFormDialogComponent, {
       panelClass: 'contact-form-dialog',
@@ -130,14 +128,13 @@ export class ContactsContactListComponent implements OnInit {
         birthday: contact.birthday,
         gender: contact.gender,
         documentNumber: contact.documentNumber,
-        branchOffice: contact.branchOffice
+        branchOfficeId: contact.branchOfficeId
       }
     });
     this.dialogRef.afterClosed().subscribe((res: any) => {
       if (!res) {
         return;
       }
-      console.log(res);
       this.persona.id = res.id;
       this.persona.name = res.name;
       this.persona.lastName = res.lastName;
@@ -148,7 +145,7 @@ export class ContactsContactListComponent implements OnInit {
       this.persona.birthday = res.birthday;
       this.persona.gender = res.gender;
       this.persona.documentNumber = res.documentNumber;
-      this.persona.branchOffice = res.branchOffice;
+      this.persona.branchOfficeId = res.branchOfficeId;
       this.saveOrUpdatePersona();
     });
   }
@@ -157,7 +154,6 @@ export class ContactsContactListComponent implements OnInit {
     if (tipo === 'Alumno') {
       this._alumnoSrv.getPersonaAlumno().subscribe((res: any) => {
         this.listapersona = res.data;
-        console.log(res.data);
         this.displayedColumns = ['select', 'documentNumber', 'name', 'email', 'cellphone', 'birthday'];
         this.dataSource = new MatTableDataSource<PersonaModel>(this.listapersona);
         this.selection = new SelectionModel<PersonaModel>(true, []);
@@ -209,7 +205,6 @@ export class ContactsContactListComponent implements OnInit {
     if (this.tipo === 'Alumno') {
       if (this.isValid) {
         this._alumnoSrv.saveOrUpdateAlumno(this.persona).subscribe(res => {
-          console.log(res);
           this.imprimirlista(this.tipo);
         });
       } else {

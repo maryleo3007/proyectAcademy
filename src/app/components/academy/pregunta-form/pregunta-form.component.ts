@@ -22,6 +22,7 @@ export class PreguntaFormComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<PreguntaFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    console.log(data);
     this.examen = new EvaluacionesModel();
     this.action = data.action;
     if (this.action === 'Nuevo') {

@@ -86,7 +86,7 @@
             </div>
             <mat-form-field appearance="outline" class="form-office">
                 <mat-label>Oficina</mat-label>
-                <mat-select [(ngModel)]="data.branchOffice" name="branchOffice">
+                <mat-select [(ngModel)]="data.branchOfficeId" name="branchOfficeId">
                     <mat-option *ngFor="let office of officeList" [value]="office.id">
                         {{ office.name }}
                     </mat-option>

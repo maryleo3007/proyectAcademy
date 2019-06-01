@@ -32,6 +32,7 @@ export class ContactsComponent implements OnInit {
     classRoom = '';
     documentType = '';
     documentNumber = '';
+    branchOfficeId = 0;
     dialogRef: any;
     hasSelectedContacts: boolean;
     searchInput: FormControl;
@@ -106,6 +107,7 @@ export class ContactsComponent implements OnInit {
                 birthday: this.birthday,
                 gender: this.gender,
                 documentNumber: this.documentNumber,
+                branchOfficeId: this.branchOfficeId,
             }
         });
 
@@ -123,7 +125,7 @@ export class ContactsComponent implements OnInit {
             this.persona.birthday = res.birthday;
             this.persona.gender = res.gender;
             this.persona.documentNumber = res.documentNumber;
-            this.persona.branchOffice = res.branchOffice;
+            this.persona.branchOfficeId = res.branchOfficeId;
 
             this.saveOrUpdatePersona();
 

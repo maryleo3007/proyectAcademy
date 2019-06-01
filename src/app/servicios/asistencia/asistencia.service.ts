@@ -37,10 +37,10 @@ export class AsistenciaListaService {
   private cambiar = 'https://8qjrqts0i7.execute-api.us-east-1.amazonaws.com/Prod/api/v1/reporte/asistencia/alumno?startDate=2019-05-05&endDate=2019-05-08&branchOffice=1';
 
   public getAsistenciaAlumno(inicio: any, fin: any, sucursal: any = 1): Observable<any[]> {
-    // return this.http.get<any[]>(this.api1 + '/alumno?' + inicio + '&' + fin + '&branchOffice=1');
-    console.log('inicio', inicio);
-    console.log('fin', fin);
-    return this.http.get<any[]>(this.cambiar);
+    return this.http.get<any[]>(this.api1 + '/alumno?' + inicio + '&' + fin + '&branchOffice=' + sucursal);
+    // console.log('inicio', inicio);
+    // console.log('fin', fin);
+    // return this.http.get<any[]>(this.cambiar);
   }
 
 }

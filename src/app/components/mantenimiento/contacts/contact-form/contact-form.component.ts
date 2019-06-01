@@ -27,6 +27,7 @@ export class ContactsContactFormDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<ContactsContactFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
+        console.log(data);
         this.disable = true
         this.action = data.action;
         this.tipo = data.tipo;
@@ -47,7 +48,6 @@ export class ContactsContactFormDialogComponent implements OnInit {
     ngOnInit() {
         this.faltaNombre = false;
         this.faltaApellido = false;
-
         this.getOffices()
     }
 
@@ -72,7 +72,6 @@ export class ContactsContactFormDialogComponent implements OnInit {
         this.dialogRef.close();
     }
     validacion() {
-        console.log(this.data);
         if (this.data.name === '' || this.data.lastName === '' || this.data.secondLastName === '' || this.data.documentNumber === '') {
             this.disable = false;
         }
