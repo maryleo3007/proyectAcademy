@@ -57,19 +57,20 @@ export class PreguntasComponent implements OnInit {
   filterCoursesByTipo(): void {
     // Filter
     // console.log(this.currentCategoryTipo);
+    console.log(this.currentCategoryTipo);
 
-    if (this.currentCategoryTipo === 0) {
-      this.mostrartabla(this.examenes)
-    }
-    else {
-      this.examenes = this.examenes.filter((course) => {
-        return course.evaluationTypeId === this.currentCategoryTipo;
-      });
+    // if (this.currentCategoryTipo === 0) {
+    //   this.mostrartabla(this.examenes)
+    // }
+    // else {
+    //   this.examenes = this.examenes.filter((course) => {
+    //     return course.evaluationTypeId === this.currentCategoryTipo;
+    //   });
 
-      this.examenesFilter = [...this.examenes];
+    //   this.examenesFilter = [...this.examenes];
 
-      this.mostrartabla(this.examenesFilter)
-    }
+    //   this.mostrartabla(this.examenesFilter)
+    // }
 
     // Re-filter by search term
     // this.filterCoursesByTerm();
@@ -79,7 +80,8 @@ export class PreguntasComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   imprimir() {
-    this._EvaluationSrv.getListaEvaluaciones().subscribe(res => {
+    this._EvaluationSrv.getListaEvaluaciones(this.currentCategoryTipo).subscribe(res => {
+      console.log(res);
       if (res !== null) {
         this.examenesFilter = this.examenes = res;
         this.mostrartabla(this.examenesFilter)
@@ -151,16 +153,16 @@ export class PreguntasComponent implements OnInit {
       if (!res) {
         return;
       }
-      // console.log(res);
-      this.examen.id = res.id;
-      this.examen.active = res.active;
-      this.examen.branchOfficeId = res.branchOfficeId;
-      this.examen.evaluationTypeId = res.evaluationTypeId;
-      this.examen.evaluationTypeName = res.evaluationTypeName;
-      this.examen.name = res.name;
-      this.examen.time = res.time;
-      this.examen.evaluationDate = res.evaluationDate;
-      this.saveOrUpdateEvaluation(this.examen);
+      console.log(res);
+      // this.examen.id = res.id;
+      // this.examen.active = res.active;
+      // this.examen.branchOfficeId = res.branchOfficeId;
+      // this.examen.evaluationTypeId = res.evaluationTypeId;
+      // this.examen.evaluationTypeName = res.evaluationTypeName;
+      // this.examen.name = res.name;
+      // this.examen.time = res.time;
+      // this.examen.evaluationDate = res.evaluationDate;
+      // this.saveOrUpdateEvaluation(this.examen);
 
     });
   }
@@ -177,16 +179,17 @@ export class PreguntasComponent implements OnInit {
       if (!res) {
         return;
       }
-      this.examen.id = res.id;
-      this.examen.active = res.active;
-      this.examen.branchOfficeId = res.branchOfficeId;
-      this.examen.evaluationTypeId = res.evaluationTypeId;
-      this.examen.evaluationTypeName = res.evaluationTypeName;
-      this.examen.name = res.name;
-      this.examen.time = res.time;
-      this.examen.evaluationDate = res.evaluationDate;
-      console.log(this.examen);
-      this.saveOrUpdateEvaluation(this.examen);
+      console.log(res);
+      // this.examen.id = res.id;
+      // this.examen.active = res.active;
+      // this.examen.branchOfficeId = res.branchOfficeId;
+      // this.examen.evaluationTypeId = res.evaluationTypeId;
+      // this.examen.evaluationTypeName = res.evaluationTypeName;
+      // this.examen.name = res.name;
+      // this.examen.time = res.time;
+      // this.examen.evaluationDate = res.evaluationDate;
+      // console.log(this.examen);
+      // this.saveOrUpdateEvaluation(this.examen);
 
     });
   }

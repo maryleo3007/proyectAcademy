@@ -18,7 +18,7 @@ export class EvaluacionesService {
 
 
     //rvaluaciones
-    public getListaEvaluaciones(id: any = 1): Observable<any[]> {
+    public getListaEvaluaciones(id: any = 0): Observable<any[]> {
         return this.http.get<any[]>(this.api + `?branchOfficeId=${id}`)
             .pipe(map((res: any) => { return res.data; }));
     }

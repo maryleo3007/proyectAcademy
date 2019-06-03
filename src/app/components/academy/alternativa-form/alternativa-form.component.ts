@@ -1,17 +1,20 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms/src/forms';
 import { EvaluacionesService } from 'app/servicios/servicio.index';
 import { DOCUMENT } from '@angular/platform-browser';
+import { fuseAnimations } from '@fuse/animations';
 declare var swal: any;
 @Component({
   selector: 'app-alternativa-form',
   templateUrl: './alternativa-form.component.html',
-  styleUrls: ['./alternativa-form.component.scss']
+  styleUrls: ['./alternativa-form.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class AlternativaFormComponent implements OnInit {
   card: any;
-  desabilitado = true;
+  desabilitado: boolean;
   chekeadodescripcion = '';
   PreguntaNew: PreguntaModel;
   descriptionnuew = '';
@@ -24,6 +27,7 @@ export class AlternativaFormComponent implements OnInit {
     public dialogRef: MatDialogRef<AlternativaFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.desabilitado = true;
     this.PreguntaNew = new PreguntaModel();
     this.alternativasmandar = new Array<CuestionModel>();
     this.PreguntaNew.evaluationId = this.data.id;
@@ -70,6 +74,7 @@ export class AlternativaFormComponent implements OnInit {
     this.alternativasmandar.splice(indice, 1);
   }
   updateCheckedCount(list: any): void {
+    this.desabilitado = false;
     this.alternativasmandar.map(function (dato) {
       if (dato.isAnswer === true) {
         dato.isAnswer = false;
@@ -91,7 +96,7 @@ export class AlternativaFormComponent implements OnInit {
     this._alternativaSrv.saveOrUpdatePreguntas(this.PreguntaNew).subscribe(res => {
       if (res.code === 1) {
         swal('Bien!', 'Guardado!', 'success').then(() => {
-          console.log(res);          
+          console.log(res);
           this.onNoClick();
         });
       } else {

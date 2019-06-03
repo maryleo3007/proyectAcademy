@@ -67,4 +67,9 @@ export class PreguntaFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.examen = new EvaluacionesModel();
   }
+  clearFilter(cambio: any) {
+    console.log(cambio);
+    console.log(cambio.target._elementRef.nativeElement.value);
+
+  }
 }

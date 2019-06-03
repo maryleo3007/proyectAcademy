@@ -63,12 +63,18 @@
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field appearance="outline" fxFlex>
+                <!-- <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Nacimiento</mat-label>
                     <input [(ngModel)]="data.birthday" name="birthday" matInput [matDatepicker]="birthdayDatePicker" name="birthday">
                     <mat-datepicker-toggle matSuffix [for]="birthdayDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #birthdayDatePicker></mat-datepicker>
-                </mat-form-field>
+                </mat-form-field> -->
+
+                <div appearance="outline" fxFlex>
+                    <label>Fecha de Examen</label>
+                    <input [(ngModel)]="data.birthday" name="birthday" type="date">
+                </div>
+
 
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Email</mat-label>

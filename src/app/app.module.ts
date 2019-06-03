@@ -4,7 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MAT_DATE_FORMATS } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import 'hammerjs';
 import { FuseModule } from '@fuse/fuse.module';
@@ -27,7 +27,8 @@ import { Interceptor } from './core/app.interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 // import { PerfilComponent } from './shared/perfil/perfil.component';
-
+import { MAT_DATE_LOCALE } from '@angular/material';
+import { MY_FORMATS } from './models/myforma.model';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
             provide: HTTP_INTERCEPTORS,
             useClass: Interceptor,
             multi: true
-        }
+        },
+        { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+        { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
 
     ],
     bootstrap: [

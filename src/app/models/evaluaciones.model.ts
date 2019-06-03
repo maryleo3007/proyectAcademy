@@ -3,7 +3,7 @@ export class EvaluacionesModel {
     name: string;
     evaluationTypeId = 1;
     active = true;
-    evaluationTypeName = "EXAMEN DIARIO";
+    evaluationTypeName: any;
     time = "30";
     evaluationDate: Date;
     branchOfficeId = 1;

@@ -25,20 +25,33 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <mat-label>Tipo</mat-label>
+                <!-- <mat-label>Tipo</mat-label>
                 <hr>
                 <mat-radio-group class="example-radio-group" [(ngModelOptions)]="favoriteSeason">
                     <mat-radio-button (click)="radioclick(tipo)" class="example-radio-button" *ngFor="let tipo of Tipos" [checked]="tipo.name === itemselect" [value]="tipo">
                         {{ tipo.name }}
                     </mat-radio-button>
-                </mat-radio-group>
+                </mat-radio-group> -->
 
+                <mat-form-field appearance="outline" class="form-office">
+                    <mat-label>Oficina</mat-label>
+                    <mat-select [(ngModel)]="examen.branchOfficeId" name="branchOfficeId">
+                        <mat-option disabled="disabled"> - OFICINA - </mat-option>
+                        <mat-option *ngFor="let tipo of Tipos" [value]="tipo.id">
+                            {{ tipo.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
                 <div appearance="outline" fxFlex>
                     <label>Fecha de Examen</label>
                     <input [(ngModel)]="examen.evaluationDate" name="evaluationDate" type="date">
-                    <!-- <mat-datepicker-toggle matSuffix [for]="birthdayDatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #birthdayDatePicker></mat-datepicker> -->
                 </div>
+                <!-- <div appearance="outline" class="form-office">
+                    <input matInput [(ngModel)]="examen.evaluationDate" [matDatepicker]="picker" placeholder="Fecha de Examen" (dateChange)="clearFilter($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div> -->
+
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>

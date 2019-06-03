@@ -22,6 +22,14 @@
             display: flex;
             input {
                 margin: 0;
+                background-color: rgb(158, 202, 231);
+                // border: groove;
+                border-radius: 2em;
+            }
+            input::-webkit-input-placeholder {
+                margin-right: 100px;
+                color: black;
+                font-weight: 500;
             }
         }
     }
@@ -49,7 +57,7 @@
                 white-space: nowrap;
                 font-size: 14px;
             }
-            .checklist-progressbar {}
+            // .checklist-progressbar {}
         }
         .editable-wrap {
             flex: 1

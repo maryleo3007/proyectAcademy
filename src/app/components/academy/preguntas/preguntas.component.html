@@ -6,17 +6,17 @@
         <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
 
             <div class="filters" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
-                <!-- <mat-form-field appearance="outline" class="category-selector">
+                <mat-form-field appearance="outline" class="category-selector officeList">
                     <mat-label>Tipo de examen</mat-label>
-                    <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="filterCoursesByTipo()">
+                    <mat-select [(ngModel)]="currentCategoryTipo" (selectionChange)="imprimir()">
                         <mat-option [value]="0">
-                            All
+                            - TODOS -
                         </mat-option>
                         <mat-option *ngFor="let category of Tipo" [value]="category.id">
                             {{ category.name }}
                         </mat-option>
                     </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
 
                 <div class="search-wrapper mt-16 m-10 mt-sm-0">
                     <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
